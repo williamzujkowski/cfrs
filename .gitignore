@@ -40,3 +40,8 @@ yarn-error.log*
 
 # OS
 Thumbs.db
+
+# Claude Code artifacts
+.hive-mind/
+.claude-flow/
+CLAUDE copy.md

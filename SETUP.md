@@ -15,6 +15,7 @@ npm install
 ```
 
 This will install all required dependencies including:
+
 - Preact (UI framework)
 - Vite (build tool)
 - TypeScript (type safety)
@@ -31,6 +32,7 @@ npm run prepare
 ```
 
 This sets up Husky pre-commit hooks for:
+
 - Code linting and formatting
 - Schema validation
 - Type checking
@@ -197,6 +199,7 @@ git commit -m "feat: your feature description"
 ```
 
 Pre-commit hooks will automatically:
+
 - Lint and format staged files
 - Validate schemas
 - Run type checking
@@ -216,6 +219,7 @@ npm run preview
 ### Setup
 
 1. Update `vite.config.ts` with your repository name:
+
    ```typescript
    base: process.env.NODE_ENV === 'production' ? '/your-repo-name/' : '/',
    ```
@@ -249,6 +253,7 @@ Make sure `jsxImportSource` is set to `preact` in tsconfig.json
 ### Bundle size too large
 
 Check bundle analysis:
+
 ```bash
 npm run build
 # Check dist/ folder size

@@ -108,21 +108,12 @@
     "theme": {
       "mission": "Build default ATS-safe themes",
       "status": "pending",
-      "deliverables": [
-        "Default theme",
-        "Theme SDK",
-        "Theme registry"
-      ]
+      "deliverables": ["Default theme", "Theme SDK", "Theme registry"]
     },
     "ui": {
       "mission": "Build frontend components and pages",
       "status": "pending",
-      "deliverables": [
-        "Editor UI",
-        "Import/export UI",
-        "Theme selector",
-        "Accessibility features"
-      ]
+      "deliverables": ["Editor UI", "Import/export UI", "Theme selector", "Accessibility features"]
     }
   },
   "compliance": {

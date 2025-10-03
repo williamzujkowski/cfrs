@@ -6,13 +6,13 @@
 
 ## 🎯 Critical Targets (Must Achieve)
 
-| Metric | Target | Network | Status |
-|--------|--------|---------|--------|
-| **First Contentful Paint** | **<3s** | 3G | ⏳ |
-| **Largest Contentful Paint** | **<4s** | 3G | ⏳ |
-| **Time to Interactive** | **<5s** | 3G | ⏳ |
-| **Total Bundle Size** | **<135KB** | All | ⏳ |
-| **Lighthouse Score** | **≥90** | All | ⏳ |
+| Metric                       | Target     | Network | Status |
+| ---------------------------- | ---------- | ------- | ------ |
+| **First Contentful Paint**   | **<3s**    | 3G      | ⏳     |
+| **Largest Contentful Paint** | **<4s**    | 3G      | ⏳     |
+| **Time to Interactive**      | **<5s**    | 3G      | ⏳     |
+| **Total Bundle Size**        | **<135KB** | All     | ⏳     |
+| **Lighthouse Score**         | **≥90**    | All     | ⏳     |
 
 ---
 
@@ -49,6 +49,7 @@ TOTAL APPLICATION: 259KB (87KB critical + 172KB deferred)
 ## ⚡ Load Time Breakdown (3G Network)
 
 ### Before Optimization ❌
+
 ```
 Critical Payload:  140KB
 Transfer Time:     140KB ÷ 50KB/s = 2.8s
@@ -59,6 +60,7 @@ TOTAL FCP:         ~4.8s (FAILS TARGET)
 ```
 
 ### After Optimization ✅
+
 ```
 Critical Payload:  87KB
 Transfer Time:     87KB ÷ 50KB/s = 1.74s
@@ -69,6 +71,7 @@ TOTAL FCP:         ~3.14s (CLOSE TO TARGET)
 ```
 
 ### Aggressive Optimization ✅✅
+
 ```
 Critical Payload:  75KB (Preact + minimal shell + inline CSS)
 Transfer Time:     75KB ÷ 50KB/s = 1.5s
@@ -96,6 +99,7 @@ TOTAL FCP:         ~2.8s (ACHIEVES TARGET!)
 ```
 
 ### Key Audits (Performance)
+
 - ✅ First Contentful Paint: <3s
 - ✅ Largest Contentful Paint: <4s
 - ✅ Total Blocking Time: <300ms
@@ -107,18 +111,19 @@ TOTAL FCP:         ~2.8s (ACHIEVES TARGET!)
 
 ## 🌐 Network Performance Matrix
 
-| Network | Download | RTT | FCP Target | LCP Target | TTI Target |
-|---------|----------|-----|------------|------------|------------|
-| **4G**  | 4 Mbps   | 50ms | <1.0s | <2.0s | <3.0s |
-| **3G**  | 400 Kbps | 400ms | <2.5s | <4.0s | <5.0s |
-| **Slow 3G** | 100 Kbps | 2000ms | <4.0s | <6.0s | <8.0s |
-| **Offline** | Cached | 0ms | Instant | Instant | Instant |
+| Network     | Download | RTT    | FCP Target | LCP Target | TTI Target |
+| ----------- | -------- | ------ | ---------- | ---------- | ---------- |
+| **4G**      | 4 Mbps   | 50ms   | <1.0s      | <2.0s      | <3.0s      |
+| **3G**      | 400 Kbps | 400ms  | <2.5s      | <4.0s      | <5.0s      |
+| **Slow 3G** | 100 Kbps | 2000ms | <4.0s      | <6.0s      | <8.0s      |
+| **Offline** | Cached   | 0ms    | Instant    | Instant    | Instant    |
 
 ---
 
 ## 🔧 7 Key Optimizations
 
 ### 1. Bundle Splitting
+
 ```
 BEFORE: 200KB monolithic bundle
 AFTER:  87KB critical + 172KB lazy
@@ -126,6 +131,7 @@ IMPACT: -56% initial load
 ```
 
 ### 2. Critical CSS
+
 ```
 BEFORE: 40KB external CSS (render blocking)
 AFTER:  12KB inline CSS + 28KB deferred
@@ -133,6 +139,7 @@ IMPACT: -1 render-blocking request
 ```
 
 ### 3. Lazy Loading
+
 ```
 BEFORE: All features loaded upfront
 AFTER:  Route-based + feature-based splitting
@@ -140,6 +147,7 @@ IMPACT: Load only what's needed
 ```
 
 ### 4. Service Worker
+
 ```
 BEFORE: Network request on every visit
 AFTER:  Cache-first for app shell
@@ -147,6 +155,7 @@ IMPACT: Instant repeat visits
 ```
 
 ### 5. Preact Switch
+
 ```
 BEFORE: React (80KB vendor bundle)
 AFTER:  Preact (45KB vendor bundle)
@@ -154,6 +163,7 @@ IMPACT: -35KB (-44% framework size)
 ```
 
 ### 6. Image Optimization
+
 ```
 BEFORE: JPEG/PNG images
 AFTER:  WebP with JPEG fallback + lazy loading
@@ -161,6 +171,7 @@ IMPACT: -50% image size
 ```
 
 ### 7. Network Adaptation
+
 ```
 BEFORE: One-size-fits-all experience
 AFTER:  Progressive tiers based on connection
@@ -203,6 +214,7 @@ IMPACT: Optimal for all networks
 ## 🚀 Progressive Loading Tiers
 
 ### Tier 1: CORE (Loads First)
+
 ```
 Size: <100KB | Load Time: <3s on 3G
 ─────────────────────────────────────
@@ -213,6 +225,7 @@ Size: <100KB | Load Time: <3s on 3G
 ```
 
 ### Tier 2: ENHANCED (Lazy Loaded)
+
 ```
 Size: +50KB | Load Time: Idle/Interaction
 ─────────────────────────────────────
@@ -223,6 +236,7 @@ Size: +50KB | Load Time: Idle/Interaction
 ```
 
 ### Tier 3: PREMIUM (On Demand)
+
 ```
 Size: +60KB | Load Time: User Action
 ─────────────────────────────────────
@@ -289,24 +303,28 @@ Cleanup: LRU when quota exceeded
 ## 📋 Implementation Status
 
 ### Week 1: Foundation ⏳
+
 - [ ] Vite configuration
 - [ ] Bundle optimization
 - [ ] CSS optimization
 - [ ] Asset pipeline
 
 ### Week 2: Caching ⏳
+
 - [ ] Service worker
 - [ ] LocalStorage
 - [ ] HTTP caching
 - [ ] Offline mode
 
 ### Week 3: Monitoring ⏳
+
 - [ ] Web Vitals
 - [ ] Lighthouse CI
 - [ ] Bundle size checks
 - [ ] Performance dashboard
 
 ### Week 4: Enhancement ⏳
+
 - [ ] Network adaptation
 - [ ] Polyfills
 - [ ] Accessibility
@@ -345,6 +363,7 @@ npm run a11y-audit
 **Checklist:** `.hive-mind/optimization-checklist.md` (13KB)
 
 **References:**
+
 - Web Vitals: https://web.dev/vitals/
 - Lighthouse: https://web.dev/performance-scoring/
 - Vite Optimization: https://vitejs.dev/guide/build.html
@@ -354,18 +373,21 @@ npm run a11y-audit
 ## ✅ Success Criteria
 
 ### Must-Have (Release Blockers)
+
 - ✅ FCP <3s on 3G
 - ✅ Bundle <135KB gzip
 - ✅ Lighthouse ≥90 (all)
 - ✅ Offline mode working
 
 ### Should-Have (Quality Gates)
+
 - ✅ LCP <4s on 3G
 - ✅ TTI <5s on 3G
 - ✅ CLS <0.1
 - ✅ No regressions
 
 ### Nice-to-Have (Enhancements)
+
 - ⚪ Performance dashboard
 - ⚪ Network adaptation
 - ⚪ Automated reports

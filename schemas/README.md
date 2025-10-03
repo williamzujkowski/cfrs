@@ -90,47 +90,58 @@ All sections are optional except `basics`:
 All CFRS-specific features use the `x_cfrs_*` namespace prefix:
 
 ### Basics Extensions
+
 - `x_cfrs_pronouns` - Preferred pronouns (e.g., "she/her", "they/them")
 - `x_cfrs_locale` - Primary locale code (e.g., "en-US", "fr-FR")
 
 ### Work Experience Extensions
+
 - `x_cfrs_employment_type` - Employment classification (full-time, contract, etc.)
 - `x_cfrs_remote` - Boolean indicating remote work
 - `x_cfrs_keywords` - ATS-targeted keywords for this position
 
 ### Education Extensions
+
 - `x_cfrs_honors` - Academic honors and distinctions
 
 ### Skills Extensions
+
 - `x_cfrs_years` - Years of experience with this skill
 - `x_cfrs_category` - Skill grouping (technical, soft, language, etc.)
 
 ### Projects Extensions
+
 - `x_cfrs_featured` - Boolean to highlight important projects
 
 ### Publications Extensions
+
 - `x_cfrs_authors` - Co-author list
 - `x_cfrs_citation_count` - Citation metrics
 
 ### Languages Extensions
+
 - `x_cfrs_cefr_level` - Common European Framework level (A1-C2)
 
 ### References Extensions
+
 - `x_cfrs_relationship` - Reference's relationship to candidate
 - `x_cfrs_email` - Reference email address
 - `x_cfrs_phone` - Reference phone number
 
 ### Certificates Extensions
+
 - `x_cfrs_expiry_date` - Certification expiration date
 - `x_cfrs_credential_id` - License/credential number
 
 ### Metadata Extensions
+
 - `x_cfrs_theme` - Preferred theme identifier
 - `x_cfrs_ats_optimized` - Boolean indicating ATS optimization
 - `x_cfrs_redaction_profile` - Active redaction level (none, partial, full, custom)
 - `x_cfrs_locale_variants` - Available locale versions of resume
 
 ### Custom Sections
+
 - `x_cfrs_custom_sections` - Array of arbitrary sections for non-standard content
 
 ---
@@ -148,9 +159,11 @@ CFRS is a **superset** of JSON Resume v1.2.1:
 ```javascript
 import { convertCfrsToJrs } from './converters/cfrs-to-jrs';
 
-const cfrsResume = { /* ... */ };
+const cfrsResume = {
+  /* ... */
+};
 const jrsResume = convertCfrsToJrs(cfrsResume, {
-  preserveExtensions: true // Store CFRS data in $.x_cfrs for round-trip
+  preserveExtensions: true, // Store CFRS data in $.x_cfrs for round-trip
 });
 ```
 
@@ -159,7 +172,9 @@ const jrsResume = convertCfrsToJrs(cfrsResume, {
 ```javascript
 import { convertJrsToCfrs } from './converters/jrs-to-cfrs';
 
-const jrsResume = { /* ... */ };
+const jrsResume = {
+  /* ... */
+};
 const cfrsResume = convertJrsToCfrs(jrsResume);
 ```
 
@@ -177,13 +192,13 @@ CFRS can be converted to/from FRESH Resume Schema with some semantic mapping:
 
 ### Key Differences
 
-| Concept | CFRS | FRESH |
-|---------|------|-------|
-| Company name | `work[*].name` | `employment.history[*].employer` |
-| Job title | `work[*].position` | `employment.history[*].position` |
-| Awards | `awards[*]` | `recognition[*]` |
-| Publications | `publications[*]` | `writing[*]` |
-| Volunteer | `volunteer[*]` | `service.history[*]` |
+| Concept      | CFRS               | FRESH                            |
+| ------------ | ------------------ | -------------------------------- |
+| Company name | `work[*].name`     | `employment.history[*].employer` |
+| Job title    | `work[*].position` | `employment.history[*].position` |
+| Awards       | `awards[*]`        | `recognition[*]`                 |
+| Publications | `publications[*]`  | `writing[*]`                     |
+| Volunteer    | `volunteer[*]`     | `service.history[*]`             |
 
 See **`mappings/cfrs-to-fresh.json`** for complete mapping specification.
 
@@ -194,12 +209,14 @@ See **`mappings/cfrs-to-fresh.json`** for complete mapping specification.
 ### Date Formats
 
 All dates must use ISO 8601 format:
+
 - Full date: `YYYY-MM-DD` (e.g., "2023-06-15")
 - Month precision: `YYYY-MM` (e.g., "2023-06")
 
 ### URLs
 
 All URL fields must be valid URIs:
+
 - Must include protocol (https://, http://)
 - Must be properly encoded
 
@@ -220,14 +237,18 @@ Locale codes must follow BCP 47 (e.g., "en-US", "fr-CA", "zh-CN").
 ## Example Resumes
 
 ### Minimal Example
+
 See: **`examples/minimal-example.json`**
+
 - Basic contact information
 - Work history with 2 positions
 - Education and skills
 - Demonstrates core schema usage
 
 ### Comprehensive Example
+
 See: **`examples/comprehensive-example.json`**
+
 - Complete professional profile
 - Multiple employment positions
 - Advanced education (Ph.D. + B.S.)
@@ -236,7 +257,9 @@ See: **`examples/comprehensive-example.json`**
 - Custom sections (patents, speaking)
 
 ### Academic CV Example
+
 See: **`examples/academic-example.json`**
+
 - Academic career path
 - Research-focused content
 - Publications with citations
@@ -256,7 +279,7 @@ import addFormats from 'ajv-formats';
 
 const ajv = new Ajv({
   allErrors: true,
-  strict: false
+  strict: false,
 });
 addFormats(ajv);
 
@@ -264,7 +287,7 @@ const validate = ajv.compile(cfrsSchema);
 
 if (!validate(resume)) {
   console.error('Validation failed:');
-  validate.errors.forEach(error => {
+  validate.errors.forEach((error) => {
     console.error(`  ${error.instancePath}: ${error.message}`);
   });
 }
@@ -273,16 +296,19 @@ if (!validate(resume)) {
 ### Common Validation Errors
 
 **Missing required fields:**
+
 ```
 Error: must have required property 'name' at $.basics
 ```
 
 **Invalid date format:**
+
 ```
 Error: must match pattern "^\\d{4}(-\\d{2}(-\\d{2})?)?$" at $.work[0].startDate
 ```
 
 **Invalid URL:**
+
 ```
 Error: must match format "uri" at $.basics.url
 ```
@@ -306,8 +332,8 @@ Prefer `YYYY-MM-DD` when exact date is known, `YYYY-MM` for month precision:
 
 ```json
 {
-  "startDate": "2020-03-15",  // Exact start date known
-  "endDate": "2023-06"         // Left in June, exact day unknown
+  "startDate": "2020-03-15", // Exact start date known
+  "endDate": "2023-06" // Left in June, exact day unknown
 }
 ```
 
@@ -316,7 +342,7 @@ Prefer `YYYY-MM-DD` when exact date is known, `YYYY-MM` for month precision:
 ```json
 {
   "startDate": "2021-01",
-  "endDate": null  // or omit entirely
+  "endDate": null // or omit entirely
 }
 ```
 
@@ -326,8 +352,8 @@ Only use `x_cfrs_*` extensions when needed:
 
 ```json
 {
-  "x_cfrs_remote": true,  // Adds value for remote positions
-  "x_cfrs_keywords": ["React", "TypeScript"]  // Useful for ATS optimization
+  "x_cfrs_remote": true, // Adds value for remote positions
+  "x_cfrs_keywords": ["React", "TypeScript"] // Useful for ATS optimization
 }
 ```
 
@@ -351,10 +377,12 @@ No migration needed! JSON Resume is 100% compatible:
 
 ```javascript
 // Your existing JSON Resume
-const jrsResume = { /* ... */ };
+const jrsResume = {
+  /* ... */
+};
 
 // Just add the CFRS schema reference
-jrsResume.$schema = "https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json";
+jrsResume.$schema = 'https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json';
 
 // Optionally add CFRS extensions
 jrsResume.work[0].x_cfrs_remote = true;
@@ -367,11 +395,14 @@ Use the conversion utility:
 ```javascript
 import { convertFreshToCfrs } from './converters/fresh-to-cfrs';
 
-const freshResume = { /* ... */ };
+const freshResume = {
+  /* ... */
+};
 const cfrsResume = convertFreshToCfrs(freshResume);
 ```
 
 Key transformations:
+
 - `employment.history` → `work`
 - `recognition` → `awards`
 - `writing` → `publications`
@@ -411,18 +442,21 @@ All schema changes require:
 ## Implementation Roadmap
 
 ### Phase 0 (Current)
+
 ✅ Schema definition
 ✅ Mapping specifications
 ✅ Example resumes
 ✅ Documentation
 
 ### Phase 1 (MVP)
+
 - [ ] JavaScript/TypeScript validators
 - [ ] Conversion utilities (JRS ↔ CFRS, FRESH ↔ CFRS)
 - [ ] CLI validation tool
 - [ ] Browser-based validator
 
 ### Phase 2 (Enhancements)
+
 - [ ] Redaction engine
 - [ ] ATS keyword analyzer
 - [ ] Multi-locale variant manager

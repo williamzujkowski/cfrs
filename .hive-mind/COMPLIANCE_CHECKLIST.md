@@ -11,6 +11,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Phase 0: Discovery & Architecture - Definition of Done
 
 ### Schema Development
+
 - [ ] **CFRS v1.0.0 JSON Schema drafted**
   - [ ] Schema file at `/schemas/cfrs.schema.json`
   - [ ] All required properties defined
@@ -35,6 +36,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Compatibility notes included
 
 ### Architecture Decision Records
+
 - [ ] **ADR-001: Schema Design** created at `/docs/ADR-001-schema.md`
   - [ ] Context: Why CFRS vs extending JRS
   - [ ] Decision: Core schema choices
@@ -49,6 +51,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Status values defined (Proposed/Accepted/Deprecated/Superseded)
 
 ### Governance Files
+
 - [ ] **CLAUDE.md updated**
   - [ ] Version incremented if needed
   - [ ] Last audit date updated
@@ -72,6 +75,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] CI hook requirements documented
 
 ### Repository Scaffold
+
 - [ ] **Directory structure created**
   - [ ] `/schemas/` directory exists
   - [ ] `/docs/` directory exists
@@ -89,6 +93,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] README.md exists with project overview
 
 ### Validation & Testing
+
 - [ ] **Schema validation tests**
   - [ ] Valid examples pass validation
   - [ ] Invalid examples fail with clear errors
@@ -106,6 +111,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Phase 1: MVP - Definition of Done
 
 ### Web Application Core
+
 - [ ] **SPA Deployment**
   - [ ] Vite build configuration complete
   - [ ] GitHub Pages deployment successful
@@ -121,6 +127,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] 100% client-side execution
 
 ### Import Functionality
+
 - [ ] **JSON Importer**
   - [ ] Accepts JSON Resume format
   - [ ] Accepts CFRS format
@@ -145,6 +152,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Loading state indicators
 
 ### Validation & Preview
+
 - [ ] **CFRS Validation**
   - [ ] Schema validation on import
   - [ ] Validation on edit
@@ -160,6 +168,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Real-time validation feedback
 
 ### Theming System
+
 - [ ] **Theme Engine**
   - [ ] Nunjucks rendering engine integrated
   - [ ] Template sandbox enforced (no remote code)
@@ -187,6 +196,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Required metadata present
 
 ### Export Functionality
+
 - [ ] **JSON Export**
   - [ ] CFRS format export
   - [ ] JSON Resume format export
@@ -215,6 +225,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Save-as-PDF instructions provided
 
 ### UI/UX Requirements
+
 - [ ] **Accessibility (WCAG AA)**
   - [ ] Keyboard navigation functional
   - [ ] Focus indicators visible
@@ -247,6 +258,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] No layout shifts (CLS <0.1)
 
 ### Security & Privacy
+
 - [ ] **Client-Side Only**
   - [ ] No server API calls
   - [ ] No data sent to backend
@@ -262,6 +274,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] CSP tests pass
 
 ### CI/CD Pipeline
+
 - [ ] **Automated Checks**
   - [ ] ESLint configured and passing
   - [ ] TypeScript compilation clean
@@ -286,6 +299,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Formatting enforced
 
 ### Documentation
+
 - [ ] **User Documentation**
   - [ ] `/docs/QUICKSTART.md` created
   - [ ] Installation instructions
@@ -303,6 +317,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
   - [ ] Contributing guidelines
 
 ### Testing Requirements
+
 - [ ] **Unit Tests**
   - [ ] Schema validator tests
   - [ ] Importer tests (JSON, Markdown)
@@ -331,16 +346,19 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Phase 2: Extended Importers & Interop - Preview
 
 ### Additional Importers
+
 - [ ] Docx importer (mammoth.js)
 - [ ] Plain text importer with wizard
 - [ ] Fallback messaging for unsupported formats
 
 ### Interoperability
+
 - [ ] JSON Resume theme adapter
 - [ ] FRESH converter (both directions)
 - [ ] Format conversion tests
 
 ### GitHub Integration
+
 - [ ] GitHub Gist save/load
 - [ ] OAuth flow implementation
 - [ ] Scoped token handling
@@ -350,12 +368,14 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Phase 3: Theming Ecosystem - Preview
 
 ### Theme SDK
+
 - [ ] Theme scaffold generator
 - [ ] Theme validation CLI
 - [ ] Theme registry system
 - [ ] Submission guidelines
 
 ### Theme Governance
+
 - [ ] Registry manifest schema
 - [ ] CI checks for external themes
 - [ ] Screenshot requirements
@@ -366,6 +386,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Phase 4: Enhancements - Preview
 
 ### Advanced Features
+
 - [ ] Redaction profiles (PII stripping)
 - [ ] ATS compatibility checker
 - [ ] Multi-locale support
@@ -377,6 +398,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Compliance Validation Rules
 
 ### Pre-Commit Checks
+
 1. **Schema Validation**: All .json files validate against declared schemas
 2. **Mapping Validation**: Round-trip tests pass for all converters
 3. **Linting**: ESLint, Prettier, and MarkdownLint pass
@@ -384,6 +406,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 5. **Type Safety**: TypeScript compiles with no errors
 
 ### Pre-PR Checks
+
 1. **Build Success**: Production build completes
 2. **Integration Tests**: Full test suite passes
 3. **Accessibility**: axe-core scan has 0 violations
@@ -391,6 +414,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 5. **Documentation**: Updated for changes
 
 ### Pre-Merge Checks
+
 1. **ADR Updated**: If schema/governance changed
 2. **MANIFEST.json Updated**: If files added/removed
 3. **CHANGELOG Updated**: User-facing changes documented
@@ -398,6 +422,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 5. **Review Approved**: At least 1 reviewer approval
 
 ### Release Checks
+
 1. **All Tests Green**: Full CI/CD pipeline passes
 2. **Security Scan**: No high/critical vulnerabilities
 3. **Bundle Size**: Production bundle <500KB gzipped
@@ -409,6 +434,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Critical Failure Conditions
 
 ### Automatic PR Rejection
+
 - Schema validation fails
 - CSP violations detected
 - Remote JS in themes
@@ -419,6 +445,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 - Build fails
 
 ### Release Blockers
+
 - Critical security vulnerabilities
 - Data loss bugs
 - Accessibility regressions
@@ -430,28 +457,33 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Review Cadence
 
 ### Daily (Automated)
+
 - CI/CD pipeline runs
 - Dependency vulnerability scans
 - Link checking
 
 ### Weekly (Automated)
+
 - Lighthouse audits
 - Bundle size reports
 - Test coverage reports
 
 ### Monthly (Manual)
+
 - ADR review and cleanup
 - MANIFEST.json audit
 - Documentation freshness check
 - Security policy review
 
 ### Quarterly (Manual)
+
 - Full compliance audit
 - CLAUDE.md comprehensive review
 - Schema versioning assessment
 - Theme registry curation
 
 ### Annually (Manual)
+
 - Architecture review
 - Dependency major version updates
 - Roadmap planning
@@ -462,12 +494,14 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 ## Success Metrics
 
 ### Phase 0 Success
+
 - All schema files valid and committed
 - All mappings tested and documented
 - At least 1 ADR recorded
 - Repo structure matches specification
 
 ### Phase 1 Success
+
 - App deployed and accessible
 - All import/export formats working
 - 2+ themes available
@@ -475,6 +509,7 @@ PURPOSE: Master compliance checklist for CloudFlow Resume project
 - Zero WCAG AA violations
 
 ### Overall Project Success
+
 - Zero-cost hosting maintained
 - 100% client-side architecture
 - All target formats supported

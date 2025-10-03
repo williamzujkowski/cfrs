@@ -13,6 +13,7 @@
 This document defines the complete performance optimization strategy for CloudFlow Resume (CFRS), targeting sub-3-second load times on 3G networks while maintaining Lighthouse scores ≥90 across all categories. The strategy leverages Vite's advanced bundling, aggressive code splitting, optimized asset delivery, and progressive enhancement patterns.
 
 **Critical Performance Targets:**
+
 - **Initial Load (3G):** <3s to First Contentful Paint (FCP)
 - **Time to Interactive (3G):** <5s
 - **Total Bundle Size:** <200KB (gzipped, initial load)
@@ -26,6 +27,7 @@ This document defines the complete performance optimization strategy for CloudFl
 ### 1.1 Bundle Size Budgets
 
 **Critical Path Bundles (must load first):**
+
 ```
 vendor.js          → 80KB  (gzipped) - React/Preact core, router
 main.js            → 40KB  (gzipped) - App shell, critical UI
@@ -34,6 +36,7 @@ Total Critical     → 135KB (gzipped)
 ```
 
 **Deferred Bundles (lazy loaded):**
+
 ```
 importers/json.js     → 8KB   - JSON importer
 importers/markdown.js → 25KB  - Markdown parser (marked.js)
@@ -47,6 +50,7 @@ export-handlers.js    → 15KB  - Export formatters
 ```
 
 **Per-Route Budgets:**
+
 ```
 /                 → 135KB (app shell only)
 /import           → 135KB + 8-45KB (importer on-demand)
@@ -67,38 +71,27 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Vendor chunk - core framework only
-          'vendor': [
+          vendor: [
             'preact',
             'preact/hooks',
-            'wouter' // lightweight router
+            'wouter', // lightweight router
           ],
 
           // Separate chunks for heavy importers
-          'importer-markdown': [
-            'marked',
-            'turndown'
-          ],
-          'importer-docx': [
-            'mammoth'
-          ],
+          'importer-markdown': ['marked', 'turndown'],
+          'importer-docx': ['mammoth'],
 
           // Render engine separated
-          'render': [
-            'nunjucks',
-            './src/render/engine.ts'
-          ],
+          render: ['nunjucks', './src/render/engine.ts'],
 
           // Schema validation
-          'validator': [
-            'ajv',
-            'ajv-formats'
-          ]
+          validator: ['ajv', 'ajv-formats'],
         },
         // Optimize chunk naming for caching
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]'
-      }
+        assetFileNames: 'assets/[name].[hash].[ext]',
+      },
     },
 
     // Target modern browsers for smaller bundles
@@ -111,36 +104,34 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info'],
-        passes: 2
+        passes: 2,
       },
       mangle: {
-        safari10: true
-      }
+        safari10: true,
+      },
     },
 
     // Enable CSS code splitting
     cssCodeSplit: true,
 
     // Chunk size warning threshold
-    chunkSizeWarningLimit: 500
-  }
-})
+    chunkSizeWarningLimit: 500,
+  },
+});
 ```
 
 ### 1.3 Tree Shaking Optimization
 
 **Package.json sideEffects configuration:**
+
 ```json
 {
-  "sideEffects": [
-    "*.css",
-    "*.scss",
-    "./src/polyfills.ts"
-  ]
+  "sideEffects": ["*.css", "*.scss", "./src/polyfills.ts"]
 }
 ```
 
 **Import patterns to enforce:**
+
 ```typescript
 // ✅ CORRECT - Named imports enable tree shaking
 import { validateCFRS } from './schema/validator';
@@ -157,17 +148,23 @@ const loadPolyfills = async () => {
 ```
 
 **Enforced via ESLint rule:**
+
 ```javascript
 // .eslintrc.js
 module.exports = {
   rules: {
-    'no-restricted-imports': ['error', {
-      patterns: [{
-        group: ['**/index'],
-        message: 'Avoid barrel imports - import directly from source files'
-      }]
-    }]
-  }
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          {
+            group: ['**/index'],
+            message: 'Avoid barrel imports - import directly from source files',
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -178,6 +175,7 @@ module.exports = {
 ### 2.1 CSS Optimization
 
 **Critical CSS Strategy:**
+
 ```html
 <!-- Inline critical CSS in index.html (≤14KB) -->
 <style>
@@ -186,12 +184,17 @@ module.exports = {
 </style>
 
 <!-- Preload non-critical CSS -->
-<link rel="preload" href="/assets/main.css" as="style"
-      onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="/assets/main.css"></noscript>
+<link
+  rel="preload"
+  href="/assets/main.css"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
+<noscript><link rel="stylesheet" href="/assets/main.css" /></noscript>
 ```
 
 **CSS Processing Pipeline:**
+
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
@@ -205,26 +208,30 @@ export default defineConfig({
         require('postcss-nesting'),
         require('autoprefixer'),
         require('cssnano')({
-          preset: ['advanced', {
-            discardComments: { removeAll: true },
-            reduceIdents: true,
-            zindex: false, // Don't optimize z-index (can break stacking)
-            normalizeWhitespace: true
-          }]
-        })
-      ]
+          preset: [
+            'advanced',
+            {
+              discardComments: { removeAll: true },
+              reduceIdents: true,
+              zindex: false, // Don't optimize z-index (can break stacking)
+              normalizeWhitespace: true,
+            },
+          ],
+        }),
+      ],
     },
 
     // CSS modules for component styles
     modules: {
       localsConvention: 'camelCaseOnly',
-      generateScopedName: '[hash:base64:8]'
-    }
-  }
+      generateScopedName: '[hash:base64:8]',
+    },
+  },
 });
 ```
 
 **CSS Architecture:**
+
 ```
 styles/
 ├── critical.css        → Inlined in HTML (app shell)
@@ -247,10 +254,9 @@ styles/
 ```css
 /* Use system font stack for UI (zero download) */
 :root {
-  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI",
-             Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro",
-               Menlo, Monaco, monospace;
+  --font-ui:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, monospace;
 }
 
 /* Web fonts ONLY for resume themes (lazy loaded) */
@@ -265,31 +271,30 @@ styles/
 ```
 
 **Font Loading Strategy:**
+
 ```typescript
 // Load fonts only when theme is applied
 const loadThemeFonts = async (themeName: string) => {
   const fontMap: Record<string, string[]> = {
     classic: ['/fonts/times-var.woff2'],
     modern: ['/fonts/inter-var.woff2'],
-    creative: ['/fonts/montserrat-var.woff2']
+    creative: ['/fonts/montserrat-var.woff2'],
   };
 
   const fonts = fontMap[themeName] || [];
 
   // Use Font Loading API with timeout
-  const fontPromises = fonts.map(url => {
+  const fontPromises = fonts.map((url) => {
     const font = new FontFace('ThemeFont', `url(${url})`);
     return Promise.race([
       font.load(),
-      new Promise((_, reject) =>
-        setTimeout(() => reject('timeout'), 3000)
-      )
+      new Promise((_, reject) => setTimeout(() => reject('timeout'), 3000)),
     ]);
   });
 
   try {
     const loadedFonts = await Promise.allSettled(fontPromises);
-    loadedFonts.forEach(result => {
+    loadedFonts.forEach((result) => {
       if (result.status === 'fulfilled') {
         document.fonts.add(result.value);
       }
@@ -301,6 +306,7 @@ const loadThemeFonts = async (themeName: string) => {
 ```
 
 **Font Budget:**
+
 - UI fonts: 0KB (system fonts)
 - Theme fonts: 40-80KB per theme (lazy loaded, variable fonts)
 - Subsetting: Latin basic + Latin extended only
@@ -308,6 +314,7 @@ const loadThemeFonts = async (themeName: string) => {
 ### 2.3 Image Optimization
 
 **Format Strategy:**
+
 ```
 Illustrations  → SVG (inline for <2KB, external for larger)
 Screenshots    → WebP with JPEG fallback
@@ -316,6 +323,7 @@ Theme previews → WebP thumbnails (lazy loaded)
 ```
 
 **Implementation:**
+
 ```typescript
 // Image component with lazy loading + format detection
 const OptimizedImage: FC<{src: string, alt: string}> = ({src, alt}) => {
@@ -353,6 +361,7 @@ const OptimizedImage: FC<{src: string, alt: string}> = ({src, alt}) => {
 ```
 
 **Build-time optimization:**
+
 ```typescript
 // vite.config.ts - imagetools plugin
 import { imagetools } from 'vite-imagetools';
@@ -364,10 +373,10 @@ export default defineConfig({
         format: 'webp;jpg',
         quality: '80',
         width: '800;1200;1600',
-        as: 'picture'
-      })
-    })
-  ]
+        as: 'picture',
+      }),
+    }),
+  ],
 });
 ```
 
@@ -411,6 +420,7 @@ export const App = () => (
 ### 3.2 Theme Lazy Loading
 
 **Theme Registry Structure:**
+
 ```typescript
 // themes/registry.ts
 export interface ThemeMetadata {
@@ -429,7 +439,7 @@ export const THEME_REGISTRY: ThemeMetadata[] = [
     category: 'ats-safe',
     thumbnail: '/themes/classic-thumb.webp',
     size: 10240,
-    loader: () => import('./classic/theme.ts')
+    loader: () => import('./classic/theme.ts'),
   },
   {
     id: 'modern',
@@ -437,12 +447,13 @@ export const THEME_REGISTRY: ThemeMetadata[] = [
     category: 'modern',
     thumbnail: '/themes/modern-thumb.webp',
     size: 12288,
-    loader: () => import('./modern/theme.ts')
-  }
+    loader: () => import('./modern/theme.ts'),
+  },
 ];
 ```
 
 **Theme Loading with Preloading:**
+
 ```typescript
 // Preload theme on hover for instant apply
 const ThemeSelector: FC = () => {
@@ -493,7 +504,7 @@ const IMPORTERS: Record<ImporterType, () => Promise<ImporterModule>> = {
   json: () => import('./json-importer'),
   markdown: () => import('./markdown-importer'),
   docx: () => import('./docx-importer'),
-  plaintext: () => import('./plaintext-importer')
+  plaintext: () => import('./plaintext-importer'),
 };
 
 // Load importer only when file type is detected
@@ -518,7 +529,7 @@ const lazyValidator = {
       this._instance = await import('./validator');
     }
     return this._instance.validateCFRS(data);
-  }
+  },
 };
 
 // Usage in components
@@ -545,6 +556,7 @@ const Editor: FC = () => {
 ### 4.1 Service Worker Architecture
 
 **Cache Layers:**
+
 ```
 Layer 1: App Shell     → Cache-first (HTML, JS, CSS, fonts)
 Layer 2: Themes        → Cache-first with network fallback
@@ -553,6 +565,7 @@ Layer 4: Static Assets → Stale-while-revalidate
 ```
 
 **Service Worker Implementation (Workbox):**
+
 ```typescript
 // apps/web/src/sw.ts
 import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching';
@@ -570,9 +583,7 @@ registerRoute(
   ({ request }) => request.mode === 'navigate',
   new CacheFirst({
     cacheName: 'app-shell-v1',
-    plugins: [
-      new CacheableResponsePlugin({ statuses: [0, 200] })
-    ]
+    plugins: [new CacheableResponsePlugin({ statuses: [0, 200] })],
   })
 );
 
@@ -584,9 +595,9 @@ registerRoute(
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
-      })
-    ]
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+      }),
+    ],
   })
 );
 
@@ -598,17 +609,14 @@ registerRoute(
     plugins: [
       new ExpirationPlugin({
         maxEntries: 10,
-        maxAgeSeconds: 7 * 24 * 60 * 60
-      })
-    ]
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    ],
   })
 );
 
 // API/user data - network only (no caching)
-registerRoute(
-  ({ url }) => url.pathname.startsWith('/api/'),
-  new NetworkOnly()
-);
+registerRoute(({ url }) => url.pathname.startsWith('/api/'), new NetworkOnly());
 
 // Background sync for offline exports
 self.addEventListener('sync', (event) => {
@@ -619,6 +627,7 @@ self.addEventListener('sync', (event) => {
 ```
 
 **Vite PWA Plugin Configuration:**
+
 ```typescript
 // vite.config.ts
 import { VitePWA } from 'vite-plugin-pwa';
@@ -640,15 +649,15 @@ export default defineConfig({
           {
             src: 'pwa-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable'
-          }
-        ]
+            purpose: 'any maskable',
+          },
+        ],
       },
 
       workbox: {
@@ -661,31 +670,32 @@ export default defineConfig({
               cacheName: 'google-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
               },
               cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
-          }
-        ]
-      }
-    })
-  ]
+                statuses: [0, 200],
+              },
+            },
+          },
+        ],
+      },
+    }),
+  ],
 });
 ```
 
 ### 4.2 LocalStorage Strategy
 
 **Data Storage Architecture:**
+
 ```typescript
 // Maximum 5MB allocation across all storage
 const STORAGE_BUDGETS = {
-  resumeData: 2 * 1024 * 1024,    // 2MB - user resume JSON
-  drafts: 1 * 1024 * 1024,        // 1MB - auto-saved drafts
-  preferences: 100 * 1024,        // 100KB - user settings
-  themeCache: 500 * 1024,         // 500KB - compiled theme cache
-  exportHistory: 400 * 1024       // 400KB - recent exports
+  resumeData: 2 * 1024 * 1024, // 2MB - user resume JSON
+  drafts: 1 * 1024 * 1024, // 1MB - auto-saved drafts
+  preferences: 100 * 1024, // 100KB - user settings
+  themeCache: 500 * 1024, // 500KB - compiled theme cache
+  exportHistory: 400 * 1024, // 400KB - recent exports
 };
 
 class StorageManager {
@@ -730,13 +740,13 @@ class StorageManager {
 
   private cleanup(): void {
     // Remove least recently used items
-    const keys = Object.keys(localStorage).filter(k => k.startsWith(this.prefix));
+    const keys = Object.keys(localStorage).filter((k) => k.startsWith(this.prefix));
 
     // Sort by access timestamp (stored in metadata)
     const sorted = keys
-      .map(k => ({
+      .map((k) => ({
         key: k,
-        accessed: this.getMetadata(k)?.accessed || 0
+        accessed: this.getMetadata(k)?.accessed || 0,
       }))
       .sort((a, b) => a.accessed - b.accessed);
 
@@ -757,6 +767,7 @@ export const storage = new StorageManager();
 ```
 
 **Auto-save with Throttling:**
+
 ```typescript
 // Auto-save resume data with 2-second throttle
 const useAutoSave = (data: CFRSResume) => {
@@ -767,11 +778,7 @@ const useAutoSave = (data: CFRSResume) => {
     clearTimeout(saveTimerRef.current);
 
     saveTimerRef.current = setTimeout(async () => {
-      const success = await storage.set(
-        'resume:current',
-        data,
-        STORAGE_BUDGETS.resumeData
-      );
+      const success = await storage.set('resume:current', data, STORAGE_BUDGETS.resumeData);
 
       if (success) {
         setLastSaved(new Date());
@@ -788,6 +795,7 @@ const useAutoSave = (data: CFRSResume) => {
 ### 4.3 HTTP Caching Headers
 
 **Static Asset Caching (via GitHub Pages / CDN):**
+
 ```nginx
 # .github/workflows/deploy.yml - set headers via netlify.toml equivalent
 
@@ -809,25 +817,26 @@ const useAutoSave = (data: CFRSResume) => {
 ```
 
 **Preload Critical Resources:**
+
 ```html
 <!-- index.html -->
 <head>
   <!-- DNS prefetch for external resources -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
   <!-- Preconnect to critical origins -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <!-- Preload critical assets -->
-  <link rel="preload" href="/assets/vendor.js" as="script">
-  <link rel="preload" href="/assets/main.js" as="script">
-  <link rel="preload" href="/assets/critical.css" as="style">
+  <link rel="preload" href="/assets/vendor.js" as="script" />
+  <link rel="preload" href="/assets/main.js" as="script" />
+  <link rel="preload" href="/assets/critical.css" as="style" />
 
   <!-- Prefetch likely next routes -->
-  <link rel="prefetch" href="/assets/import-route.js">
+  <link rel="prefetch" href="/assets/import-route.js" />
 
   <!-- Module preload for faster execution -->
-  <link rel="modulepreload" href="/assets/vendor.js">
+  <link rel="modulepreload" href="/assets/vendor.js" />
 </head>
 ```
 
@@ -838,6 +847,7 @@ const useAutoSave = (data: CFRSResume) => {
 ### 5.1 Real User Monitoring (RUM)
 
 **Web Vitals Tracking:**
+
 ```typescript
 // apps/web/src/monitoring/vitals.ts
 import { onCLS, onFID, onLCP, onFCP, onTTFB, onINP } from 'web-vitals';
@@ -873,7 +883,7 @@ class PerformanceMonitor {
     if (import.meta.env.DEV) {
       console.info(`[Perf] ${metric.name}:`, {
         value: metric.value,
-        rating: metric.rating
+        rating: metric.rating,
       });
     } else {
       this.sendToAnalytics(metric);
@@ -893,7 +903,7 @@ class PerformanceMonitor {
         value: duration,
         rating: duration < 200 ? 'good' : duration < 500 ? 'needs-improvement' : 'poor',
         delta: duration,
-        id: themeId
+        id: themeId,
       });
     };
 
@@ -904,7 +914,7 @@ class PerformanceMonitor {
         value: duration,
         rating: duration < 1000 ? 'good' : duration < 3000 ? 'needs-improvement' : 'poor',
         delta: duration,
-        id: format
+        id: format,
       });
     };
 
@@ -920,7 +930,7 @@ class PerformanceMonitor {
       value: Math.round(metric.value),
       rating: metric.rating,
       connection: this.getConnectionInfo(),
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     navigator.sendBeacon('/api/vitals', JSON.stringify(data));
@@ -933,7 +943,7 @@ class PerformanceMonitor {
     return {
       effectiveType: conn.effectiveType, // '4g', '3g', etc.
       downlink: conn.downlink,
-      rtt: conn.rtt
+      rtt: conn.rtt,
     };
   }
 
@@ -953,6 +963,7 @@ if (typeof window !== 'undefined') {
 ### 5.2 Performance Budget Enforcement
 
 **Lighthouse CI Configuration:**
+
 ```javascript
 // lighthouserc.js
 module.exports = {
@@ -967,10 +978,10 @@ module.exports = {
           throughputKbps: 400,
           requestLatencyMs: 400,
           downloadThroughputKbps: 400,
-          uploadThroughputKbps: 400
+          uploadThroughputKbps: 400,
         },
-        emulatedFormFactor: 'mobile'
-      }
+        emulatedFormFactor: 'mobile',
+      },
     },
 
     assert: {
@@ -981,7 +992,7 @@ module.exports = {
         'total-blocking-time': ['error', { maxNumericValue: 300 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
         'speed-index': ['error', { maxNumericValue: 5000 }],
-        'interactive': ['error', { maxNumericValue: 5000 }],
+        interactive: ['error', { maxNumericValue: 5000 }],
 
         // Accessibility
         'categories:accessibility': ['error', { minScore: 0.9 }],
@@ -1002,18 +1013,19 @@ module.exports = {
 
         // Fonts
         'font-display': 'error',
-        'preload-lcp-image': 'warn'
-      }
+        'preload-lcp-image': 'warn',
+      },
     },
 
     upload: {
-      target: 'temporary-public-storage'
-    }
-  }
+      target: 'temporary-public-storage',
+    },
+  },
 };
 ```
 
 **Bundle Size Monitoring (bundlesize):**
+
 ```json
 // package.json
 {
@@ -1050,6 +1062,7 @@ module.exports = {
 ### 5.3 Performance Dashboard
 
 **Runtime Performance Panel:**
+
 ```typescript
 // apps/web/src/components/PerformancePanel.tsx (dev mode only)
 import { h } from 'preact';
@@ -1127,6 +1140,7 @@ export const PerformancePanel: FC = () => {
 ### 6.1 Performance Category (Target: ≥90)
 
 **Critical Optimizations:**
+
 - [x] First Contentful Paint <3s (3G)
 - [x] Largest Contentful Paint <4s (3G)
 - [x] Total Blocking Time <300ms
@@ -1135,6 +1149,7 @@ export const PerformancePanel: FC = () => {
 - [x] Time to Interactive <5s (3G)
 
 **Implementation Tasks:**
+
 ```markdown
 - [ ] Enable Vite code splitting (vendor/main/routes)
 - [ ] Implement route-based lazy loading
@@ -1156,6 +1171,7 @@ export const PerformancePanel: FC = () => {
 ### 6.2 Accessibility Category (Target: ≥90)
 
 **Compliance Tasks:**
+
 ```markdown
 - [ ] Semantic HTML structure (header, nav, main, footer)
 - [ ] ARIA labels for interactive elements
@@ -1173,6 +1189,7 @@ export const PerformancePanel: FC = () => {
 ```
 
 **Audit Script:**
+
 ```typescript
 // scripts/a11y-audit.ts
 import { Builder } from 'selenium-webdriver';
@@ -1189,7 +1206,7 @@ const auditAccessibility = async () => {
       .analyze();
 
     console.log(`Found ${results.violations.length} violations:`);
-    results.violations.forEach(violation => {
+    results.violations.forEach((violation) => {
       console.error(`[${violation.impact}] ${violation.help}`);
       console.error(`  - ${violation.helpUrl}`);
     });
@@ -1208,6 +1225,7 @@ auditAccessibility();
 ### 6.3 Best Practices Category (Target: ≥90)
 
 **Compliance Checklist:**
+
 ```markdown
 - [ ] HTTPS enforced (via GitHub Pages)
 - [ ] No mixed content warnings
@@ -1225,9 +1243,12 @@ auditAccessibility();
 ```
 
 **CSP Headers:**
+
 ```html
 <!-- index.html -->
-<meta http-equiv="Content-Security-Policy" content="
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
   default-src 'self';
   script-src 'self';
   style-src 'self' 'unsafe-inline';
@@ -1237,12 +1258,14 @@ auditAccessibility();
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
-">
+"
+/>
 ```
 
 ### 6.4 SEO Category (Target: ≥90)
 
 **Requirements:**
+
 ```markdown
 - [ ] Title tag (<60 characters, descriptive)
 - [ ] Meta description (<160 characters)
@@ -1259,44 +1282,51 @@ auditAccessibility();
 ```
 
 **SEO Meta Template:**
+
 ```html
 <!-- index.html -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Free, privacy-focused resume builder. Create ATS-friendly resumes with professional themes. 100% client-side, no sign-up required.">
-  <meta name="keywords" content="resume builder, CV maker, ATS resume, free resume, privacy">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Free, privacy-focused resume builder. Create ATS-friendly resumes with professional themes. 100% client-side, no sign-up required."
+  />
+  <meta name="keywords" content="resume builder, CV maker, ATS resume, free resume, privacy" />
 
   <title>CloudFlow Resume - Free Privacy-Focused Resume Builder</title>
-  <link rel="canonical" href="https://cloudflow-resume.github.io/">
+  <link rel="canonical" href="https://cloudflow-resume.github.io/" />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="CloudFlow Resume - Free Privacy-Focused Resume Builder">
-  <meta property="og:description" content="Create professional resumes with ATS-friendly themes. 100% free, no sign-up.">
-  <meta property="og:image" content="https://cloudflow-resume.github.io/og-image.png">
-  <meta property="og:url" content="https://cloudflow-resume.github.io/">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CloudFlow Resume - Free Privacy-Focused Resume Builder" />
+  <meta
+    property="og:description"
+    content="Create professional resumes with ATS-friendly themes. 100% free, no sign-up."
+  />
+  <meta property="og:image" content="https://cloudflow-resume.github.io/og-image.png" />
+  <meta property="og:url" content="https://cloudflow-resume.github.io/" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CloudFlow Resume">
-  <meta name="twitter:description" content="Free, privacy-focused resume builder">
-  <meta name="twitter:image" content="https://cloudflow-resume.github.io/twitter-card.png">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CloudFlow Resume" />
+  <meta name="twitter:description" content="Free, privacy-focused resume builder" />
+  <meta name="twitter:image" content="https://cloudflow-resume.github.io/twitter-card.png" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "CloudFlow Resume",
-    "description": "Privacy-focused resume builder",
-    "applicationCategory": "ProductivityApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CloudFlow Resume",
+      "description": "Privacy-focused resume builder",
+      "applicationCategory": "ProductivityApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     }
-  }
   </script>
 </head>
 ```
@@ -1308,6 +1338,7 @@ auditAccessibility();
 ### 7.1 Network Constraints
 
 **3G Network Profile:**
+
 ```
 Download:    400 Kbps  (50 KB/s)
 Upload:      400 Kbps  (50 KB/s)
@@ -1316,6 +1347,7 @@ Packet Loss: ~1%
 ```
 
 **Load Time Calculation:**
+
 ```
 Critical Path: 135KB gzipped
 Transfer time: 135KB ÷ 50KB/s = 2.7s
@@ -1326,6 +1358,7 @@ Total FCP:     ~4.7s (exceeds target!)
 ```
 
 **Optimization Required to Hit <3s:**
+
 - Reduce critical path to <100KB
 - Minimize RTT overhead (preconnect, HTTP/2)
 - Optimize parse/execute (smaller JS, defer non-critical)
@@ -1333,6 +1366,7 @@ Total FCP:     ~4.7s (exceeds target!)
 ### 7.2 Critical Path Reduction
 
 **Before Optimization:**
+
 ```
 index.html        → 5KB
 vendor.js (gz)    → 80KB
@@ -1343,6 +1377,7 @@ Total             → 140KB
 ```
 
 **After Optimization:**
+
 ```
 index.html (with inline CSS)  → 18KB (includes critical CSS)
 vendor.js (gz, Preact)        → 45KB (switch to Preact)
@@ -1358,6 +1393,7 @@ Total: ~3.66s (still tight!)
 ```
 
 **Further Optimization (Preact + Aggressive Splitting):**
+
 ```typescript
 // Use Preact instead of React (save ~35KB)
 import { h, render } from 'preact';
@@ -1385,19 +1421,25 @@ const App = () => {
 ### 7.3 RTT Reduction Strategies
 
 **Minimize Round Trips:**
+
 ```html
 <!-- Preconnect to origins (saves 1 RTT) -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" />
 
 <!-- HTTP/2 Server Push (if supported) -->
 <!-- Push vendor.js and main.js with HTML -->
 
 <!-- Inline critical resources to eliminate requests -->
-<style>/* Critical CSS inlined */</style>
-<script>/* App shell bootstrapper (tiny) */</script>
+<style>
+  /* Critical CSS inlined */
+</style>
+<script>
+  /* App shell bootstrapper (tiny) */
+</script>
 ```
 
 **Resource Consolidation:**
+
 ```
 Before:
   - index.html
@@ -1418,6 +1460,7 @@ Saved: 800ms
 ### 7.4 Progressive Enhancement Strategy
 
 **Tier 1: Core Experience (loads first, <100KB):**
+
 ```
 - HTML structure
 - Critical CSS (inlined)
@@ -1426,6 +1469,7 @@ Saved: 800ms
 ```
 
 **Tier 2: Enhanced Experience (lazy loaded):**
+
 ```
 - Importers (JSON first, others on demand)
 - Theme engine + 1 default theme
@@ -1434,6 +1478,7 @@ Saved: 800ms
 ```
 
 **Tier 3: Premium Features (progressive):**
+
 ```
 - Additional themes
 - Advanced importers (docx, plaintext)
@@ -1443,6 +1488,7 @@ Saved: 800ms
 ```
 
 **Implementation:**
+
 ```typescript
 // Progressive feature loading based on connection
 const loadFeatureSet = async () => {
@@ -1469,6 +1515,7 @@ requestIdleCallback(loadFeatureSet);
 ### 7.5 Adaptive Loading
 
 **Network-Aware Image Loading:**
+
 ```typescript
 const AdaptiveImage: FC<{src: string}> = ({ src }) => {
   const conn = (navigator as any).connection;
@@ -1488,6 +1535,7 @@ const AdaptiveImage: FC<{src: string}> = ({ src }) => {
 ```
 
 **Feature Flags Based on Network:**
+
 ```typescript
 const FEATURE_FLAGS = {
   enableThemePreviews: () => {
@@ -1523,6 +1571,7 @@ const ThemeGallery: FC = () => {
 ### 8.1 Core Principles
 
 **1. Baseline Experience (no JS required):**
+
 ```html
 <!-- Static HTML works without JavaScript -->
 <main>
@@ -1542,6 +1591,7 @@ const ThemeGallery: FC = () => {
 ```
 
 **2. Enhanced with CSS:**
+
 ```css
 /* Base styles work on all browsers */
 .cta {
@@ -1576,6 +1626,7 @@ const ThemeGallery: FC = () => {
 ```
 
 **3. Enhanced with JavaScript:**
+
 ```typescript
 // Feature detection before using APIs
 const supportsLocalStorage = (() => {
@@ -1598,22 +1649,23 @@ if (!supportsIntersectionObserver) {
 
 ### 8.2 Graceful Degradation Matrix
 
-| Feature                | No JS         | JS + Old Browser | JS + Modern Browser |
-|------------------------|---------------|------------------|---------------------|
-| View documentation     | ✅ Full       | ✅ Full          | ✅ Full             |
-| Download examples      | ✅ Full       | ✅ Full          | ✅ Full             |
-| Import JSON            | ❌ N/A        | ✅ Full          | ✅ Full             |
-| Import Markdown        | ❌ N/A        | ✅ Full          | ✅ Full             |
-| Import Docx            | ❌ N/A        | ⚠️ Limited       | ✅ Full             |
-| Theme preview          | ❌ N/A        | ✅ Static        | ✅ Interactive      |
-| Export HTML            | ❌ N/A        | ✅ Full          | ✅ Full             |
-| Export PDF             | ❌ N/A        | ✅ Print dialog  | ✅ Enhanced print   |
-| Auto-save              | ❌ N/A        | ⚠️ Cookie        | ✅ LocalStorage     |
-| Offline mode           | ❌ N/A        | ❌ N/A           | ✅ Service Worker   |
+| Feature            | No JS   | JS + Old Browser | JS + Modern Browser |
+| ------------------ | ------- | ---------------- | ------------------- |
+| View documentation | ✅ Full | ✅ Full          | ✅ Full             |
+| Download examples  | ✅ Full | ✅ Full          | ✅ Full             |
+| Import JSON        | ❌ N/A  | ✅ Full          | ✅ Full             |
+| Import Markdown    | ❌ N/A  | ✅ Full          | ✅ Full             |
+| Import Docx        | ❌ N/A  | ⚠️ Limited       | ✅ Full             |
+| Theme preview      | ❌ N/A  | ✅ Static        | ✅ Interactive      |
+| Export HTML        | ❌ N/A  | ✅ Full          | ✅ Full             |
+| Export PDF         | ❌ N/A  | ✅ Print dialog  | ✅ Enhanced print   |
+| Auto-save          | ❌ N/A  | ⚠️ Cookie        | ✅ LocalStorage     |
+| Offline mode       | ❌ N/A  | ❌ N/A           | ✅ Service Worker   |
 
 ### 8.3 Polyfill Strategy
 
 **Selective Polyfills (load only if needed):**
+
 ```typescript
 // apps/web/src/polyfills.ts
 const loadPolyfills = async () => {
@@ -1649,6 +1701,7 @@ if (import.meta.env.PROD) {
 ```
 
 **Modern Features with Fallbacks:**
+
 ```typescript
 // Copy to clipboard with fallback
 const copyToClipboard = async (text: string): Promise<boolean> => {
@@ -1688,6 +1741,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 ### 9.1 Phase 1: Foundation (Week 1)
 
 **Vite Configuration:**
+
 - [ ] Configure code splitting (vendor/main/routes)
 - [ ] Set up Terser minification
 - [ ] Enable CSS code splitting
@@ -1695,6 +1749,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Set up build budgets
 
 **Bundle Optimization:**
+
 - [ ] Switch to Preact (if applicable)
 - [ ] Implement route-based lazy loading
 - [ ] Set up dynamic imports for importers
@@ -1702,6 +1757,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Defer schema validator loading
 
 **Asset Pipeline:**
+
 - [ ] Set up PostCSS with cssnano
 - [ ] Configure critical CSS extraction
 - [ ] Implement CSS modules
@@ -1711,6 +1767,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 ### 9.2 Phase 2: Caching & Offline (Week 2)
 
 **Service Worker:**
+
 - [ ] Install Workbox / vite-plugin-pwa
 - [ ] Configure app shell caching
 - [ ] Set up theme caching strategy
@@ -1718,6 +1775,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Add background sync for exports
 
 **Storage Management:**
+
 - [ ] Implement StorageManager class
 - [ ] Set up auto-save with throttling
 - [ ] Create storage quota monitoring
@@ -1725,6 +1783,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Add storage migration logic
 
 **HTTP Caching:**
+
 - [ ] Configure cache headers for assets
 - [ ] Set up immutable caching for hashed files
 - [ ] Configure CDN caching (if applicable)
@@ -1734,6 +1793,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 ### 9.3 Phase 3: Monitoring & Optimization (Week 3)
 
 **Performance Monitoring:**
+
 - [ ] Install web-vitals library
 - [ ] Implement PerformanceMonitor class
 - [ ] Set up custom metrics tracking
@@ -1741,6 +1801,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Add analytics integration (privacy-preserving)
 
 **Lighthouse CI:**
+
 - [ ] Configure lighthouserc.js
 - [ ] Set up GitHub Actions workflow
 - [ ] Define performance budgets
@@ -1748,6 +1809,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Set up budget enforcement
 
 **Bundle Analysis:**
+
 - [ ] Install bundlesize package
 - [ ] Configure bundle size limits
 - [ ] Set up rollup-plugin-visualizer
@@ -1757,6 +1819,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 ### 9.4 Phase 4: Progressive Enhancement (Week 4)
 
 **Network Adaptation:**
+
 - [ ] Implement connection detection
 - [ ] Create adaptive loading strategy
 - [ ] Set up feature flags based on network
@@ -1764,6 +1827,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Add reduced motion detection
 
 **Polyfills & Compatibility:**
+
 - [ ] Identify required polyfills
 - [ ] Implement selective polyfill loading
 - [ ] Create fallbacks for modern APIs
@@ -1771,6 +1835,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 - [ ] Document browser support matrix
 
 **Accessibility:**
+
 - [ ] Run axe-core audit
 - [ ] Fix WCAG AA violations
 - [ ] Implement keyboard navigation
@@ -1783,42 +1848,42 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 
 ### 10.1 Core Web Vitals
 
-| Metric                        | Good      | Needs Improvement | Poor      | Target |
-|-------------------------------|-----------|-------------------|-----------|--------|
-| Largest Contentful Paint (LCP)| ≤2.5s     | 2.5s - 4.0s       | >4.0s     | ≤2.5s  |
-| First Input Delay (FID)       | ≤100ms    | 100ms - 300ms     | >300ms    | ≤100ms |
-| Interaction to Next Paint (INP)| ≤200ms   | 200ms - 500ms     | >500ms    | ≤200ms |
-| Cumulative Layout Shift (CLS) | ≤0.1      | 0.1 - 0.25        | >0.25     | ≤0.1   |
-| First Contentful Paint (FCP)  | ≤1.8s     | 1.8s - 3.0s       | >3.0s     | ≤1.8s  |
-| Time to First Byte (TTFB)     | ≤800ms    | 800ms - 1800ms    | >1800ms   | ≤600ms |
+| Metric                          | Good   | Needs Improvement | Poor    | Target |
+| ------------------------------- | ------ | ----------------- | ------- | ------ |
+| Largest Contentful Paint (LCP)  | ≤2.5s  | 2.5s - 4.0s       | >4.0s   | ≤2.5s  |
+| First Input Delay (FID)         | ≤100ms | 100ms - 300ms     | >300ms  | ≤100ms |
+| Interaction to Next Paint (INP) | ≤200ms | 200ms - 500ms     | >500ms  | ≤200ms |
+| Cumulative Layout Shift (CLS)   | ≤0.1   | 0.1 - 0.25        | >0.25   | ≤0.1   |
+| First Contentful Paint (FCP)    | ≤1.8s  | 1.8s - 3.0s       | >3.0s   | ≤1.8s  |
+| Time to First Byte (TTFB)       | ≤800ms | 800ms - 1800ms    | >1800ms | ≤600ms |
 
 ### 10.2 Bundle Size Metrics
 
-| Bundle                  | Target (gzip) | Max (gzip) | Current | Status |
-|-------------------------|---------------|------------|---------|--------|
-| Vendor (Preact)         | 45KB          | 80KB       | TBD     | ⏳     |
-| Main (App Shell)        | 30KB          | 40KB       | TBD     | ⏳     |
-| Critical CSS            | 12KB          | 15KB       | TBD     | ⏳     |
-| Importer: JSON          | 8KB           | 10KB       | TBD     | ⏳     |
-| Importer: Markdown      | 20KB          | 25KB       | TBD     | ⏳     |
-| Importer: Docx          | 40KB          | 45KB       | TBD     | ⏳     |
-| Render Engine           | 30KB          | 35KB       | TBD     | ⏳     |
-| Schema Validator        | 25KB          | 30KB       | TBD     | ⏳     |
-| **Total Initial Load**  | **87KB**      | **135KB**  | TBD     | ⏳     |
+| Bundle                 | Target (gzip) | Max (gzip) | Current | Status |
+| ---------------------- | ------------- | ---------- | ------- | ------ |
+| Vendor (Preact)        | 45KB          | 80KB       | TBD     | ⏳     |
+| Main (App Shell)       | 30KB          | 40KB       | TBD     | ⏳     |
+| Critical CSS           | 12KB          | 15KB       | TBD     | ⏳     |
+| Importer: JSON         | 8KB           | 10KB       | TBD     | ⏳     |
+| Importer: Markdown     | 20KB          | 25KB       | TBD     | ⏳     |
+| Importer: Docx         | 40KB          | 45KB       | TBD     | ⏳     |
+| Render Engine          | 30KB          | 35KB       | TBD     | ⏳     |
+| Schema Validator       | 25KB          | 30KB       | TBD     | ⏳     |
+| **Total Initial Load** | **87KB**      | **135KB**  | TBD     | ⏳     |
 
 ### 10.3 Lighthouse Scores
 
-| Category          | Target | Minimum | Current | Status |
-|-------------------|--------|---------|---------|--------|
-| Performance       | ≥95    | ≥90     | TBD     | ⏳     |
-| Accessibility     | ≥95    | ≥90     | TBD     | ⏳     |
-| Best Practices    | 100    | ≥90     | TBD     | ⏳     |
-| SEO               | 100    | ≥90     | TBD     | ⏳     |
+| Category       | Target | Minimum | Current | Status |
+| -------------- | ------ | ------- | ------- | ------ |
+| Performance    | ≥95    | ≥90     | TBD     | ⏳     |
+| Accessibility  | ≥95    | ≥90     | TBD     | ⏳     |
+| Best Practices | 100    | ≥90     | TBD     | ⏳     |
+| SEO            | 100    | ≥90     | TBD     | ⏳     |
 
 ### 10.4 Network-Specific Targets
 
 | Network Type | FCP Target | LCP Target | TTI Target | Total Size |
-|--------------|------------|------------|------------|------------|
+| ------------ | ---------- | ---------- | ---------- | ---------- |
 | 4G           | ≤1.0s      | ≤2.0s      | ≤3.0s      | ≤200KB     |
 | 3G           | ≤2.5s      | ≤4.0s      | ≤5.0s      | ≤135KB     |
 | Slow 3G      | ≤4.0s      | ≤6.0s      | ≤8.0s      | ≤100KB     |
@@ -1831,6 +1896,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 ### 11.1 CI/CD Integration
 
 **GitHub Actions Workflow:**
+
 ```yaml
 # .github/workflows/performance.yml
 name: Performance Budget
@@ -1879,6 +1945,7 @@ jobs:
 ### 11.2 Performance Regression Detection
 
 **Automated Checks:**
+
 ```typescript
 // scripts/perf-regression.ts
 import { readFileSync } from 'fs';
@@ -1900,9 +1967,7 @@ const checkRegression = () => {
     readFileSync('.lighthouseci/baseline.json', 'utf-8')
   );
 
-  const current: LighthouseReport = JSON.parse(
-    readFileSync('.lighthouseci/current.json', 'utf-8')
-  );
+  const current: LighthouseReport = JSON.parse(readFileSync('.lighthouseci/current.json', 'utf-8'));
 
   const regressions: string[] = [];
 
@@ -1914,7 +1979,7 @@ const checkRegression = () => {
 
   // Check metric degradation (>10% increase)
   const metrics = ['first-contentful-paint', 'largest-contentful-paint', 'total-blocking-time'];
-  metrics.forEach(metric => {
+  metrics.forEach((metric) => {
     const baseValue = baseline.audits[metric].numericValue;
     const currentValue = current.audits[metric].numericValue;
     const delta = (currentValue - baseValue) / baseValue;
@@ -1926,7 +1991,7 @@ const checkRegression = () => {
 
   if (regressions.length > 0) {
     console.error('Performance regressions detected:');
-    regressions.forEach(r => console.error(`  - ${r}`));
+    regressions.forEach((r) => console.error(`  - ${r}`));
     process.exit(1);
   }
 
@@ -1939,6 +2004,7 @@ checkRegression();
 ### 11.3 Performance Budget Dashboard
 
 **Weekly Report Generation:**
+
 ```typescript
 // scripts/generate-perf-report.ts
 import { writeFileSync } from 'fs';
@@ -1957,19 +2023,19 @@ const generateReport = (): BudgetReport => {
     timestamp: new Date().toISOString(),
     bundles: {
       vendor: { size: 45000, budget: 80000, status: 'pass' },
-      main: { size: 30000, budget: 40000, status: 'pass' }
+      main: { size: 30000, budget: 40000, status: 'pass' },
     },
     lighthouse: {
       performance: 95,
       accessibility: 98,
       bestPractices: 100,
-      seo: 100
+      seo: 100,
     },
     webVitals: {
       lcp: 2100,
       fid: 50,
-      cls: 0.05
-    }
+      cls: 0.05,
+    },
   };
 
   // Write to reports directory
@@ -2011,30 +2077,36 @@ const generateDashboard = (reports: BudgetReport[]) => {
 ### 12.1 Developer Guidelines
 
 **Performance-First Development Practices:**
+
 ```markdown
 # Performance Guidelines for Contributors
 
 ## 1. Bundle Size Awareness
+
 - Check bundle impact before adding dependencies
 - Use `npm run analyze` to visualize bundle
 - Prefer smaller alternatives (e.g., date-fns/esm over moment)
 
 ## 2. Code Splitting
+
 - Always use dynamic imports for routes
 - Lazy load heavy components (importers, themes)
 - Defer non-critical features to idle time
 
 ## 3. Asset Optimization
+
 - Optimize images before commit (use imagetools)
 - Use SVG for icons and illustrations
 - Inline critical CSS, defer the rest
 
 ## 4. Testing
+
 - Run Lighthouse CI on every PR
 - Check bundle size with `npm run bundlesize`
 - Test on throttled 3G network (Chrome DevTools)
 
 ## 5. Monitoring
+
 - Add performance marks for custom features
 - Track long tasks (>50ms)
 - Monitor memory usage for memory leaks
@@ -2043,39 +2115,46 @@ const generateDashboard = (reports: BudgetReport[]) => {
 ### 12.2 Performance Audit Template
 
 **Monthly Performance Audit Checklist:**
+
 ```markdown
 # Performance Audit - [Date]
 
 ## Bundle Analysis
+
 - [ ] Total bundle size within budget (<200KB gzip)
 - [ ] No unexpected dependencies added
 - [ ] Tree shaking working (no dead code)
 - [ ] Code splitting effective (no large chunks)
 
 ## Lighthouse Scores
+
 - [ ] Performance ≥90
 - [ ] Accessibility ≥90
 - [ ] Best Practices ≥90
 - [ ] SEO ≥90
 
 ## Web Vitals (3G)
+
 - [ ] LCP <4s
 - [ ] FID <100ms
 - [ ] CLS <0.1
 - [ ] FCP <3s
 
 ## Caching
+
 - [ ] Service worker caching app shell
 - [ ] Proper cache headers set
 - [ ] Offline mode working
 - [ ] LocalStorage within quota
 
 ## Regressions
+
 - [ ] No performance regressions vs. last month
 - [ ] No new JavaScript errors
 - [ ] No accessibility violations introduced
 
 ## Action Items
+
 1. [List any issues found]
 2. [Prioritize fixes]
 3. [Assign owners]
@@ -2088,6 +2167,7 @@ const generateDashboard = (reports: BudgetReport[]) => {
 ### 13.1 Tools & Libraries
 
 **Build & Bundling:**
+
 - Vite 4+ (build tool)
 - Rollup (bundler, via Vite)
 - Terser (minification)
@@ -2095,18 +2175,21 @@ const generateDashboard = (reports: BudgetReport[]) => {
 - vite-plugin-pwa (service worker)
 
 **Performance:**
+
 - web-vitals (Core Web Vitals tracking)
 - Lighthouse CI (automated audits)
 - bundlesize (bundle size monitoring)
 - @lhci/cli (Lighthouse CI CLI)
 
 **Monitoring:**
+
 - Performance Observer API
 - Navigation Timing API
 - Resource Timing API
 - User Timing API
 
 **Optimization:**
+
 - imagetools (image optimization)
 - Workbox (service worker)
 - critical (critical CSS extraction)
@@ -2115,32 +2198,34 @@ const generateDashboard = (reports: BudgetReport[]) => {
 ### 13.2 Reference Links
 
 **Performance Resources:**
+
 - [Web Vitals](https://web.dev/vitals/)
 - [Lighthouse Scoring](https://web.dev/performance-scoring/)
 - [Network Information API](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API)
 - [Vite Build Optimizations](https://vitejs.dev/guide/build.html)
 
 **Best Practices:**
+
 - [Chrome Performance Best Practices](https://developer.chrome.com/docs/lighthouse/performance/)
 - [Preact Performance](https://preactjs.com/guide/v10/differences-to-react/#performance)
 - [Service Worker Caching Strategies](https://developers.google.com/web/tools/workbox/modules/workbox-strategies)
 
 ### 13.3 Glossary
 
-| Term              | Definition                                                                 |
-|-------------------|---------------------------------------------------------------------------|
-| **FCP**           | First Contentful Paint - when first content renders                       |
-| **LCP**           | Largest Contentful Paint - when main content renders                      |
-| **FID**           | First Input Delay - time from first interaction to response               |
-| **INP**           | Interaction to Next Paint - responsiveness metric replacing FID           |
-| **CLS**           | Cumulative Layout Shift - visual stability metric                         |
-| **TBT**           | Total Blocking Time - sum of blocking time between FCP and TTI            |
-| **TTI**           | Time to Interactive - when page is fully interactive                      |
-| **TTFB**          | Time to First Byte - time until first byte received from server           |
-| **RTT**           | Round Trip Time - latency for request/response cycle                      |
-| **Tree Shaking**  | Removing unused code during bundling                                      |
-| **Code Splitting**| Dividing code into chunks loaded on demand                                |
-| **Critical CSS**  | Minimum CSS needed to render above-the-fold content                       |
+| Term               | Definition                                                      |
+| ------------------ | --------------------------------------------------------------- |
+| **FCP**            | First Contentful Paint - when first content renders             |
+| **LCP**            | Largest Contentful Paint - when main content renders            |
+| **FID**            | First Input Delay - time from first interaction to response     |
+| **INP**            | Interaction to Next Paint - responsiveness metric replacing FID |
+| **CLS**            | Cumulative Layout Shift - visual stability metric               |
+| **TBT**            | Total Blocking Time - sum of blocking time between FCP and TTI  |
+| **TTI**            | Time to Interactive - when page is fully interactive            |
+| **TTFB**           | Time to First Byte - time until first byte received from server |
+| **RTT**            | Round Trip Time - latency for request/response cycle            |
+| **Tree Shaking**   | Removing unused code during bundling                            |
+| **Code Splitting** | Dividing code into chunks loaded on demand                      |
+| **Critical CSS**   | Minimum CSS needed to render above-the-fold content             |
 
 ---
 
@@ -2155,12 +2240,14 @@ This optimization strategy provides a comprehensive roadmap to achieve sub-3-sec
 5. **Continuous monitoring** - Lighthouse CI, bundle size checks, Web Vitals tracking
 
 **Next Steps:**
+
 1. Review and approve this strategy
 2. Begin Phase 1 implementation (Vite configuration + bundle optimization)
 3. Set up CI/CD pipelines for automated monitoring
 4. Iterate based on real-world performance data
 
 **Compliance:**
+
 - Aligns with CLAUDE.md requirements (<3s load, Lighthouse ≥90)
 - Privacy-preserving monitoring (no PII collection)
 - GitHub Pages compatible (static deployment)

@@ -27,10 +27,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor': ['preact'],
-          'schema': ['ajv', 'ajv-formats'],
-          'render': ['nunjucks'],
-          'importers': ['mammoth', 'marked'],
+          vendor: ['preact'],
+          schema: ['ajv', 'ajv-formats'],
+          render: ['nunjucks'],
+          importers: ['mammoth', 'marked'],
         },
       },
     },
@@ -62,13 +62,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'apps/web/src/test/',
-        '**/*.d.ts',
-        '**/*.config.*',
-        '**/dist/**',
-      ],
+      exclude: ['node_modules/', 'apps/web/src/test/', '**/*.d.ts', '**/*.config.*', '**/dist/**'],
     },
   },
 });

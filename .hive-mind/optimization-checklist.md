@@ -9,6 +9,7 @@
 ## Phase 1: Foundation (Week 1)
 
 ### Vite Configuration
+
 - [ ] Create `vite.config.ts` with manual chunk splitting
 - [ ] Configure vendor chunk (Preact, router only)
 - [ ] Set up separate chunks for importers (json, markdown, docx)
@@ -21,6 +22,7 @@
 - [ ] Set chunk size warning limit to 500KB
 
 ### Bundle Optimization
+
 - [ ] Install Preact (`npm install preact`)
 - [ ] Set up Preact aliases in Vite config
 - [ ] Convert React imports to Preact
@@ -33,6 +35,7 @@
 - [ ] Add `sideEffects` to package.json
 
 ### CSS Optimization
+
 - [ ] Install PostCSS plugins (cssnano, autoprefixer)
 - [ ] Configure PostCSS in Vite config
 - [ ] Set up CSS modules for components
@@ -45,6 +48,7 @@
 - [ ] Audit and remove unused CSS
 
 ### Image & Font Optimization
+
 - [ ] Install vite-imagetools plugin
 - [ ] Configure WebP generation with JPEG fallback
 - [ ] Set up lazy loading for images
@@ -61,6 +65,7 @@
 ## Phase 2: Caching & Offline (Week 2)
 
 ### Service Worker Setup
+
 - [ ] Install vite-plugin-pwa (`npm install -D vite-plugin-pwa`)
 - [ ] Configure VitePWA plugin in vite.config.ts
 - [ ] Set up PWA manifest (name, icons, theme)
@@ -73,6 +78,7 @@
 - [ ] Test service worker in production build
 
 ### Workbox Configuration
+
 - [ ] Configure runtime caching strategies
 - [ ] Set up cache name versioning
 - [ ] Add expiration plugins (max age, max entries)
@@ -85,6 +91,7 @@
 - [ ] Monitor cache storage usage
 
 ### LocalStorage Strategy
+
 - [ ] Create StorageManager class
 - [ ] Define storage budgets (resume: 2MB, drafts: 1MB, etc.)
 - [ ] Implement quota checking before save
@@ -97,6 +104,7 @@
 - [ ] Add storage migration logic for version updates
 
 ### HTTP Caching
+
 - [ ] Configure cache headers for assets (max-age=31536000)
 - [ ] Set no-cache for HTML (must-revalidate)
 - [ ] Configure cache headers for service worker (max-age=0)
@@ -113,6 +121,7 @@
 ## Phase 3: Monitoring & Testing (Week 3)
 
 ### Web Vitals Tracking
+
 - [ ] Install web-vitals (`npm install web-vitals`)
 - [ ] Create PerformanceMonitor class
 - [ ] Implement onCLS, onFID/onINP, onLCP handlers
@@ -125,6 +134,7 @@
 - [ ] Set up sendBeacon for reliable metric reporting
 
 ### Lighthouse CI
+
 - [ ] Install @lhci/cli (`npm install -D @lhci/cli`)
 - [ ] Create lighthouserc.js configuration
 - [ ] Set performance budgets (FCP <3s, LCP <4s, etc.)
@@ -137,6 +147,7 @@
 - [ ] Add PR status checks
 
 ### Bundle Size Monitoring
+
 - [ ] Install bundlesize (`npm install -D bundlesize`)
 - [ ] Configure bundlesize in package.json
 - [ ] Set size limits for vendor.js (80KB gzip)
@@ -149,6 +160,7 @@
 - [ ] Set up size comparison in PRs
 
 ### Performance Testing
+
 - [ ] Create performance regression script
 - [ ] Set up baseline Lighthouse report
 - [ ] Configure automated comparison (±5% tolerance)
@@ -165,6 +177,7 @@
 ## Phase 4: Progressive Enhancement (Week 4)
 
 ### Network Adaptation
+
 - [ ] Implement connection detection (Navigator.connection)
 - [ ] Create feature flags based on effectiveType
 - [ ] Set up save-data mode detection
@@ -177,6 +190,7 @@
 - [ ] Verify graceful degradation
 
 ### Polyfills & Compatibility
+
 - [ ] Identify required polyfills (IntersectionObserver, etc.)
 - [ ] Create polyfill loading script
 - [ ] Implement conditional polyfill loading
@@ -189,6 +203,7 @@
 - [ ] Verify bundle size impact
 
 ### Accessibility Compliance
+
 - [ ] Install @axe-core/webdriverjs
 - [ ] Create accessibility audit script
 - [ ] Run axe-core with WCAG 2.1 AA rules
@@ -201,6 +216,7 @@
 - [ ] Add focus visible styles
 
 ### Progressive Loading
+
 - [ ] Implement 3-tier loading strategy
 - [ ] Create core tier (<100KB, essential only)
 - [ ] Create enhanced tier (themes, render engine)
@@ -217,6 +233,7 @@
 ## Validation & Testing
 
 ### Pre-Deployment Checks
+
 - [ ] Run `npm run build` successfully
 - [ ] Verify bundle sizes under budget
 - [ ] Run Lighthouse CI (all scores ≥90)
@@ -229,6 +246,7 @@
 - [ ] Test importer lazy loading
 
 ### Manual Testing
+
 - [ ] Test on Chrome (desktop + mobile)
 - [ ] Test on Firefox (desktop + mobile)
 - [ ] Test on Safari (desktop + mobile)
@@ -241,6 +259,7 @@
 - [ ] Check print-to-PDF functionality
 
 ### Performance Validation
+
 - [ ] Measure FCP on 3G (<3s target)
 - [ ] Measure LCP on 3G (<4s target)
 - [ ] Measure TTI on 3G (<5s target)
@@ -257,6 +276,7 @@
 ## CI/CD Integration
 
 ### GitHub Actions Setup
+
 - [ ] Create `.github/workflows/performance.yml`
 - [ ] Add Lighthouse CI job
 - [ ] Add bundlesize check job
@@ -269,6 +289,7 @@
 - [ ] Test workflow on sample PR
 
 ### Pre-commit Hooks
+
 - [ ] Install husky (`npm install -D husky`)
 - [ ] Set up pre-commit hook
 - [ ] Add bundle size check
@@ -285,6 +306,7 @@
 ## Documentation
 
 ### Developer Guides
+
 - [ ] Create PERFORMANCE.md in /docs
 - [ ] Document bundle size budgets
 - [ ] Explain code splitting strategy
@@ -297,6 +319,7 @@
 - [ ] Add FAQ section
 
 ### User Documentation
+
 - [ ] Explain offline mode to users
 - [ ] Document save-data mode benefits
 - [ ] Add browser compatibility matrix
@@ -313,6 +336,7 @@
 ## Success Metrics Tracking
 
 ### Initial Metrics (Baseline)
+
 - [ ] Record initial bundle sizes
 - [ ] Record initial Lighthouse scores
 - [ ] Record initial Web Vitals
@@ -325,6 +349,7 @@
 - [ ] Create baseline report
 
 ### Target Metrics (Post-Optimization)
+
 - [ ] Verify bundle size reduction (>50%)
 - [ ] Confirm Lighthouse ≥90 (all categories)
 - [ ] Verify FCP <3s on 3G
@@ -341,6 +366,7 @@
 ## Quick Reference
 
 ### Critical Commands
+
 ```bash
 # Build for production
 npm run build
@@ -365,6 +391,7 @@ npm run perf-report
 ```
 
 ### Performance Budget Summary
+
 - Vendor bundle: 45KB (max 80KB) gzipped
 - Main bundle: 30KB (max 40KB) gzipped
 - Critical CSS: 12KB (max 15KB) gzipped
@@ -373,6 +400,7 @@ npm run perf-report
 - Lighthouse: ≥90 (all categories)
 
 ### Key Files
+
 - `/home/william/git/cfrs/.hive-mind/optimization-strategy.md` - Full spec
 - `/home/william/git/cfrs/.hive-mind/optimization-summary.md` - Executive summary
 - `/home/william/git/cfrs/vite.config.ts` - Build configuration
@@ -389,6 +417,7 @@ npm run perf-report
 ---
 
 ## Notes
+
 - Check off items as you complete them
 - Update metrics as you progress
 - Report blockers immediately

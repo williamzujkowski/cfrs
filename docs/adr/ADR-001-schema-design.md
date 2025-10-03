@@ -10,6 +10,7 @@
 ## Context
 
 CloudFlow Resume System (CFRS) requires a JSON schema that:
+
 1. Supports all standard resume sections and fields
 2. Maintains 100% backward compatibility with JSON Resume
 3. Provides interoperability with FRESH format
@@ -27,6 +28,7 @@ We will adopt **CFRS v1.0.0** as a **strict superset of JSON Resume v1.0.0** wit
 ### 1. **Base Schema: JSON Resume v1.0.0**
 
 **Rationale:**
+
 - JSON Resume v1.0.0 is the current stable version (not v1.2.1 as initially referenced)
 - Wider adoption and ecosystem support
 - Simpler, flatter structure (arrays vs nested objects)
@@ -34,25 +36,27 @@ We will adopt **CFRS v1.0.0** as a **strict superset of JSON Resume v1.0.0** wit
 - All JSON Resume documents are valid CFRS documents
 
 **Structure:**
+
 ```json
 {
-  "basics": { },
-  "work": [ ],
-  "volunteer": [ ],
-  "education": [ ],
-  "awards": [ ],
-  "publications": [ ],
-  "skills": [ ],
-  "languages": [ ],
-  "interests": [ ],
-  "references": [ ],
-  "projects": [ ]
+  "basics": {},
+  "work": [],
+  "volunteer": [],
+  "education": [],
+  "awards": [],
+  "publications": [],
+  "skills": [],
+  "languages": [],
+  "interests": [],
+  "references": [],
+  "projects": []
 }
 ```
 
 ### 2. **Namespaced Extensions: `x_cfrs_*` Prefix**
 
 **Rationale:**
+
 - Prevents naming collisions with future JSON Resume fields
 - Clearly identifies CFRS-specific functionality
 - Allows JSON Resume to evolve independently
@@ -60,6 +64,7 @@ We will adopt **CFRS v1.0.0** as a **strict superset of JSON Resume v1.0.0** wit
 - Easy to filter during export
 
 **Extension Categories:**
+
 - **Privacy & Localization:** `x_cfrs_pronouns`, `x_cfrs_locale`, `x_cfrs_variants`
 - **ATS Optimization:** `x_cfrs_keywords`, `x_cfrs_employment_type`, `x_cfrs_remote_eligible`
 - **Academic & Research:** `x_cfrs_academic_honors`, `x_cfrs_co_authors`, `x_cfrs_citation_count`
@@ -71,6 +76,7 @@ Total: 22 CFRS-specific extensions
 ### 3. **Additional Standard Section: `certificates`**
 
 **Rationale:**
+
 - Professional certifications are critical for many roles
 - Not well-supported in JSON Resume base schema
 - Can be added without breaking compatibility (optional section)
@@ -79,6 +85,7 @@ Total: 22 CFRS-specific extensions
 ### 4. **Validation Strategy**
 
 **Rationale:**
+
 - JSON Schema Draft-07 for wide tool support
 - All fields optional except `basics.name` (privacy-first)
 - Strict patterns for dates (ISO 8601), URLs, emails
@@ -88,6 +95,7 @@ Total: 22 CFRS-specific extensions
 ### 5. **Compatibility Mappings**
 
 **Rationale:**
+
 - Bidirectional CFRS ↔ JSON Resume (100% lossless import, 80-90% lossless export)
 - Bidirectional CFRS ↔ FRESH (95% lossless both ways)
 - Documented transformation algorithms
@@ -100,11 +108,13 @@ Total: 22 CFRS-specific extensions
 ### Alternative 1: Use FRESH as Base
 
 **Pros:**
+
 - More comprehensive structure
 - Better academic/research support
 - Richer metadata
 
 **Cons:**
+
 - Less mature ecosystem
 - More complex nested structure
 - Harder to parse and validate
@@ -116,11 +126,13 @@ Total: 22 CFRS-specific extensions
 ### Alternative 2: Create Entirely New Schema
 
 **Pros:**
+
 - Complete freedom in design
 - Can optimize for all use cases
 - No legacy constraints
 
 **Cons:**
+
 - No existing ecosystem
 - Users must migrate manually
 - No import from popular formats
@@ -131,10 +143,12 @@ Total: 22 CFRS-specific extensions
 ### Alternative 3: Use JSON Resume with Inline Extensions
 
 **Pros:**
+
 - Simpler (no namespace)
 - More natural field names
 
 **Cons:**
+
 - Naming collisions with future JSON Resume fields
 - Breaks forward compatibility
 - Violates best practices
@@ -144,10 +158,12 @@ Total: 22 CFRS-specific extensions
 ### Alternative 4: Multiple Schema Versions (CFRS-Basic, CFRS-Extended)
 
 **Pros:**
+
 - Clear separation of concerns
 - Users choose complexity level
 
 **Cons:**
+
 - Schema fragmentation
 - Confusion about which to use
 - Harder to maintain
@@ -178,19 +194,19 @@ Total: 22 CFRS-specific extensions
 ### Negative
 
 1. **Verbosity:** Namespaced extensions (`x_cfrs_*`) are longer than plain names.
-   - *Mitigation:* Helper functions and UI abstractions hide complexity from users.
+   - _Mitigation:_ Helper functions and UI abstractions hide complexity from users.
 
 2. **Export Data Loss:** CFRS → JSON Resume loses `x_cfrs_*` fields.
-   - *Mitigation:* Documented in mappings; users warned during export; round-trip capability for CFRS.
+   - _Mitigation:_ Documented in mappings; users warned during export; round-trip capability for CFRS.
 
 3. **Learning Curve:** Developers must understand extension namespacing.
-   - *Mitigation:* Comprehensive documentation with examples; TypeScript types for autocomplete.
+   - _Mitigation:_ Comprehensive documentation with examples; TypeScript types for autocomplete.
 
 4. **Schema Size:** 18KB formatted (2KB gzipped) is larger than minimal schemas.
-   - *Mitigation:* Acceptable for client-side validation; schemas cached; lazy loading if needed.
+   - _Mitigation:_ Acceptable for client-side validation; schemas cached; lazy loading if needed.
 
 5. **Maintenance:** Must track JSON Resume and FRESH evolution.
-   - *Mitigation:* Automated tests for compatibility; scheduled reviews; documented mapping strategies.
+   - _Mitigation:_ Automated tests for compatibility; scheduled reviews; documented mapping strategies.
 
 ---
 

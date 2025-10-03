@@ -52,7 +52,16 @@
       "location": "Seattle, WA",
       "x_cfrs_employment_type": "full-time",
       "x_cfrs_remote": false,
-      "x_cfrs_keywords": ["Distributed Systems", "Kafka", "Kubernetes", "Go", "Python", "AWS", "Terraform", "Team Leadership"]
+      "x_cfrs_keywords": [
+        "Distributed Systems",
+        "Kafka",
+        "Kubernetes",
+        "Go",
+        "Python",
+        "AWS",
+        "Terraform",
+        "Team Leadership"
+      ]
     },
     {
       "name": "DataFlow Inc.",
@@ -70,7 +79,14 @@
       "location": "San Francisco, CA",
       "x_cfrs_employment_type": "full-time",
       "x_cfrs_remote": false,
-      "x_cfrs_keywords": ["Real-time Analytics", "Apache Flink", "Scala", "Redis", "Cassandra", "Observability"]
+      "x_cfrs_keywords": [
+        "Real-time Analytics",
+        "Apache Flink",
+        "Scala",
+        "Redis",
+        "Cassandra",
+        "Observability"
+      ]
     },
     {
       "name": "Innovate Labs",
@@ -106,10 +122,7 @@
         "Computer Systems Engineering"
       ],
       "location": "Cambridge, MA",
-      "x_cfrs_honors": [
-        "Presidential Fellowship",
-        "Best Dissertation Award in Computer Science"
-      ]
+      "x_cfrs_honors": ["Presidential Fellowship", "Best Dissertation Award in Computer Science"]
     },
     {
       "institution": "Stanford University",
@@ -126,17 +139,20 @@
         "Artificial Intelligence"
       ],
       "location": "Stanford, CA",
-      "x_cfrs_honors": [
-        "Summa Cum Laude",
-        "Phi Beta Kappa"
-      ]
+      "x_cfrs_honors": ["Summa Cum Laude", "Phi Beta Kappa"]
     }
   ],
   "skills": [
     {
       "name": "System Architecture",
       "level": "expert",
-      "keywords": ["Distributed Systems", "Microservices", "Event-Driven Architecture", "Service Mesh", "API Design"],
+      "keywords": [
+        "Distributed Systems",
+        "Microservices",
+        "Event-Driven Architecture",
+        "Service Mesh",
+        "API Design"
+      ],
       "x_cfrs_years": 12,
       "x_cfrs_category": "technical"
     },
@@ -157,14 +173,28 @@
     {
       "name": "Data Technologies",
       "level": "expert",
-      "keywords": ["Kafka", "Apache Flink", "Spark", "PostgreSQL", "Redis", "Cassandra", "Elasticsearch"],
+      "keywords": [
+        "Kafka",
+        "Apache Flink",
+        "Spark",
+        "PostgreSQL",
+        "Redis",
+        "Cassandra",
+        "Elasticsearch"
+      ],
       "x_cfrs_years": 9,
       "x_cfrs_category": "technical"
     },
     {
       "name": "Leadership & Communication",
       "level": "expert",
-      "keywords": ["Technical Leadership", "Mentorship", "Public Speaking", "Technical Writing", "Stakeholder Management"],
+      "keywords": [
+        "Technical Leadership",
+        "Mentorship",
+        "Public Speaking",
+        "Technical Writing",
+        "Stakeholder Management"
+      ],
       "x_cfrs_years": 8,
       "x_cfrs_category": "soft"
     }

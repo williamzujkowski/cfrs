@@ -57,21 +57,21 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
       "properties": {
         "required": {
           "type": "array",
-          "items": {"type": "string"}
+          "items": { "type": "string" }
         },
         "validation": {
           "type": "object",
           "properties": {
-            "onCommit": {"type": "boolean"},
-            "onBuild": {"type": "boolean"},
-            "blockOnFail": {"type": "boolean"}
+            "onCommit": { "type": "boolean" },
+            "onBuild": { "type": "boolean" },
+            "blockOnFail": { "type": "boolean" }
           }
         },
         "versionControl": {
           "type": "object",
           "properties": {
-            "enforceSemanticVersioning": {"type": "boolean"},
-            "requireVersionBump": {"type": "boolean"}
+            "enforceSemanticVersioning": { "type": "boolean" },
+            "requireVersionBump": { "type": "boolean" }
           }
         }
       }
@@ -82,13 +82,13 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
         "roundTripTests": {
           "type": "object",
           "properties": {
-            "required": {"type": "boolean"},
-            "minCoverage": {"type": "number"}
+            "required": { "type": "boolean" },
+            "minCoverage": { "type": "number" }
           }
         },
         "losslessRequired": {
           "type": "array",
-          "items": {"type": "string"}
+          "items": { "type": "string" }
         }
       }
     },
@@ -98,24 +98,24 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
         "csp": {
           "type": "object",
           "properties": {
-            "noInlineScripts": {"type": "boolean"},
-            "noRemoteResources": {"type": "boolean"},
+            "noInlineScripts": { "type": "boolean" },
+            "noRemoteResources": { "type": "boolean" },
             "allowedResourceTypes": {
               "type": "array",
-              "items": {"type": "string"}
+              "items": { "type": "string" }
             }
           }
         },
         "sizeLimit": {
           "type": "object",
           "properties": {
-            "maxKb": {"type": "number"},
-            "enforce": {"type": "boolean"}
+            "maxKb": { "type": "number" },
+            "enforce": { "type": "boolean" }
           }
         },
         "requiredFiles": {
           "type": "array",
-          "items": {"type": "string"}
+          "items": { "type": "string" }
         }
       }
     },
@@ -127,18 +127,18 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
           "properties": {
             "requiredFor": {
               "type": "array",
-              "items": {"type": "string"}
+              "items": { "type": "string" }
             },
-            "template": {"type": "string"},
-            "numberingScheme": {"type": "string"}
+            "template": { "type": "string" },
+            "numberingScheme": { "type": "string" }
           }
         },
         "manifestSync": {
           "type": "object",
           "properties": {
-            "autoUpdate": {"type": "boolean"},
-            "validateOnCommit": {"type": "boolean"},
-            "blockOnMismatch": {"type": "boolean"}
+            "autoUpdate": { "type": "boolean" },
+            "validateOnCommit": { "type": "boolean" },
+            "blockOnMismatch": { "type": "boolean" }
           }
         }
       }
@@ -149,22 +149,22 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
         "clientSideOnly": {
           "type": "object",
           "properties": {
-            "noServerCalls": {"type": "boolean"},
-            "noExternalTracking": {"type": "boolean"},
+            "noServerCalls": { "type": "boolean" },
+            "noExternalTracking": { "type": "boolean" },
             "allowedDomains": {
               "type": "array",
-              "items": {"type": "string"}
+              "items": { "type": "string" }
             }
           }
         },
         "dependencies": {
           "type": "object",
           "properties": {
-            "scanForVulnerabilities": {"type": "boolean"},
-            "blockCritical": {"type": "boolean"},
+            "scanForVulnerabilities": { "type": "boolean" },
+            "blockCritical": { "type": "boolean" },
             "allowedLicenses": {
               "type": "array",
-              "items": {"type": "string"}
+              "items": { "type": "string" }
             }
           }
         }
@@ -176,25 +176,25 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
         "testing": {
           "type": "object",
           "properties": {
-            "minCoverage": {"type": "number"},
-            "requireTestsForFeatures": {"type": "boolean"},
-            "requireA11yTests": {"type": "boolean"}
+            "minCoverage": { "type": "number" },
+            "requireTestsForFeatures": { "type": "boolean" },
+            "requireA11yTests": { "type": "boolean" }
           }
         },
         "accessibility": {
           "type": "object",
           "properties": {
-            "wcagLevel": {"type": "string"},
-            "axeCoreViolations": {"type": "number"},
-            "scanOnBuild": {"type": "boolean"}
+            "wcagLevel": { "type": "string" },
+            "axeCoreViolations": { "type": "number" },
+            "scanOnBuild": { "type": "boolean" }
           }
         },
         "performance": {
           "type": "object",
           "properties": {
-            "lighthouseMin": {"type": "number"},
-            "bundleSizeMaxKb": {"type": "number"},
-            "loadTimeMaxMs": {"type": "number"}
+            "lighthouseMin": { "type": "number" },
+            "bundleSizeMaxKb": { "type": "number" },
+            "loadTimeMaxMs": { "type": "number" }
           }
         }
       }
@@ -245,10 +245,7 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
       "minCoverage": 100,
       "formats": ["CFRS->JRS->CFRS", "CFRS->FRESH->CFRS"]
     },
-    "losslessRequired": [
-      "CFRS->JRS",
-      "JRS->CFRS"
-    ],
+    "losslessRequired": ["CFRS->JRS", "JRS->CFRS"],
     "validationRules": {
       "enforceFieldMapping": true,
       "requireReverseMappings": true,
@@ -269,12 +266,7 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
       "enforce": true,
       "includeAssets": true
     },
-    "requiredFiles": [
-      "manifest.json",
-      "template.njk",
-      "styles.css",
-      "screenshot.png"
-    ],
+    "requiredFiles": ["manifest.json", "template.njk", "styles.css", "screenshot.png"],
     "metadata": {
       "requireLicense": true,
       "requireVersion": true,
@@ -331,25 +323,13 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
       "noExternalTracking": true,
       "allowedDomains": [],
       "scanCodeForAPICalls": true,
-      "prohibitedPatterns": [
-        "fetch(",
-        "XMLHttpRequest",
-        "axios.",
-        "$.ajax",
-        "navigator.sendBeacon"
-      ]
+      "prohibitedPatterns": ["fetch(", "XMLHttpRequest", "axios.", "$.ajax", "navigator.sendBeacon"]
     },
     "dependencies": {
       "scanForVulnerabilities": true,
       "blockCritical": true,
       "blockHigh": false,
-      "allowedLicenses": [
-        "MIT",
-        "Apache-2.0",
-        "BSD-2-Clause",
-        "BSD-3-Clause",
-        "ISC"
-      ],
+      "allowedLicenses": ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC"],
       "requireJustificationFor": "production",
       "scanTools": ["npm audit", "snyk"]
     },
@@ -415,11 +395,7 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
       "accessibility",
       "security-scan"
     ],
-    "optionalChecks": [
-      "performance-audit",
-      "bundle-size",
-      "link-validation"
-    ],
+    "optionalChecks": ["performance-audit", "bundle-size", "link-validation"],
     "blockMergeOnFailure": true,
     "requireApprovals": 1
   },
@@ -479,6 +455,7 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
 **Purpose**: Ensure schema integrity and consistency
 
 **Enforced Rules**:
+
 1. All schema files validate against JSON Schema Draft-07
 2. Schema versions follow SemVer
 3. Schema changes require ADR
@@ -487,12 +464,14 @@ The `.claude-rules.json` file defines **mandatory enforcement rules** for the Cl
 6. Examples validate correctly (valid pass, invalid fail)
 
 **Validation Commands**:
+
 ```bash
 npm run validate:schemas
 npm run validate:examples
 ```
 
 **Failure Actions**:
+
 - Block commit if schema invalid
 - Block PR if ADR missing for schema change
 - Block merge if examples don't validate
@@ -504,6 +483,7 @@ npm run validate:examples
 **Purpose**: Ensure data conversion accuracy
 
 **Enforced Rules**:
+
 1. Round-trip tests exist for all mappings
 2. Round-trip tests have 100% coverage
 3. CFRS→JRS→CFRS is lossless
@@ -511,12 +491,14 @@ npm run validate:examples
 5. Edge cases are documented
 
 **Validation Commands**:
+
 ```bash
 npm run test:mappings
 npm run test:roundtrip
 ```
 
 **Failure Actions**:
+
 - Block commit if round-trip tests fail
 - Block PR if mapping coverage <100%
 - Warn if new edge case not documented
@@ -528,6 +510,7 @@ npm run test:roundtrip
 **Purpose**: Ensure theme security and quality
 
 **Enforced Rules**:
+
 1. No JavaScript in theme files
 2. No remote resource loading
 3. CSP headers compliant
@@ -537,12 +520,14 @@ npm run test:roundtrip
 7. Golden fixtures exist
 
 **Validation Commands**:
+
 ```bash
 npm run validate:theme <theme-name>
 npm run scan:csp <theme-name>
 ```
 
 **Failure Actions**:
+
 - Reject theme if JavaScript detected
 - Reject theme if CSP violation found
 - Reject theme if >500KB
@@ -555,6 +540,7 @@ npm run scan:csp <theme-name>
 **Purpose**: Maintain project documentation standards
 
 **Enforced Rules**:
+
 1. ADR required for:
    - Schema changes
    - Architecture decisions
@@ -571,12 +557,14 @@ npm run scan:csp <theme-name>
 3. CHANGELOG updated for user-facing changes
 
 **Validation Commands**:
+
 ```bash
 npm run validate:manifest
 npm run check:adr-required
 ```
 
 **Failure Actions**:
+
 - Block PR if ADR missing for required change
 - Block commit if MANIFEST.json out of sync
 - Warn if CHANGELOG not updated
@@ -588,6 +576,7 @@ npm run check:adr-required
 **Purpose**: Enforce privacy and security standards
 
 **Enforced Rules**:
+
 1. No server API calls in code
 2. No external tracking/analytics
 3. No critical/high vulnerabilities in dependencies
@@ -596,6 +585,7 @@ npm run check:adr-required
 6. Production dependencies require justification
 
 **Validation Commands**:
+
 ```bash
 npm run scan:security
 npm audit
@@ -603,6 +593,7 @@ npm run check:licenses
 ```
 
 **Failure Actions**:
+
 - Block commit if server call detected
 - Block PR if critical vulnerability found
 - Block merge if incompatible license added
@@ -615,6 +606,7 @@ npm run check:licenses
 **Purpose**: Maintain code quality and accessibility
 
 **Enforced Rules**:
+
 1. Test coverage ≥80%
 2. Zero accessibility violations (axe-core)
 3. WCAG AA compliance
@@ -626,6 +618,7 @@ npm run check:licenses
 9. TypeScript strict mode
 
 **Validation Commands**:
+
 ```bash
 npm run test:coverage
 npm run test:a11y
@@ -637,6 +630,7 @@ npm run type-check
 ```
 
 **Failure Actions**:
+
 - Block commit if lint errors
 - Block PR if coverage <80%
 - Block merge if a11y violations
@@ -654,6 +648,7 @@ npm run type-check
 **Runs On**: Every `git commit`
 
 **Checks**:
+
 1. Lint staged files (ESLint, Prettier)
 2. Validate schemas if changed
 3. Type-check TypeScript files
@@ -661,23 +656,14 @@ npm run type-check
 5. Validate MANIFEST.json if changed
 
 **Configuration**:
+
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "tsc --noEmit"
-    ],
-    "*.{js,jsx,json,md}": [
-      "prettier --write"
-    ],
-    "schemas/**/*.json": [
-      "npm run validate:schemas"
-    ],
-    "MANIFEST.json": [
-      "npm run validate:manifest"
-    ]
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write", "tsc --noEmit"],
+    "*.{js,jsx,json,md}": ["prettier --write"],
+    "schemas/**/*.json": ["npm run validate:schemas"],
+    "MANIFEST.json": ["npm run validate:manifest"]
   }
 }
 ```
@@ -689,6 +675,7 @@ npm run type-check
 **Runs On**: Every push and PR
 
 **Required Checks**:
+
 1. **Build**: Production build succeeds
 2. **Lint**: ESLint passes with 0 warnings
 3. **Type Check**: TypeScript compiles
@@ -698,11 +685,13 @@ npm run type-check
 7. **Security Scan**: No critical vulnerabilities
 
 **Optional Checks**:
+
 1. **Performance**: Lighthouse audit
 2. **Bundle Size**: Size impact report
 3. **Link Validation**: No broken links
 
 **Branch Protection**:
+
 - All required checks must pass
 - At least 1 approval required
 - CODEOWNERS review for sensitive files
@@ -712,19 +701,23 @@ npm run type-check
 ### PR Templates
 
 **Checklist Items**:
+
 ```markdown
 ## Governance
+
 - [ ] MANIFEST.json updated (if files added/removed)
 - [ ] ADR created/updated (if required)
 - [ ] CHANGELOG updated (if user-facing change)
 
 ## Quality
+
 - [ ] Tests added/updated
 - [ ] Test coverage ≥80%
 - [ ] Accessibility tested
 - [ ] Keyboard navigation verified
 
 ## Security
+
 - [ ] No server calls added
 - [ ] No tracking/analytics added
 - [ ] Dependencies scanned
@@ -738,18 +731,21 @@ npm run type-check
 ### Severity Levels
 
 **CRITICAL (Block)**:
+
 - Schema validation failure
 - Security vulnerability
 - CSP violation in theme
 - Accessibility regression
 
 **ERROR (Block)**:
+
 - Test failure
 - Lint errors
 - Type errors
 - Coverage drop below 80%
 
 **WARNING (Log)**:
+
 - Bundle size increase
 - Performance regression
 - Missing documentation
@@ -759,12 +755,14 @@ npm run type-check
 ### Error Messages
 
 All error messages should:
+
 1. **Identify the issue**: What rule was violated
 2. **Explain why**: Why the rule exists
 3. **Provide fix**: How to resolve the violation
 4. **Link docs**: Where to learn more
 
 **Example**:
+
 ```
 ❌ Schema Validation Failed
 
@@ -796,12 +794,14 @@ Learn more: /docs/SCHEMA.md#validation-rules
 **Never disable rules in .claude-rules.json**
 
 For temporary bypass:
+
 ```bash
 # Use git commit --no-verify (emergency only)
 git commit --no-verify -m "Emergency fix"
 ```
 
 **Required Follow-up**:
+
 - Create issue to fix properly
 - Create ADR explaining why bypass was needed
 - Fix and re-commit with verification enabled
@@ -811,6 +811,7 @@ git commit --no-verify -m "Emergency fix"
 ## Validation Scripts
 
 ### Pre-Commit Validation
+
 ```bash
 #!/bin/bash
 # scripts/validate-pre-commit.sh
@@ -839,6 +840,7 @@ echo "✓ Pre-commit validation passed"
 ```
 
 ### PR Validation
+
 ```bash
 #!/bin/bash
 # scripts/validate-pr.sh
@@ -878,18 +880,23 @@ echo "✓ PR validation passed"
 ## FAQ
 
 ### Can I skip pre-commit hooks?
+
 **No.** Use `--no-verify` only for emergencies and create follow-up issue.
 
 ### What if a rule is too strict?
+
 Create ADR proposing rule change, discuss with team, update if consensus.
 
 ### How do I add a new check?
+
 Add to .claude-rules.json, implement script, add to CI, document, create ADR.
 
 ### What if CI is failing incorrectly?
+
 Investigate root cause. If CI bug, fix CI. Never merge failing checks.
 
 ### Can themes have exceptions?
+
 No. All themes must pass CSP, size, and metadata checks without exception.
 
 ---

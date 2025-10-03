@@ -18,10 +18,7 @@
     },
     "mappings": {
       "required": true,
-      "locations": [
-        "schemas/mappings/cfrs-to-jrs.json",
-        "schemas/mappings/cfrs-to-fresh.json"
-      ],
+      "locations": ["schemas/mappings/cfrs-to-jrs.json", "schemas/mappings/cfrs-to-fresh.json"],
       "bidirectional": false,
       "description": "Schema mappings must be complete and tested"
     },

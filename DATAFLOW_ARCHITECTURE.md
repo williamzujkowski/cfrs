@@ -12,6 +12,7 @@
 This document defines the complete data flow architecture for the CloudFlow Resume System, a client-side SPA that transforms various resume input formats into structured CFRS JSON, applies themes, and exports to multiple formats.
 
 **Core Principles:**
+
 - 100% client-side processing (zero server storage)
 - Schema-first validation (CFRS v1.0.0)
 - Immutable data transformations
@@ -108,12 +109,14 @@ This document defines the complete data flow architecture for the CloudFlow Resu
 **Location:** `/apps/web/src/orchestrator/import-orchestrator.ts`
 
 **Responsibilities:**
+
 - Detect input format (MIME type, file extension, content analysis)
 - Route to appropriate importer
 - Handle errors and fallbacks
 - Coordinate multi-file imports
 
 **Interface:**
+
 ```typescript
 interface ImportOrchestrator {
   import(input: ImportInput): Promise<ImportResult>;
@@ -136,6 +139,7 @@ type ImportResult = {
 ```
 
 **Data Flow:**
+
 ```
 Input → Format Detection → Sanitization → Importer Selection → Parse → Result
 ```
@@ -151,6 +155,7 @@ Input → Format Detection → Sanitization → Importer Selection → Parse →
 **Purpose:** Parse JSON Resume or CFRS JSON
 
 **Algorithm:**
+
 ```
 1. Parse JSON (validate well-formed)
 2. Detect schema version:
@@ -165,6 +170,7 @@ Input → Format Detection → Sanitization → Importer Selection → Parse →
 ```
 
 **Mapping Strategy:**
+
 ```typescript
 interface Mapper {
   detect(data: unknown): SchemaType;
@@ -188,6 +194,7 @@ interface Mapper {
 **Purpose:** Parse structured Markdown resumes
 
 **Algorithm:**
+
 ```
 1. Extract frontmatter (YAML/TOML) if present
    - Contains metadata and structured data
@@ -205,6 +212,7 @@ interface Mapper {
 ```
 
 **Section Patterns:**
+
 ```regex
 Experience/Work History: /^#+\s*(experience|work|employment)/i
 Education: /^#+\s*education/i
@@ -220,6 +228,7 @@ Dates: /(\d{4})\s*[-–]\s*(\d{4}|present)/i
 **Dependencies:** `mammoth.js`
 
 **Algorithm:**
+
 ```
 1. Use mammoth.js to extract HTML
 2. Parse HTML to text with structure preservation
@@ -231,6 +240,7 @@ Dates: /(\d{4})\s*[-–]\s*(\d{4}|present)/i
 ```
 
 **Limitations:**
+
 - No complex table support
 - Limited formatting preservation
 - Fallback UI messaging for complex docs
@@ -240,6 +250,7 @@ Dates: /(\d{4})\s*[-–]\s*(\d{4}|present)/i
 **Purpose:** Interactive wizard for unstructured text
 
 **Algorithm:**
+
 ```
 1. Analyze text for patterns:
    - Email addresses → Contact
@@ -256,6 +267,7 @@ Dates: /(\d{4})\s*[-–]\s*(\d{4}|present)/i
 ```
 
 **Pattern Library:**
+
 ```typescript
 const PATTERNS = {
   email: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
@@ -386,7 +398,7 @@ interface ValidationError {
 // Example validation rules:
 const BUSINESS_RULES = {
   maxExperience: 50, // years
-  maxEducation: 10,  // entries
+  maxEducation: 10, // entries
   maxSkills: 100,
   maxTitleLength: 200,
   maxSummaryLength: 2000,
@@ -691,12 +703,12 @@ const useDebouncedRender = (resume: CFRSResume, delay = 300) => {
 
 ```typescript
 type ExportFormat =
-  | 'cfrs-json'        // CFRS native format
-  | 'json-resume'      // JSON Resume v1.2.1
-  | 'fresh-json'       // FRESH format
-  | 'markdown'         // Markdown with frontmatter
-  | 'html'             // Standalone HTML (theme embedded)
-  | 'pdf';             // Print to PDF (browser native)
+  | 'cfrs-json' // CFRS native format
+  | 'json-resume' // JSON Resume v1.2.1
+  | 'fresh-json' // FRESH format
+  | 'markdown' // Markdown with frontmatter
+  | 'html' // Standalone HTML (theme embedded)
+  | 'pdf'; // Print to PDF (browser native)
 
 interface Exporter {
   export(resume: CFRSResume, format: ExportFormat, options: ExportOptions): Blob;
@@ -764,12 +776,16 @@ ${resume.summary.content}
 
 ## Experience
 
-${resume.experience.map(exp => `
+${resume.experience
+  .map(
+    (exp) => `
 ### ${exp.title} at ${exp.company}
 ${exp.startDate} - ${exp.endDate || 'Present'}
 
-${exp.highlights.map(h => `- ${h}`).join('\n')}
-`).join('\n')}
+${exp.highlights.map((h) => `- ${h}`).join('\n')}
+`
+  )
+  .join('\n')}
 
 // ... etc
 `;
@@ -897,8 +913,8 @@ self.addEventListener('install', (event) => {
 
 // Cache-first for schemas, network-first for themes
 const cacheStrategy = {
-  schemas: 'cache-first',    // Immutable
-  themes: 'network-first',   // May update
+  schemas: 'cache-first', // Immutable
+  themes: 'network-first', // May update
   app: 'stale-while-revalidate',
 };
 ```
@@ -1013,25 +1029,39 @@ abstract class CFRSError extends Error {
 }
 
 class ImportError extends CFRSError {
-  constructor(message: string, public format: string, public originalError?: Error) {
+  constructor(
+    message: string,
+    public format: string,
+    public originalError?: Error
+  ) {
     super(message, 'IMPORT_ERROR', 'error');
   }
 }
 
 class ValidationError extends CFRSError {
-  constructor(message: string, public field: string, public value?: unknown) {
+  constructor(
+    message: string,
+    public field: string,
+    public value?: unknown
+  ) {
     super(message, 'VALIDATION_ERROR', 'error');
   }
 }
 
 class RenderError extends CFRSError {
-  constructor(message: string, public theme: string) {
+  constructor(
+    message: string,
+    public theme: string
+  ) {
     super(message, 'RENDER_ERROR', 'error');
   }
 }
 
 class ExportError extends CFRSError {
-  constructor(message: string, public format: string) {
+  constructor(
+    message: string,
+    public format: string
+  ) {
     super(message, 'EXPORT_ERROR', 'error');
   }
 }
@@ -1388,6 +1418,7 @@ function useToast() {
 **Problem:** Large Docx files (>5MB) slow parsing
 
 **Solution:**
+
 ```typescript
 // Web Worker for heavy parsing
 // /workers/docx-parser.worker.ts
@@ -1421,6 +1452,7 @@ worker.addEventListener('message', (e) => {
 **Problem:** Real-time validation on every keystroke causes lag
 
 **Solution:**
+
 ```typescript
 // Debounced validation with partial updates
 const useValidation = (resume: CFRSResume) => {
@@ -1467,6 +1499,7 @@ class IncrementalValidator {
 **Problem:** Re-rendering entire resume on small changes
 
 **Solution:**
+
 ```typescript
 // Granular memoization per section
 function ResumeSection({ type, data }: { type: string; data: unknown }) {
@@ -1496,6 +1529,7 @@ function ResumePreview({ resume }: { resume: CFRSResume }) {
 **Problem:** Large HTML export causes memory issues
 
 **Solution:**
+
 ```typescript
 // Streaming export for large documents
 async function* generateHTMLChunks(resume: CFRSResume, theme: Theme): AsyncGenerator<string> {
@@ -1793,14 +1827,14 @@ jobs:
 <!-- dist/404.html - Fallback for client-side routing -->
 <!DOCTYPE html>
 <html>
-<head>
-  <script>
-    // Redirect 404s to index.html with path preserved
-    sessionStorage.redirect = location.href;
-    location.replace(location.origin);
-  </script>
-</head>
-<body></body>
+  <head>
+    <script>
+      // Redirect 404s to index.html with path preserved
+      sessionStorage.redirect = location.href;
+      location.replace(location.origin);
+    </script>
+  </head>
+  <body></body>
 </html>
 ```
 
@@ -1844,14 +1878,18 @@ if (sessionStorage.redirect) {
 // Import tests
 describe('JSONImporter', () => {
   it('should parse valid CFRS JSON', async () => {
-    const input = { /* CFRS data */ };
+    const input = {
+      /* CFRS data */
+    };
     const result = await jsonImporter.import(input);
     expect(result.success).toBe(true);
     expect(result.data).toMatchSchema(cfrsSchema);
   });
 
   it('should convert JSON Resume to CFRS', async () => {
-    const jrs = { /* JSON Resume data */ };
+    const jrs = {
+      /* JSON Resume data */
+    };
     const result = await jsonImporter.import(jrs);
     expect(result.data).toMatchObject({
       header: { name: jrs.basics.name },
@@ -1873,29 +1911,29 @@ describe('Validator', () => {
     const incomplete = { header: {} }; // Missing name
     const result = validator.validate(incomplete);
     expect(result.valid).toBe(false);
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({ field: 'header.name' })
-    );
+    expect(result.errors).toContainEqual(expect.objectContaining({ field: 'header.name' }));
   });
 
   it('should validate date logic', () => {
     const invalid = {
-      experience: [{
-        startDate: '2023-01-01',
-        endDate: '2022-01-01', // End before start
-      }],
+      experience: [
+        {
+          startDate: '2023-01-01',
+          endDate: '2022-01-01', // End before start
+        },
+      ],
     };
     const result = validator.validate(invalid);
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({ code: 'INVALID_DATE_RANGE' })
-    );
+    expect(result.errors).toContainEqual(expect.objectContaining({ code: 'INVALID_DATE_RANGE' }));
   });
 });
 
 // Render tests
 describe('TemplateEngine', () => {
   it('should render with theme', () => {
-    const resume = { /* CFRS data */ };
+    const resume = {
+      /* CFRS data */
+    };
     const theme = { template: '<h1>{{ resume.header.name }}</h1>' };
     const html = engine.render(theme.template, resume);
     expect(html).toContain('<h1>John Doe</h1>');
@@ -1911,7 +1949,9 @@ describe('TemplateEngine', () => {
 // Export tests
 describe('Exporters', () => {
   it('should export to JSON Resume format', () => {
-    const cfrs = { /* CFRS data */ };
+    const cfrs = {
+      /* CFRS data */
+    };
     const blob = jsonResumeExporter.export(cfrs);
     const json = JSON.parse(await blob.text());
     expect(json).toHaveProperty('basics');
@@ -1964,7 +2004,9 @@ test('complete import-edit-export flow', async ({ page }) => {
 
 ```html
 <!-- Strict CSP for GitHub Pages -->
-<meta http-equiv="Content-Security-Policy" content="
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
   default-src 'self';
   script-src 'self';
   style-src 'self' 'unsafe-inline';
@@ -1975,7 +2017,8 @@ test('complete import-edit-export flow', async ({ page }) => {
   object-src 'none';
   base-uri 'self';
   form-action 'self';
-">
+"
+/>
 ```
 
 ### 11.2 Theme Sandboxing
@@ -2229,9 +2272,7 @@ class PerformanceMonitor {
   }
 
   private avg(name: string): number {
-    const values = this.metrics
-      .filter((m) => m.name === name)
-      .map((m) => m.duration);
+    const values = this.metrics.filter((m) => m.name === name).map((m) => m.duration);
     return values.reduce((a, b) => a + b, 0) / values.length;
   }
 }
@@ -2480,7 +2521,7 @@ interface CFRSResume {
     company: string;
     location?: string;
     startDate: string; // ISO 8601
-    endDate?: string;  // ISO 8601 or null for current
+    endDate?: string; // ISO 8601 or null for current
     highlights: string[];
     technologies?: string[];
   }>;
@@ -2586,6 +2627,7 @@ The architecture supports the project's core principles while providing a solid 
 ---
 
 **Next Steps:**
+
 1. Review and approve architecture
 2. Create GitHub issues for each implementation phase
 3. Begin Phase 0 implementation
@@ -2594,6 +2636,7 @@ The architecture supports the project's core principles while providing a solid 
 
 **Questions or Feedback:**
 This architecture is designed to be iterated upon. Please provide feedback on:
+
 - Performance targets
 - Technology choices
 - Module boundaries

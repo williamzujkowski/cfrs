@@ -74,10 +74,10 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
           "type": "object",
           "required": ["version", "path", "hash"],
           "properties": {
-            "version": {"type": "string"},
-            "path": {"type": "string"},
-            "hash": {"type": "string"},
-            "lastModified": {"type": "string", "format": "date-time"}
+            "version": { "type": "string" },
+            "path": { "type": "string" },
+            "hash": { "type": "string" },
+            "lastModified": { "type": "string", "format": "date-time" }
           }
         },
         "examples": {
@@ -86,10 +86,10 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
             "type": "object",
             "required": ["name", "path", "valid"],
             "properties": {
-              "name": {"type": "string"},
-              "path": {"type": "string"},
-              "valid": {"type": "boolean"},
-              "description": {"type": "string"}
+              "name": { "type": "string" },
+              "path": { "type": "string" },
+              "valid": { "type": "boolean" },
+              "description": { "type": "string" }
             }
           }
         }
@@ -103,24 +103,24 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
           "type": "object",
           "required": ["version", "path", "hash"],
           "properties": {
-            "version": {"type": "string"},
-            "path": {"type": "string"},
-            "hash": {"type": "string"},
-            "lastModified": {"type": "string", "format": "date-time"},
-            "lossless": {"type": "boolean"},
-            "testPath": {"type": "string"}
+            "version": { "type": "string" },
+            "path": { "type": "string" },
+            "hash": { "type": "string" },
+            "lastModified": { "type": "string", "format": "date-time" },
+            "lossless": { "type": "boolean" },
+            "testPath": { "type": "string" }
           }
         },
         "cfrsToFresh": {
           "type": "object",
           "required": ["version", "path", "hash"],
           "properties": {
-            "version": {"type": "string"},
-            "path": {"type": "string"},
-            "hash": {"type": "string"},
-            "lastModified": {"type": "string", "format": "date-time"},
-            "lossless": {"type": "boolean"},
-            "testPath": {"type": "string"}
+            "version": { "type": "string" },
+            "path": { "type": "string" },
+            "hash": { "type": "string" },
+            "lastModified": { "type": "string", "format": "date-time" },
+            "lossless": { "type": "boolean" },
+            "testPath": { "type": "string" }
           }
         }
       }
@@ -135,9 +135,9 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
             "type": "object",
             "required": ["name", "path"],
             "properties": {
-              "name": {"type": "string"},
-              "path": {"type": "string"},
-              "purpose": {"type": "string"}
+              "name": { "type": "string" },
+              "path": { "type": "string" },
+              "purpose": { "type": "string" }
             }
           }
         },
@@ -147,9 +147,9 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
             "type": "object",
             "required": ["name", "path"],
             "properties": {
-              "name": {"type": "string"},
-              "path": {"type": "string"},
-              "purpose": {"type": "string"}
+              "name": { "type": "string" },
+              "path": { "type": "string" },
+              "purpose": { "type": "string" }
             }
           }
         }
@@ -161,19 +161,19 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
         "type": "object",
         "required": ["number", "title", "status", "path", "date"],
         "properties": {
-          "number": {"type": "integer", "minimum": 1},
-          "title": {"type": "string"},
+          "number": { "type": "integer", "minimum": 1 },
+          "title": { "type": "string" },
           "status": {
             "type": "string",
             "enum": ["Proposed", "Accepted", "Deprecated", "Superseded"]
           },
-          "path": {"type": "string"},
-          "date": {"type": "string", "format": "date"},
-          "supersedes": {"type": "integer"},
-          "supersededBy": {"type": "integer"},
+          "path": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "supersedes": { "type": "integer" },
+          "supersededBy": { "type": "integer" },
           "tags": {
             "type": "array",
-            "items": {"type": "string"}
+            "items": { "type": "string" }
           }
         }
       }
@@ -188,13 +188,13 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
             "type": "object",
             "required": ["id", "name", "version", "path"],
             "properties": {
-              "id": {"type": "string"},
-              "name": {"type": "string"},
-              "version": {"type": "string"},
-              "path": {"type": "string"},
-              "category": {"type": "string"},
-              "atsSafe": {"type": "boolean"},
-              "printOptimized": {"type": "boolean"}
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "version": { "type": "string" },
+              "path": { "type": "string" },
+              "category": { "type": "string" },
+              "atsSafe": { "type": "boolean" },
+              "printOptimized": { "type": "boolean" }
             }
           }
         },
@@ -202,9 +202,9 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
           "type": "object",
           "required": ["path", "count"],
           "properties": {
-            "path": {"type": "string"},
-            "count": {"type": "integer"},
-            "lastUpdated": {"type": "string", "format": "date-time"}
+            "path": { "type": "string" },
+            "count": { "type": "integer" },
+            "lastUpdated": { "type": "string", "format": "date-time" }
           }
         }
       }
@@ -213,31 +213,31 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
       "type": "object",
       "required": ["rulesPath", "preCommitHooks", "ciWorkflows"],
       "properties": {
-        "rulesPath": {"type": "string"},
+        "rulesPath": { "type": "string" },
         "preCommitHooks": {
           "type": "array",
-          "items": {"type": "string"}
+          "items": { "type": "string" }
         },
         "ciWorkflows": {
           "type": "array",
-          "items": {"type": "string"}
+          "items": { "type": "string" }
         },
         "requiredChecks": {
           "type": "array",
-          "items": {"type": "string"}
+          "items": { "type": "string" }
         }
       }
     },
     "compliance": {
       "type": "object",
       "properties": {
-        "lastAudit": {"type": "string", "format": "date"},
-        "nextAudit": {"type": "string", "format": "date"},
+        "lastAudit": { "type": "string", "format": "date" },
+        "nextAudit": { "type": "string", "format": "date" },
         "status": {
           "type": "string",
           "enum": ["Compliant", "Partial", "Non-Compliant"]
         },
-        "checklist": {"type": "string"}
+        "checklist": { "type": "string" }
       }
     },
     "dependencies": {
@@ -249,10 +249,10 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
             "type": "object",
             "required": ["name", "version", "license"],
             "properties": {
-              "name": {"type": "string"},
-              "version": {"type": "string"},
-              "license": {"type": "string"},
-              "justification": {"type": "string"}
+              "name": { "type": "string" },
+              "version": { "type": "string" },
+              "license": { "type": "string" },
+              "justification": { "type": "string" }
             }
           }
         },
@@ -262,9 +262,9 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
             "type": "object",
             "required": ["name", "version", "license"],
             "properties": {
-              "name": {"type": "string"},
-              "version": {"type": "string"},
-              "license": {"type": "string"}
+              "name": { "type": "string" },
+              "version": { "type": "string" },
+              "license": { "type": "string" }
             }
           }
         }
@@ -426,11 +426,7 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
 
   "enforcement": {
     "rulesPath": "/.claude-rules.json",
-    "preCommitHooks": [
-      "lint-staged",
-      "schema-validation",
-      "type-check"
-    ],
+    "preCommitHooks": ["lint-staged", "schema-validation", "type-check"],
     "ciWorkflows": [
       ".github/workflows/build.yml",
       ".github/workflows/test.yml",
@@ -501,6 +497,7 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
 ## Field Descriptions
 
 ### Top-Level Metadata
+
 - **manifestVersion**: Version of MANIFEST schema (SemVer)
 - **projectVersion**: Current CFRS project version (SemVer)
 - **projectName**: Always "CloudFlow Resume"
@@ -509,6 +506,7 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
 - **lastUpdated**: ISO 8601 timestamp from time.gov (UTC)
 
 ### Schema Section
+
 - **cfrs**: Primary CFRS schema metadata
   - **version**: Schema version (SemVer)
   - **path**: Relative path from repo root
@@ -518,41 +516,49 @@ The MANIFEST.json file serves as the **central inventory and metadata registry**
   - **valid**: Whether example should pass validation
 
 ### Mappings Section
+
 - **cfrsToJrs**: CFRS ↔ JSON Resume mapping
 - **cfrsToFresh**: CFRS ↔ FRESH mapping
 - **lossless**: Whether round-trip preserves all data
 - **testPath**: Path to round-trip tests
 
 ### Documentation Section
+
 - **primary**: Authoritative governance documents
 - **secondary**: Supporting technical documentation
 
 ### ADRs Section
+
 Array of all Architecture Decision Records:
+
 - **number**: Sequential integer (1, 2, 3...)
 - **status**: Current lifecycle status
 - **supersedes/supersededBy**: Links to related ADRs
 - **tags**: Categorization tags
 
 ### Themes Section
+
 - **builtin**: Themes included in repo
 - **registry**: External theme registry metadata
 - **atsSafe**: Whether theme is ATS-optimized
 - **printOptimized**: Whether theme is print-ready
 
 ### Enforcement Section
+
 - **rulesPath**: Path to .claude-rules.json
 - **preCommitHooks**: Git hooks that run before commit
 - **ciWorkflows**: GitHub Actions workflow files
 - **requiredChecks**: CI checks that must pass
 
 ### Compliance Section
+
 - **lastAudit**: Date of last comprehensive review
 - **nextAudit**: Scheduled next review date
 - **status**: Current compliance state
 - **checklist**: Path to compliance checklist
 
 ### Dependencies Section
+
 - **production**: Runtime dependencies
 - **development**: Build/test dependencies
 - **justification**: Why dependency is needed (for production only)
@@ -562,6 +568,7 @@ Array of all Architecture Decision Records:
 ## Validation Rules
 
 ### Automatic Validation
+
 MANIFEST.json MUST be validated on every commit:
 
 1. **Schema Validation**: Validates against manifest.schema.json
@@ -573,6 +580,7 @@ MANIFEST.json MUST be validated on every commit:
 7. **Unique IDs**: Theme IDs are unique
 
 ### Manual Validation
+
 Quarterly reviews should verify:
 
 1. **Documentation Currency**: All docs are up-to-date
@@ -587,6 +595,7 @@ Quarterly reviews should verify:
 ### When to Update MANIFEST.json
 
 **REQUIRED Updates**:
+
 - Schema version changes
 - New/removed mapping files
 - ADR creation
@@ -596,6 +605,7 @@ Quarterly reviews should verify:
 - Documentation restructuring
 
 **RECOMMENDED Updates**:
+
 - Minor dependency updates
 - Documentation corrections
 - Compliance audit results
@@ -620,6 +630,7 @@ sha256sum /path/to/file.json | awk '{print "sha256:" $1}'
 ### Automated Updates
 
 Some fields can be auto-updated by CI:
+
 - File hashes
 - Timestamps
 - Theme registry count
@@ -638,9 +649,7 @@ import { createHash } from 'crypto';
 const ajv = new Ajv({ strict: true });
 
 // Load and validate schema
-const manifestSchema = JSON.parse(
-  readFileSync('./schemas/manifest.schema.json', 'utf-8')
-);
+const manifestSchema = JSON.parse(readFileSync('./schemas/manifest.schema.json', 'utf-8'));
 const manifest = JSON.parse(readFileSync('./MANIFEST.json', 'utf-8'));
 
 const validate = ajv.compile(manifestSchema);
@@ -655,13 +664,13 @@ if (!valid) {
 // Verify paths exist
 const paths = [
   manifest.schema.cfrs.path,
-  ...manifest.schema.examples.map(e => e.path),
+  ...manifest.schema.examples.map((e) => e.path),
   manifest.mappings.cfrsToJrs.path,
   manifest.mappings.cfrsToFresh.path,
-  ...manifest.documentation.primary.map(d => d.path),
-  ...manifest.documentation.secondary.map(d => d.path),
-  ...manifest.adrs.map(a => a.path),
-  ...manifest.themes.builtin.map(t => t.path),
+  ...manifest.documentation.primary.map((d) => d.path),
+  ...manifest.documentation.secondary.map((d) => d.path),
+  ...manifest.adrs.map((a) => a.path),
+  ...manifest.themes.builtin.map((t) => t.path),
 ];
 
 for (const path of paths) {
@@ -691,7 +700,7 @@ for (const { path, hash } of hashFiles) {
 }
 
 // Verify ADR sequence
-const adrNumbers = manifest.adrs.map(a => a.number).sort((a, b) => a - b);
+const adrNumbers = manifest.adrs.map((a) => a.number).sort((a, b) => a - b);
 const expectedSequence = Array.from({ length: adrNumbers.length }, (_, i) => i + 1);
 
 if (JSON.stringify(adrNumbers) !== JSON.stringify(expectedSequence)) {
@@ -707,6 +716,7 @@ console.log('MANIFEST.json validation passed ✓');
 ## CI Integration
 
 ### Pre-Commit Hook
+
 ```yaml
 # .husky/pre-commit
 #!/bin/sh
@@ -717,6 +727,7 @@ npm run validate:manifest || exit 1
 ```
 
 ### GitHub Action
+
 ```yaml
 # .github/workflows/validate-manifest.yml
 name: Validate MANIFEST
@@ -740,6 +751,7 @@ jobs:
 ## Best Practices
 
 ### Maintenance
+
 1. **Update immediately** when adding/removing files
 2. **Validate before commit** using pre-commit hook
 3. **Review quarterly** for accuracy
@@ -747,12 +759,14 @@ jobs:
 5. **Regenerate hashes** when files change
 
 ### Documentation
+
 1. **Link from CLAUDE.md** for authority
 2. **Reference in ADRs** when relevant
 3. **Include in PR templates** as checklist item
 4. **Explain in onboarding docs** for new contributors
 
 ### Automation
+
 1. **Auto-generate** what can be computed
 2. **Validate in CI** on every PR
 3. **Block merges** if validation fails
@@ -765,6 +779,7 @@ jobs:
 ### From No MANIFEST to v1.0.0
 
 1. **Create Initial MANIFEST**:
+
    ```bash
    npm run generate:manifest
    ```
@@ -775,6 +790,7 @@ jobs:
    - Set correct versions
 
 3. **Validate**:
+
    ```bash
    npm run validate:manifest
    ```
@@ -800,18 +816,23 @@ When manifest schema changes:
 ## FAQ
 
 ### Why MANIFEST.json?
+
 Single source of truth for project inventory, enables automated validation, supports tooling, provides clear project snapshot.
 
 ### When to update?
+
 Whenever files are added/removed/moved, when versions change, when ADRs are created, when themes are added.
 
 ### What if paths change?
+
 Update MANIFEST.json in the same commit as the path change. CI will catch mismatches.
 
 ### How to handle hash mismatches?
+
 Regenerate hash using validation script. If content changed without MANIFEST update, that's the issue to fix.
 
 ### Can MANIFEST be auto-generated?
+
 Partially - paths, hashes, timestamps can be automated. Descriptions, justifications need manual input.
 
 ---

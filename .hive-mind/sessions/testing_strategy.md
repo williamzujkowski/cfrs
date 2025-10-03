@@ -1,4 +1,5 @@
 # CloudFlow Resume Testing Strategy
+
 **Version:** 1.0.0
 **Date:** 2025-10-03
 **Agent:** TESTER
@@ -11,6 +12,7 @@
 This document defines the comprehensive testing strategy for CloudFlow Resume (CFRS), ensuring quality, security, accessibility, and performance compliance. The strategy aligns with CLAUDE.md requirements and supports the project's mission of delivering a reliable, client-side resume generation platform.
 
 ### Key Testing Objectives
+
 1. **Schema Compliance:** 100% validation against CFRS v1.0.0
 2. **Security:** Zero XSS vulnerabilities, CSP enforcement, no remote JS
 3. **Accessibility:** WCAG AA compliance across all UI components
@@ -23,6 +25,7 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 ## Test Pyramid Architecture
 
 ### Level 1: Unit Tests (70% coverage target)
+
 **Volume:** ~500-700 tests
 **Execution Time:** <30 seconds
 **Framework:** Vitest + Testing Library
@@ -30,6 +33,7 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 #### Coverage Areas:
 
 **Schema Validation (High Priority)**
+
 - CFRS JSON Schema validator tests
 - Field type validation (string, array, object)
 - Required vs optional field enforcement
@@ -38,6 +42,7 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 - Invalid data rejection tests
 
 **Importers**
+
 - JSON parser (valid/invalid inputs)
 - Markdown parser (heading extraction, list parsing)
 - Docx parser (mammoth.js integration, fallback handling)
@@ -45,6 +50,7 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 - Edge cases: empty files, malformed data, encoding issues
 
 **Exporters**
+
 - CFRS → JSON Resume mapping accuracy
 - CFRS → FRESH transformation
 - HTML export (Nunjucks template rendering)
@@ -52,6 +58,7 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 - Data loss prevention (round-trip validation)
 
 **Utilities**
+
 - Date formatting functions
 - String sanitization (XSS prevention)
 - Redaction logic (PII stripping)
@@ -59,6 +66,7 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 - Copy-to-clipboard functions
 
 ### Level 2: Integration Tests (20% coverage target)
+
 **Volume:** ~100-150 tests
 **Execution Time:** 1-2 minutes
 **Framework:** Vitest + Playwright Component Testing
@@ -66,29 +74,34 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 #### Coverage Areas:
 
 **End-to-End Data Flows**
+
 - Import → Validate → Render → Export pipeline
 - Schema validation → Error surfacing → UI feedback
 - Theme selection → Rendering → Preview
 - Multi-format export chains
 
 **Component Integration**
+
 - Store state management with UI updates
 - Router navigation with data persistence
 - Theme engine with data binding
 - Form validation with schema enforcement
 
 **Mapping Validation**
+
 - CFRS to JSON Resume (full object mapping)
 - JSON Resume to CFRS (reverse mapping)
 - CFRS to FRESH (format transformation)
 - Data integrity across conversions
 
 **GitHub Integration**
+
 - OAuth flow simulation
 - Gist save/load operations
 - Error handling for API failures
 
 ### Level 3: End-to-End Tests (10% coverage target)
+
 **Volume:** ~30-50 tests
 **Execution Time:** 3-5 minutes
 **Framework:** Playwright
@@ -126,9 +139,11 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 ### WCAG AA Compliance Checklist
 
 #### Automated Testing (CI Integration)
+
 **Tool:** axe-core + pa11y
 
 **Test Cases:**
+
 - [ ] Color contrast ≥4.5:1 for normal text
 - [ ] Color contrast ≥3:1 for large text (18pt+)
 - [ ] All interactive elements keyboard accessible
@@ -141,9 +156,11 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
 - [ ] Screen reader announcements for dynamic content
 
 #### Manual Testing (Per Release)
+
 **Tool:** NVDA/JAWS + VoiceOver
 
 **Test Scenarios:**
+
 1. **Screen Reader Navigation**
    - Tab through entire app with eyes closed
    - Verify announcements clear and contextual
@@ -165,6 +182,7 @@ This document defines the comprehensive testing strategy for CloudFlow Resume (C
    - Check theme contrast ratios
 
 #### Accessibility Test Automation
+
 ```typescript
 // Example: axe-core integration test
 import { test, expect } from '@playwright/test';
@@ -175,7 +193,7 @@ test('Homepage accessibility', async ({ page }) => {
   await injectAxe(page);
   await checkA11y(page, null, {
     detailedReport: true,
-    detailedReportOptions: { html: true }
+    detailedReportOptions: { html: true },
   });
 });
 
@@ -199,6 +217,7 @@ test('Resume editor keyboard navigation', async ({ page }) => {
 ## Performance Testing Strategy
 
 ### Target Benchmarks
+
 - **Initial Load:** <3s on 3G (1.6 Mbps, 300ms RTT)
 - **Time to Interactive (TTI):** <4s
 - **First Contentful Paint (FCP):** <1.5s
@@ -209,16 +228,18 @@ test('Resume editor keyboard navigation', async ({ page }) => {
 ### Performance Test Suite
 
 #### Load Time Testing
+
 **Tool:** Lighthouse CI + WebPageTest
 
 **Test Matrix:**
 | Network | Device | Target TTI |
 |---------|--------|------------|
-| 3G      | Mobile | <4s        |
-| 4G      | Mobile | <2s        |
-| Cable   | Desktop| <1.5s      |
+| 3G | Mobile | <4s |
+| 4G | Mobile | <2s |
+| Cable | Desktop| <1.5s |
 
 **Automated Tests:**
+
 ```typescript
 // lighthouse-config.js
 export default {
@@ -228,22 +249,24 @@ export default {
     throttling: {
       rttMs: 300,
       throughputKbps: 1638.4,
-      cpuSlowdownMultiplier: 4
-    }
+      cpuSlowdownMultiplier: 4,
+    },
   },
   assertions: {
     'categories:performance': ['error', { minScore: 0.9 }],
     'categories:accessibility': ['error', { minScore: 0.9 }],
     'first-contentful-paint': ['error', { maxNumericValue: 1500 }],
-    'interactive': ['error', { maxNumericValue: 3000 }]
-  }
+    interactive: ['error', { maxNumericValue: 3000 }],
+  },
 };
 ```
 
 #### Runtime Performance
+
 **Tool:** Vitest + performance.mark/measure
 
 **Test Cases:**
+
 - [ ] Schema validation <50ms (10KB resume)
 - [ ] Theme rendering <200ms
 - [ ] Export generation <500ms
@@ -251,6 +274,7 @@ export default {
 - [ ] Memory usage <50MB for typical resume
 
 **Example Test:**
+
 ```typescript
 test('Schema validation performance', () => {
   const largeResume = generateLargeResume(1000); // 1000 work items
@@ -265,9 +289,11 @@ test('Schema validation performance', () => {
 ```
 
 #### Bundle Size Monitoring
+
 **Tool:** bundlesize + size-limit
 
 **Limits:**
+
 ```json
 {
   "bundlesize": [
@@ -286,9 +312,11 @@ test('Schema validation performance', () => {
 ### CSP (Content Security Policy) Validation
 
 #### Automated CSP Tests
+
 **Tool:** csp-evaluator + custom validators
 
 **Test Cases:**
+
 - [ ] No `unsafe-inline` in script-src
 - [ ] No `unsafe-eval` in script-src
 - [ ] All external resources whitelisted
@@ -296,6 +324,7 @@ test('Schema validation performance', () => {
 - [ ] Nunjucks templates properly escaped
 
 **Implementation:**
+
 ```typescript
 test('CSP headers enforce security policy', async ({ page }) => {
   const response = await page.goto('/');
@@ -328,9 +357,11 @@ test('Themes contain no JavaScript', async () => {
 ### XSS Prevention Testing
 
 #### Injection Attack Vectors
+
 **Tool:** DOMPurify test suite + custom payloads
 
 **Test Payloads:**
+
 ```typescript
 const xssPayloads = [
   '<script>alert("XSS")</script>',
@@ -353,6 +384,7 @@ test.each(xssPayloads)('Sanitizes XSS payload: %s', (payload) => {
 ```
 
 #### Content Injection Tests
+
 - User-supplied URLs (phishing prevention)
 - Markdown injection (via CommonMark spec)
 - JSON injection (schema validation enforcement)
@@ -361,7 +393,9 @@ test.each(xssPayloads)('Sanitizes XSS payload: %s', (payload) => {
 ### Theme Security Validation
 
 #### Theme Submission Checklist
+
 **Automated CI Checks:**
+
 - [ ] No external resource loading (fonts, scripts, images)
 - [ ] CSS size limit: <10KB
 - [ ] No `@import` statements
@@ -371,6 +405,7 @@ test.each(xssPayloads)('Sanitizes XSS payload: %s', (payload) => {
 - [ ] Screenshot provided (for preview)
 
 **Test Implementation:**
+
 ```typescript
 test('Theme meets security requirements', async () => {
   const themeCSS = await fs.readFile('./themes/new-theme/style.css');
@@ -397,6 +432,7 @@ test('Theme meets security requirements', async () => {
 #### Fixture Categories
 
 **1. Reference Resumes (10 fixtures)**
+
 - `golden/minimal.json` - Minimal valid CFRS
 - `golden/complete.json` - All fields populated
 - `golden/jrs-compat.json` - JSON Resume format
@@ -409,6 +445,7 @@ test('Theme meets security requirements', async () => {
 - `golden/developer.json` - Projects, skills
 
 **2. Mapping Fixtures (6 fixtures)**
+
 - `mappings/cfrs-to-jrs.json` - Transformation reference
 - `mappings/jrs-to-cfrs.json` - Reverse mapping
 - `mappings/cfrs-to-fresh.json` - FRESH export
@@ -417,6 +454,7 @@ test('Theme meets security requirements', async () => {
 - `mappings/extensions.json` - Custom field handling
 
 **3. Theme Output Fixtures (Per Theme)**
+
 - `themes/classic/snapshots/*.html` - Rendered HTML
 - `themes/modern/snapshots/*.html`
 - `themes/minimal/snapshots/*.html`
@@ -424,6 +462,7 @@ test('Theme meets security requirements', async () => {
 ### Snapshot Testing Implementation
 
 #### Visual Regression Testing
+
 **Tool:** Playwright + pixelmatch
 
 ```typescript
@@ -440,12 +479,13 @@ test('Theme renders consistently', async ({ page }) => {
 
   // Visual snapshot
   await expect(page).toHaveScreenshot('classic-complete.png', {
-    maxDiffPixels: 100
+    maxDiffPixels: 100,
   });
 });
 ```
 
 #### Schema Snapshot Testing
+
 **Tool:** Vitest snapshots
 
 ```typescript
@@ -467,12 +507,14 @@ test('Import produces consistent structure', () => {
 ### Golden Fixture Maintenance
 
 **Update Triggers:**
+
 - Schema version bump (regenerate all)
 - Mapping changes (update affected pairs)
 - Theme modifications (regenerate theme snapshots)
 - New features (add fixture variants)
 
 **Validation Process:**
+
 1. Run `npm run fixtures:generate`
 2. Visual review of diffs
 3. Commit approved changes
@@ -485,6 +527,7 @@ test('Import produces consistent structure', () => {
 ### GitHub Actions Workflow
 
 #### Stage 1: Fast Feedback (<2 min)
+
 **Triggers:** Every push, PR
 
 ```yaml
@@ -514,151 +557,158 @@ jobs:
 ```
 
 #### Stage 2: Schema Validation (<1 min)
+
 **Triggers:** Every push, PR
 
 ```yaml
-  schema-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
+schema-validation:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm ci
 
-      # Validate all fixtures against schema
-      - run: npm run validate:fixtures
+    # Validate all fixtures against schema
+    - run: npm run validate:fixtures
 
-      # Check mapping consistency
-      - run: npm run validate:mappings
+    # Check mapping consistency
+    - run: npm run validate:mappings
 
-      # Verify schema version matches CLAUDE.md
-      - run: node scripts/check-schema-version.js
+    # Verify schema version matches CLAUDE.md
+    - run: node scripts/check-schema-version.js
 ```
 
 #### Stage 3: Integration Tests (<3 min)
+
 **Triggers:** PR to main, main branch
 
 ```yaml
-  integration-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
-      - run: npm run test:integration
+integration-tests:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm ci
+    - run: npm run test:integration
 ```
 
 #### Stage 4: E2E & Visual Tests (<5 min)
+
 **Triggers:** PR to main, main branch
 
 ```yaml
-  e2e-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
-      - run: npx playwright install --with-deps
-      - run: npm run test:e2e
+e2e-tests:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm ci
+    - run: npx playwright install --with-deps
+    - run: npm run test:e2e
 
-      # Upload failure screenshots
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: playwright-screenshots
-          path: test-results/
+    # Upload failure screenshots
+    - uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: playwright-screenshots
+        path: test-results/
 ```
 
 #### Stage 5: Accessibility Audit (<2 min)
+
 **Triggers:** PR to main, main branch
 
 ```yaml
-  accessibility:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
-      - run: npm run build
+accessibility:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm ci
+    - run: npm run build
 
-      # Serve build and run axe-core
-      - run: npm run test:a11y
+    # Serve build and run axe-core
+    - run: npm run test:a11y
 
-      # Generate report
-      - uses: actions/upload-artifact@v3
-        with:
-          name: a11y-report
-          path: reports/accessibility.html
+    # Generate report
+    - uses: actions/upload-artifact@v3
+      with:
+        name: a11y-report
+        path: reports/accessibility.html
 ```
 
 #### Stage 6: Security Scans (<3 min)
+
 **Triggers:** PR to main, main branch, daily
 
 ```yaml
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
+security:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm ci
 
-      # Theme security validation
-      - run: npm run validate:themes
+    # Theme security validation
+    - run: npm run validate:themes
 
-      # CSP header checks
-      - run: npm run test:csp
+    # CSP header checks
+    - run: npm run test:csp
 
-      # Dependency audit
-      - run: npm audit --audit-level=moderate
+    # Dependency audit
+    - run: npm audit --audit-level=moderate
 
-      # OWASP dependency check
-      - uses: dependency-check/Dependency-Check_Action@main
-        with:
-          path: '.'
-          format: 'HTML'
+    # OWASP dependency check
+    - uses: dependency-check/Dependency-Check_Action@main
+      with:
+        path: '.'
+        format: 'HTML'
 ```
 
 #### Stage 7: Performance Budget (<2 min)
+
 **Triggers:** PR to main, main branch
 
 ```yaml
-  performance:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
-      - run: npm run build
+performance:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm ci
+    - run: npm run build
 
-      # Bundle size check
-      - run: npm run test:bundle-size
+    # Bundle size check
+    - run: npm run test:bundle-size
 
-      # Lighthouse CI
-      - run: npm run lighthouse:ci
+    # Lighthouse CI
+    - run: npm run lighthouse:ci
 
-      # Runtime performance tests
-      - run: npm run test:performance
+    # Runtime performance tests
+    - run: npm run test:performance
 ```
 
 #### Stage 8: Theme Validation (<1 min)
-**Triggers:** Changes to /themes/**
+
+**Triggers:** Changes to /themes/\*\*
 
 ```yaml
-  theme-validation:
-    runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.modified, 'themes/')
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
+theme-validation:
+  runs-on: ubuntu-latest
+  if: contains(github.event.head_commit.modified, 'themes/')
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm ci
 
-      # Validate theme structure
-      - run: npm run validate:theme-structure
+    # Validate theme structure
+    - run: npm run validate:theme-structure
 
-      # Security checks (no JS)
-      - run: npm run validate:theme-security
+    # Security checks (no JS)
+    - run: npm run validate:theme-security
 
-      # Render snapshots
-      - run: npm run test:theme-snapshots
+    # Render snapshots
+    - run: npm run test:theme-snapshots
 ```
 
 ### Pre-commit Hooks (Husky + lint-staged)
@@ -672,18 +722,9 @@ jobs:
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "npm run test:unit -- --findRelatedTests"
-    ],
-    "*.json": [
-      "prettier --write",
-      "npm run validate:schema"
-    ],
-    "themes/**/*.{njk,css}": [
-      "npm run validate:theme-security"
-    ]
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write", "npm run test:unit -- --findRelatedTests"],
+    "*.json": ["prettier --write", "npm run validate:schema"],
+    "themes/**/*.{njk,css}": ["npm run validate:theme-security"]
   }
 }
 ```
@@ -691,6 +732,7 @@ jobs:
 ### Deployment Gates (Production)
 
 **Required Checks (All must pass):**
+
 - ✅ All unit tests pass (>80% coverage)
 - ✅ All integration tests pass
 - ✅ All E2E tests pass
@@ -702,6 +744,7 @@ jobs:
 - ✅ Visual regression approved (if changed)
 
 **Manual Review Required:**
+
 - Theme additions/modifications
 - Schema version bumps
 - Mapping changes
@@ -716,6 +759,7 @@ jobs:
 **Objective:** Verify round-trip data integrity
 
 **Steps:**
+
 1. Load `golden/complete.json` (JSON Resume format)
 2. Convert to CFRS
 3. Render with 'classic' theme
@@ -723,6 +767,7 @@ jobs:
 5. Compare original vs exported
 
 **Expected Results:**
+
 - No data loss in conversion
 - All fields correctly mapped
 - Theme renders all sections
@@ -730,6 +775,7 @@ jobs:
 - Structural equivalence (deep equality)
 
 **Test Code:**
+
 ```typescript
 test('JSON Resume round-trip preserves data', async () => {
   const original = await loadFixture('golden/jrs-complete.json');
@@ -756,6 +802,7 @@ test('JSON Resume round-trip preserves data', async () => {
 **Objective:** Handle malformed Markdown gracefully
 
 **Steps:**
+
 1. Load `imports/edge-cases.md` (missing sections, invalid dates)
 2. Parse with error recovery
 3. Validate against CFRS
@@ -763,6 +810,7 @@ test('JSON Resume round-trip preserves data', async () => {
 5. Allow user correction
 
 **Expected Results:**
+
 - Parser doesn't crash
 - Warnings clearly indicate issues
 - Valid sections imported successfully
@@ -770,6 +818,7 @@ test('JSON Resume round-trip preserves data', async () => {
 - User can manually fix errors
 
 **Test Code:**
+
 ```typescript
 test('Markdown parser handles edge cases', async () => {
   const markdown = await loadFixture('imports/edge-cases.md');
@@ -794,6 +843,7 @@ test('Markdown parser handles edge cases', async () => {
 **Objective:** Prevent malicious theme code execution
 
 **Steps:**
+
 1. Submit theme with `<script>` tag
 2. Run theme validation
 3. Check CSP compliance
@@ -801,6 +851,7 @@ test('Markdown parser handles edge cases', async () => {
 5. Verify rejection
 
 **Expected Results:**
+
 - CI rejects theme submission
 - Error message clearly states violation
 - No script execution possible
@@ -808,6 +859,7 @@ test('Markdown parser handles edge cases', async () => {
 - Security report generated
 
 **Test Code:**
+
 ```typescript
 test('Theme with JavaScript is rejected', async () => {
   const maliciousTheme = `
@@ -820,14 +872,14 @@ test('Theme with JavaScript is rejected', async () => {
   const validation = await validateTheme({
     name: 'malicious',
     template: maliciousTheme,
-    style: ''
+    style: '',
   });
 
   expect(validation.valid).toBe(false);
   expect(validation.errors).toContainEqual(
     expect.objectContaining({
       code: 'THEME_CONTAINS_SCRIPT',
-      message: expect.stringContaining('JavaScript not allowed')
+      message: expect.stringContaining('JavaScript not allowed'),
     })
   );
 });
@@ -838,6 +890,7 @@ test('Theme with JavaScript is rejected', async () => {
 **Objective:** Ensure full keyboard operability
 
 **Steps:**
+
 1. Load app with keyboard only
 2. Tab through all controls
 3. Activate import button (Enter/Space)
@@ -845,6 +898,7 @@ test('Theme with JavaScript is rejected', async () => {
 5. Export resume (Enter)
 
 **Expected Results:**
+
 - All controls reachable via Tab
 - Focus indicators visible (2px outline)
 - Logical tab order (top-to-bottom, left-to-right)
@@ -852,6 +906,7 @@ test('Theme with JavaScript is rejected', async () => {
 - Screen reader announces state changes
 
 **Test Code:**
+
 ```typescript
 test('Full keyboard navigation workflow', async ({ page }) => {
   await page.goto('/');
@@ -882,6 +937,7 @@ test('Full keyboard navigation workflow', async ({ page }) => {
 **Objective:** Meet <3s load target on 3G
 
 **Steps:**
+
 1. Simulate 3G network (1.6 Mbps, 300ms RTT)
 2. Clear cache
 3. Load homepage
@@ -889,6 +945,7 @@ test('Full keyboard navigation workflow', async ({ page }) => {
 5. Verify bundle sizes
 
 **Expected Results:**
+
 - TTI <3s
 - FCP <1.5s
 - LCP <2.5s
@@ -896,12 +953,13 @@ test('Full keyboard navigation workflow', async ({ page }) => {
 - No render-blocking resources
 
 **Test Code:**
+
 ```typescript
 test('Homepage loads under 3s on 3G', async ({ page }) => {
   // Simulate 3G
   await page.route('**/*', (route) => {
     route.continue({
-      delay: 300 + Math.random() * 100
+      delay: 300 + Math.random() * 100,
     });
   });
 
@@ -909,7 +967,7 @@ test('Homepage loads under 3s on 3G', async ({ page }) => {
     return new Promise((resolve) => {
       new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        const tti = entries.find(e => e.name === 'tti');
+        const tti = entries.find((e) => e.name === 'tti');
         resolve(tti);
       }).observe({ entryTypes: ['measure'] });
 
@@ -927,6 +985,7 @@ test('Homepage loads under 3s on 3G', async ({ page }) => {
 **Objective:** Strip PII correctly
 
 **Steps:**
+
 1. Load resume with full personal details
 2. Apply 'anonymous' redaction profile
 3. Verify phone, email, address removed
@@ -934,14 +993,16 @@ test('Homepage loads under 3s on 3G', async ({ page }) => {
 5. Export and validate
 
 **Expected Results:**
+
 - Phone number: removed
-- Email: removed or anonymized (j***@example.com)
+- Email: removed or anonymized (j\*\*\*@example.com)
 - Address: removed or city/country only
 - Name: initials only (J.D.)
 - Work content: unchanged
 - Schema still valid
 
 **Test Code:**
+
 ```typescript
 test('Anonymous redaction profile strips PII', () => {
   const resume = loadFixture('golden/complete.json');
@@ -969,29 +1030,34 @@ test('Anonymous redaction profile strips PII', () => {
 ### Recommended Stack
 
 **Unit & Integration Testing:**
+
 - Framework: Vitest
 - Assertions: Vitest (Jest-compatible)
 - Mocking: Vitest mocks
 - Coverage: c8
 
 **E2E Testing:**
+
 - Framework: Playwright
 - Browsers: Chromium, Firefox, WebKit
 - Visual: Playwright screenshots + pixelmatch
 - Network: Playwright route mocking
 
 **Accessibility:**
+
 - Automated: axe-core + pa11y
 - Manual: NVDA, JAWS, VoiceOver
 - Reporting: axe-core HTML reporter
 
 **Performance:**
+
 - Lighthouse CI (automated)
 - WebPageTest (manual validation)
 - bundlesize (CI integration)
 - Chrome DevTools Performance profiling
 
 **Security:**
+
 - CSP Evaluator
 - DOMPurify test suite
 - npm audit
@@ -1002,6 +1068,7 @@ test('Anonymous redaction profile strips PII', () => {
 **Fixture Location:** `/tests/fixtures/`
 
 **Structure:**
+
 ```
 tests/
 ├── fixtures/
@@ -1016,6 +1083,7 @@ tests/
 ```
 
 **Fixture Generation:**
+
 ```bash
 npm run fixtures:generate       # Regenerate all
 npm run fixtures:validate       # Validate against schema
@@ -1029,6 +1097,7 @@ npm run fixtures:snapshot       # Update snapshots
 ### Test Metrics Dashboard
 
 **Key Metrics (tracked in CI):**
+
 - Unit test coverage: Target >80%
 - E2E test pass rate: Target >95%
 - Accessibility score: Target ≥90
@@ -1039,16 +1108,19 @@ npm run fixtures:snapshot       # Update snapshots
 ### Review Cadence
 
 **Weekly:**
+
 - Review failed tests
 - Update flaky test list
 - Check coverage trends
 
 **Monthly:**
+
 - Audit test execution time
 - Review accessibility reports
 - Update performance baselines
 
 **Quarterly:**
+
 - Major fixture refresh
 - Security dependency updates
 - Test strategy retrospective
@@ -1056,12 +1128,14 @@ npm run fixtures:snapshot       # Update snapshots
 ### Test Debt Management
 
 **Priorities:**
+
 1. Fix failing tests (blocker)
 2. Address flaky tests (high)
 3. Improve coverage gaps (medium)
 4. Optimize slow tests (low)
 
 **Definition of Test Debt:**
+
 - Skipped tests (`.skip`, `.todo`)
 - Coverage below 80% for new code
 - E2E tests >30s execution time
@@ -1072,19 +1146,26 @@ npm run fixtures:snapshot       # Update snapshots
 ## Appendix: Test Case Templates
 
 ### Unit Test Template
+
 ```typescript
 import { describe, it, expect } from 'vitest';
 
 describe('ModuleName', () => {
   describe('functionName', () => {
     it('should handle valid input', () => {
-      const input = { /* ... */ };
+      const input = {
+        /* ... */
+      };
       const result = functionName(input);
-      expect(result).toEqual({ /* ... */ });
+      expect(result).toEqual({
+        /* ... */
+      });
     });
 
     it('should reject invalid input', () => {
-      const invalid = { /* ... */ };
+      const invalid = {
+        /* ... */
+      };
       expect(() => functionName(invalid)).toThrow();
     });
 
@@ -1097,6 +1178,7 @@ describe('ModuleName', () => {
 ```
 
 ### Integration Test Template
+
 ```typescript
 import { test, expect } from '@playwright/test';
 
@@ -1116,6 +1198,7 @@ test.describe('Feature Name', () => {
 ```
 
 ### Accessibility Test Template
+
 ```typescript
 import { test } from '@playwright/test';
 import { injectAxe, checkA11y } from 'axe-playwright';
@@ -1128,8 +1211,8 @@ test('Component accessibility', async ({ page }) => {
     detailedReport: true,
     rules: {
       'color-contrast': { enabled: true },
-      'label': { enabled: true }
-    }
+      label: { enabled: true },
+    },
   });
 });
 ```
@@ -1148,6 +1231,7 @@ This testing strategy provides comprehensive coverage across all quality dimensi
 ✅ **CI/CD** - Multi-stage pipeline with deployment gates
 
 **Next Steps:**
+
 1. Implement test infrastructure (Vitest + Playwright setup)
 2. Create golden fixtures (10 reference resumes)
 3. Build CI pipeline (GitHub Actions)
@@ -1157,6 +1241,7 @@ This testing strategy provides comprehensive coverage across all quality dimensi
 ---
 
 **Document Control:**
+
 - Version: 1.0.0
 - Last Updated: 2025-10-03
 - Next Review: 2025-11-03

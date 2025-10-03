@@ -16,6 +16,7 @@ This document defines the review standards for all pull requests in the CloudFlo
 ## Pre-Review Automated Checks
 
 ### CI Pipeline Status
+
 All automated checks MUST pass before human review begins:
 
 - [ ] **Build Success**: Production build completes without errors
@@ -36,6 +37,7 @@ All automated checks MUST pass before human review begins:
 ### 1. Governance Compliance
 
 #### Schema Changes
+
 - [ ] If schema modified: ADR created/updated
 - [ ] Schema version bumped appropriately (SemVer)
 - [ ] Mappings updated (CFRS↔JRS, CFRS↔FRESH)
@@ -45,6 +47,7 @@ All automated checks MUST pass before human review begins:
 - [ ] Migration guide provided if needed
 
 #### Documentation Updates
+
 - [ ] MANIFEST.json updated if files added/removed
 - [ ] CLAUDE.md updated if governance changed
 - [ ] .claude-rules.json updated if enforcement changed
@@ -53,7 +56,9 @@ All automated checks MUST pass before human review begins:
 - [ ] Code comments added for complex logic
 
 #### ADR Requirements
+
 Must create/update ADR for:
+
 - Schema changes
 - Architecture decisions
 - Dependency additions
@@ -62,6 +67,7 @@ Must create/update ADR for:
 - Security policy changes
 
 **Verification**:
+
 - [ ] ADR number sequential and not reused
 - [ ] ADR follows template structure
 - [ ] ADR status is Proposed or Accepted
@@ -73,6 +79,7 @@ Must create/update ADR for:
 ### 2. Code Quality
 
 #### TypeScript Standards
+
 - [ ] No `any` types (use `unknown` or specific types)
 - [ ] Interfaces/types properly exported
 - [ ] No TypeScript errors or warnings
@@ -81,6 +88,7 @@ Must create/update ADR for:
 - [ ] Enums preferred over string literals
 
 #### Code Organization
+
 - [ ] Files in correct directory per architecture
 - [ ] Import statements organized (external, internal, types)
 - [ ] Single Responsibility Principle followed
@@ -89,6 +97,7 @@ Must create/update ADR for:
 - [ ] No duplicate code (DRY principle)
 
 #### Naming Conventions
+
 - [ ] Variables: camelCase
 - [ ] Functions: camelCase
 - [ ] Components: PascalCase
@@ -98,6 +107,7 @@ Must create/update ADR for:
 - [ ] Descriptive names (avoid abbreviations)
 
 #### Error Handling
+
 - [ ] All async functions handle errors
 - [ ] User-facing errors have clear messages
 - [ ] Error boundaries implemented for components
@@ -110,6 +120,7 @@ Must create/update ADR for:
 ### 3. Schema & Data Compliance
 
 #### CFRS Schema Adherence
+
 - [ ] All data conforms to CFRS v1.x.x
 - [ ] Only namespaced extensions (`x_cfrs_*`) used
 - [ ] No undocumented fields added
@@ -118,6 +129,7 @@ Must create/update ADR for:
 - [ ] Arrays properly typed and validated
 
 #### Mapping Integrity
+
 - [ ] CFRS→JRS mapping lossless
 - [ ] JRS→CFRS mapping functional
 - [ ] CFRS→FRESH mapping preserves data
@@ -125,6 +137,7 @@ Must create/update ADR for:
 - [ ] Edge cases documented
 
 #### Data Validation
+
 - [ ] Client-side validation before processing
 - [ ] Schema validation on import
 - [ ] Clear error messages for invalid data
@@ -136,6 +149,7 @@ Must create/update ADR for:
 ### 4. Security & Privacy
 
 #### Client-Side Architecture
+
 - [ ] No server API calls introduced
 - [ ] No data transmitted externally
 - [ ] No analytics/tracking added
@@ -143,6 +157,7 @@ Must create/update ADR for:
 - [ ] LocalStorage use justified and minimal
 
 #### Content Security Policy
+
 - [ ] No inline scripts added
 - [ ] No eval() or Function() constructor
 - [ ] No remote script loading
@@ -150,6 +165,7 @@ Must create/update ADR for:
 - [ ] Theme rendering sandboxed
 
 #### Theme Security
+
 - [ ] Themes contain CSS only (no JS)
 - [ ] No remote resource loading in themes
 - [ ] No data URIs exceeding size limits
@@ -157,6 +173,7 @@ Must create/update ADR for:
 - [ ] User-provided content escaped
 
 #### Dependency Security
+
 - [ ] New dependencies justified in ADR
 - [ ] Dependencies from trusted sources only
 - [ ] No dependencies with known vulnerabilities
@@ -168,6 +185,7 @@ Must create/update ADR for:
 ### 5. Accessibility (WCAG AA)
 
 #### Keyboard Navigation
+
 - [ ] All interactive elements keyboard accessible
 - [ ] Focus order logical and predictable
 - [ ] Focus indicators visible (outline/ring)
@@ -175,6 +193,7 @@ Must create/update ADR for:
 - [ ] No keyboard traps
 
 #### Screen Reader Support
+
 - [ ] Semantic HTML used
 - [ ] ARIA labels where needed
 - [ ] ARIA roles appropriate
@@ -183,6 +202,7 @@ Must create/update ADR for:
 - [ ] Error messages announced
 
 #### Visual Accessibility
+
 - [ ] Color contrast ≥4.5:1 (normal text)
 - [ ] Color contrast ≥3:1 (large text)
 - [ ] Information not conveyed by color alone
@@ -190,6 +210,7 @@ Must create/update ADR for:
 - [ ] No flickering/flashing content
 
 #### Testing Evidence
+
 - [ ] axe-core scan results included
 - [ ] Manual keyboard test performed
 - [ ] Screen reader tested (NVDA/JAWS/VoiceOver)
@@ -201,6 +222,7 @@ Must create/update ADR for:
 ### 6. Performance
 
 #### Bundle Size
+
 - [ ] Production bundle <500KB gzipped
 - [ ] New dependencies justified vs size impact
 - [ ] Code splitting used where appropriate
@@ -208,6 +230,7 @@ Must create/update ADR for:
 - [ ] Lazy loading for heavy components
 
 #### Load Performance
+
 - [ ] Lighthouse Performance score ≥90
 - [ ] First Contentful Paint <1.5s
 - [ ] Time to Interactive <3.0s
@@ -216,6 +239,7 @@ Must create/update ADR for:
 - [ ] Load time <3s on simulated 3G
 
 #### Runtime Performance
+
 - [ ] No unnecessary re-renders
 - [ ] Expensive computations memoized
 - [ ] Large lists virtualized
@@ -227,6 +251,7 @@ Must create/update ADR for:
 ### 7. UI/UX Quality
 
 #### Responsive Design
+
 - [ ] Tested at 375px (mobile)
 - [ ] Tested at 768px (tablet)
 - [ ] Tested at 1920px (desktop)
@@ -236,6 +261,7 @@ Must create/update ADR for:
 - [ ] Mobile-first approach followed
 
 #### Theme Rendering
+
 - [ ] Themes render correctly with all data
 - [ ] Themes handle missing optional fields
 - [ ] Print preview functional
@@ -244,6 +270,7 @@ Must create/update ADR for:
 - [ ] No flash of unstyled content (FOUC)
 
 #### User Feedback
+
 - [ ] Loading states for async operations
 - [ ] Success/error messages clear
 - [ ] Validation messages contextual
@@ -252,6 +279,7 @@ Must create/update ADR for:
 - [ ] Help text where needed
 
 #### Dark/Light Mode
+
 - [ ] Both modes tested
 - [ ] Smooth transitions between modes
 - [ ] All themes support both modes
@@ -263,6 +291,7 @@ Must create/update ADR for:
 ### 8. Testing
 
 #### Unit Tests
+
 - [ ] Coverage ≥80% for new code
 - [ ] Edge cases tested
 - [ ] Error paths tested
@@ -271,6 +300,7 @@ Must create/update ADR for:
 - [ ] Tests are fast (<10s total runtime)
 
 #### Integration Tests
+
 - [ ] User flows tested end-to-end
 - [ ] Import/export flows validated
 - [ ] Theme rendering tested
@@ -278,12 +308,14 @@ Must create/update ADR for:
 - [ ] Error scenarios covered
 
 #### Snapshot Tests
+
 - [ ] UI components have snapshots
 - [ ] Theme outputs have golden fixtures
 - [ ] Breaking changes to snapshots justified
 - [ ] Snapshots are reviewable
 
 #### Test Quality
+
 - [ ] Test names describe behavior
 - [ ] Tests are independent
 - [ ] No test interdependencies
@@ -295,7 +327,9 @@ Must create/update ADR for:
 ### 9. Import/Export Compliance
 
 #### Import Formats
+
 If modifying importers:
+
 - [ ] JSON Resume import functional
 - [ ] CFRS import functional
 - [ ] Markdown import functional
@@ -304,7 +338,9 @@ If modifying importers:
 - [ ] File size limits enforced
 
 #### Export Formats
+
 If modifying exporters:
+
 - [ ] CFRS export valid
 - [ ] JSON Resume export valid
 - [ ] HTML export self-contained
@@ -313,6 +349,7 @@ If modifying exporters:
 - [ ] Download triggers correctly
 
 #### Data Integrity
+
 - [ ] No data loss during conversion
 - [ ] Round-trip import/export tested
 - [ ] Character encoding correct (UTF-8)
@@ -326,6 +363,7 @@ If modifying exporters:
 If adding/modifying themes:
 
 #### Theme Structure
+
 - [ ] Theme follows directory structure
 - [ ] manifest.json present and valid
 - [ ] Nunjucks template valid
@@ -334,6 +372,7 @@ If adding/modifying themes:
 - [ ] No remote resources
 
 #### Theme Metadata
+
 - [ ] Name, version, author present
 - [ ] Description clear and accurate
 - [ ] License specified (MIT preferred)
@@ -342,6 +381,7 @@ If adding/modifying themes:
 - [ ] Category assigned
 
 #### Theme Quality
+
 - [ ] Renders all CFRS sections
 - [ ] Handles missing optional fields
 - [ ] ATS-safe if claimed
@@ -350,6 +390,7 @@ If adding/modifying themes:
 - [ ] Passes CSP validation
 
 #### Theme Testing
+
 - [ ] Golden fixture snapshots created
 - [ ] Tested with minimal data
 - [ ] Tested with maximal data
@@ -361,23 +402,27 @@ If adding/modifying themes:
 ## Review Process
 
 ### Step 1: Automated Checks
+
 1. Wait for all CI checks to complete
 2. Verify all checks are green
 3. If any fail, request fixes before proceeding
 
 ### Step 2: Governance Review
+
 1. Check MANIFEST.json updated if needed
 2. Verify ADR present for architectural changes
 3. Confirm .claude-rules.json updated if enforcement changed
 4. Ensure CHANGELOG.md updated for user-facing changes
 
 ### Step 3: Code Review
+
 1. Review for code quality and standards
 2. Check test coverage and quality
 3. Verify security and privacy compliance
 4. Assess performance impact
 
 ### Step 4: Functional Review
+
 1. Pull branch locally
 2. Test primary use cases
 3. Verify accessibility with keyboard
@@ -385,6 +430,7 @@ If adding/modifying themes:
 5. Validate dark/light mode
 
 ### Step 5: Approval Decision
+
 - **Approve**: If all criteria met
 - **Request Changes**: If critical issues found
 - **Comment**: If minor suggestions or questions
@@ -394,12 +440,14 @@ If adding/modifying themes:
 ## Review Comments Best Practices
 
 ### Constructive Feedback
+
 - **Be specific**: Point to exact lines/files
 - **Be kind**: Assume positive intent
 - **Be educational**: Explain the "why"
 - **Be actionable**: Suggest concrete fixes
 
 ### Comment Prefixes
+
 - **CRITICAL**: Must be fixed before merge
 - **REQUIRED**: Must be addressed (fix or discussion)
 - **SUGGESTION**: Optional improvement
@@ -408,6 +456,7 @@ If adding/modifying themes:
 - **PRAISE**: Recognition of good work
 
 ### Example Good Comments
+
 ```
 CRITICAL: Line 42 - This introduces a SQL injection vulnerability.
 Use parameterized queries instead. See: [link to docs]
@@ -431,24 +480,28 @@ PRAISE: Excellent test coverage and clear test names!
 ## Common Rejection Reasons
 
 ### Automatic Rejection (No Review Needed)
+
 - CI checks failing
 - Merge conflicts present
 - Work-in-progress without [WIP] tag
 - No description provided
 
 ### Governance Violations
+
 - Schema change without ADR
 - MANIFEST.json not updated
 - Breaking change without major version bump
 - Bypassing required enforcement rules
 
 ### Quality Issues
+
 - Test coverage <80%
 - Accessibility violations
 - Security vulnerabilities
 - Performance regression >20%
 
 ### Non-Compliance
+
 - Remote JS added to themes
 - Server-side logic introduced
 - User data transmitted externally
@@ -459,6 +512,7 @@ PRAISE: Excellent test coverage and clear test names!
 ## Expedited Review Path
 
 For urgent fixes, tag PR with `urgent` label and:
+
 - [ ] Clearly state urgency reason
 - [ ] Link to related incident/issue
 - [ ] Ensure all automated checks pass
@@ -470,6 +524,7 @@ For urgent fixes, tag PR with `urgent` label and:
 ## Reviewer Responsibilities
 
 ### Required Actions
+
 1. Review within 24 hours of PR creation
 2. Provide clear, actionable feedback
 3. Re-review within 24 hours of updates
@@ -477,6 +532,7 @@ For urgent fixes, tag PR with `urgent` label and:
 5. Document approval reasoning if complex
 
 ### Reviewer Checklist
+
 - [ ] Understood the change purpose
 - [ ] Verified all automated checks passed
 - [ ] Reviewed for governance compliance
@@ -493,16 +549,19 @@ For urgent fixes, tag PR with `urgent` label and:
 ## Post-Merge Validation
 
 ### Within 1 Hour
+
 - [ ] Verify deployment successful
 - [ ] Check production build artifacts
 - [ ] Monitor for errors in logs (if applicable)
 
 ### Within 24 Hours
+
 - [ ] Verify Lighthouse scores maintained
 - [ ] Check bundle size impact
 - [ ] Review user feedback channels
 
 ### Within 1 Week
+
 - [ ] Assess adoption of new feature
 - [ ] Monitor for regression reports
 - [ ] Update documentation if gaps found
@@ -512,13 +571,16 @@ For urgent fixes, tag PR with `urgent` label and:
 ## Continuous Improvement
 
 ### Review Metrics
+
 Track and improve:
+
 - Time to first review
 - Time to merge after approval
 - Number of review cycles
 - Defect escape rate
 
 ### Process Updates
+
 - Review criteria updated quarterly
 - Lessons learned documented
 - Common issues added to checklist

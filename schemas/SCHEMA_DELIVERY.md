@@ -25,6 +25,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 - **Size:** ~18KB (formatted)
 
 **Key Features:**
+
 - Required fields: `$schema`, `basics.name`
 - All other sections optional for flexibility
 - Pattern validation for dates (ISO 8601), emails (RFC 5322), URLs
@@ -37,6 +38,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 **Directory:** `/schemas/examples/`
 
 #### Minimal Example (`minimal-example.json`)
+
 - **Profile:** Software Engineer with 5 years experience
 - **Sections:** basics, work (2), education (1), skills (3), languages (1)
 - **Extensions Used:** employment_type, remote, keywords, years, category
@@ -44,6 +46,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 - **Size:** ~3KB
 
 #### Comprehensive Example (`comprehensive-example.json`)
+
 - **Profile:** Principal Engineer with 12+ years experience
 - **Sections:** All standard sections populated
 - **Extensions Used:** All CFRS extensions demonstrated
@@ -52,6 +55,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 - **Size:** ~8KB
 
 #### Academic CV Example (`academic-example.json`)
+
 - **Profile:** Assistant Professor in Computational Biology
 - **Sections:** Heavy focus on publications, education, grants
 - **Extensions Used:** Academic-specific features (honors, citations, CEFR)
@@ -66,6 +70,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 **File:** `/schemas/mappings/cfrs-to-jrs.json`
 
 **Mapping Coverage:**
+
 - **Core Fields:** 100% bidirectional compatibility
 - **CFRS Extensions:** Documented export behavior (omit vs preserve)
 - **Round-trip Support:** Optional preservation in `$.x_cfrs` object
@@ -73,6 +78,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 - **Implementation Guide:** Libraries, error handling, best practices
 
 **Key Insights:**
+
 - CFRS is a **strict superset** of JSON Resume
 - JSON Resume → CFRS: **Lossless**
 - CFRS → JSON Resume: **Lossy** (extensions dropped unless preserved)
@@ -83,6 +89,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 **File:** `/schemas/mappings/cfrs-to-fresh.json`
 
 **Mapping Coverage:**
+
 - **Structural Differences:** Nested objects vs flat arrays
 - **Terminology Mapping:** 20+ field name translations
 - **Level Conversions:** Language fluency level mapping table
@@ -90,6 +97,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 - **Conversion Algorithms:** Bidirectional transformation steps
 
 **Key Differences:**
+
 - FRESH uses `employment.history` vs CFRS `work`
 - FRESH uses `recognition` vs CFRS `awards`
 - FRESH uses `writing` vs CFRS `publications`
@@ -102,6 +110,7 @@ The CloudFlow Resume Schema (CFRS) v1.0.0 has been designed and delivered as the
 **File:** `/schemas/README.md`
 
 **Sections:**
+
 - Overview and design principles
 - Quick start guide with code examples
 - Core schema structure reference
@@ -133,11 +142,11 @@ Extensions: 20+ x_cfrs_* fields
 
 ### Compatibility Matrix
 
-| Format | Import | Export | Lossless | Notes |
-|--------|--------|--------|----------|-------|
-| JSON Resume v1.2.1 | ✅ Yes | ✅ Yes | ✅ Import only | CFRS is superset |
-| FRESH v0.9.0 | ✅ Yes | ✅ Yes | ❌ No | Structural mapping required |
-| CFRS v1.0.0 | ✅ Yes | ✅ Yes | ✅ Yes | Native format |
+| Format             | Import | Export | Lossless       | Notes                       |
+| ------------------ | ------ | ------ | -------------- | --------------------------- |
+| JSON Resume v1.2.1 | ✅ Yes | ✅ Yes | ✅ Import only | CFRS is superset            |
+| FRESH v0.9.0       | ✅ Yes | ✅ Yes | ❌ No          | Structural mapping required |
+| CFRS v1.0.0        | ✅ Yes | ✅ Yes | ✅ Yes         | Native format               |
 
 ### Validation Performance
 
@@ -154,11 +163,13 @@ Tested with: AJV 8.x on Node.js 20.x
 ## CFRS Extensions Summary
 
 ### Privacy & Localization (3 fields)
+
 - `x_cfrs_pronouns` - Preferred pronouns
 - `x_cfrs_locale` - Primary locale code
 - `x_cfrs_locale_variants` - Multi-locale support
 
 ### ATS Optimization (5 fields)
+
 - `x_cfrs_keywords` - Position-specific keywords
 - `x_cfrs_ats_optimized` - ATS optimization flag
 - `x_cfrs_employment_type` - Employment classification
@@ -166,31 +177,38 @@ Tested with: AJV 8.x on Node.js 20.x
 - `x_cfrs_theme` - Theme hint for rendering
 
 ### Academic & Research (4 fields)
+
 - `x_cfrs_honors` - Academic distinctions
 - `x_cfrs_authors` - Publication co-authors
 - `x_cfrs_citation_count` - Citation metrics
 - `x_cfrs_cefr_level` - Language proficiency (CEFR)
 
 ### Skills & Experience (2 fields)
+
 - `x_cfrs_years` - Years of experience
 - `x_cfrs_category` - Skill categorization
 
 ### Project Management (1 field)
+
 - `x_cfrs_featured` - Featured project flag
 
 ### Credentials (2 fields)
+
 - `x_cfrs_expiry_date` - Certification expiration
 - `x_cfrs_credential_id` - License/credential number
 
 ### References (3 fields)
+
 - `x_cfrs_relationship` - Reference relationship
 - `x_cfrs_email` - Reference email
 - `x_cfrs_phone` - Reference phone
 
 ### Privacy & Redaction (1 field)
+
 - `x_cfrs_redaction_profile` - Redaction level
 
 ### Custom Content (1 field)
+
 - `x_cfrs_custom_sections` - Arbitrary sections
 
 **Total:** 22 extension fields across 9 categories
@@ -200,36 +218,43 @@ Tested with: AJV 8.x on Node.js 20.x
 ## Design Decisions (ADR Summary)
 
 ### 1. JSON Resume Compatibility
+
 **Decision:** Make CFRS a strict superset of JSON Resume
 **Rationale:** Leverage existing ecosystem, ease migration, maximize adoption
 **Trade-off:** Some design constraints to maintain compatibility
 
 ### 2. Namespaced Extensions
+
 **Decision:** Use `x_cfrs_*` prefix for all custom fields
 **Rationale:** Prevent collisions, clear ownership, allow future JSON Resume evolution
 **Trade-off:** Slightly verbose field names
 
 ### 3. Optional Everything
+
 **Decision:** Only `$schema` and `basics.name` required
 **Rationale:** Maximum flexibility for diverse use cases
 **Trade-off:** Less structure enforcement, more validation needed
 
 ### 4. ISO Standards
+
 **Decision:** Use ISO 8601 dates, ISO 3166-1 countries, BCP 47 locales
 **Rationale:** International compatibility, clear semantics, parser support
 **Trade-off:** Stricter validation, potential user confusion
 
 ### 5. No Inline Validation Rules
+
 **Decision:** Keep validation in schema, not in extensions
 **Rationale:** Schema-first approach, tooling compatibility
 **Trade-off:** Cannot express complex business rules in schema alone
 
 ### 6. Flat Array Structure
+
 **Decision:** Keep sections as flat arrays (not nested objects like FRESH)
 **Rationale:** Simpler to parse, JSON Resume compatibility
 **Trade-off:** Some duplication (e.g., location in each work entry)
 
 ### 7. String Length Limits
+
 **Decision:** Add maxLength constraints to all string fields
 **Rationale:** Prevent abuse, reasonable resume sizes, performance
 **Trade-off:** Could be restrictive for edge cases
@@ -260,24 +285,28 @@ Tested with: AJV 8.x on Node.js 20.x
 ## Next Steps for Other Agents
 
 ### Parser/Importer Agent
+
 1. Implement JSON Resume → CFRS converter
 2. Implement FRESH → CFRS converter
 3. Implement Markdown → CFRS parser
 4. Add validation middleware
 
 ### Renderer/Theme Agent
+
 1. Create Nunjucks templates consuming CFRS
 2. Implement CFRS → HTML renderer
 3. Handle `x_cfrs_*` extensions in themes
 4. Support `x_cfrs_redaction_profile`
 
 ### Validator/Test Agent
+
 1. Create comprehensive test suite
 2. Add golden fixture tests
 3. Implement schema regression tests
 4. Build ATS compatibility checker
 
 ### Export Agent
+
 1. Implement CFRS → JSON Resume converter
 2. Implement CFRS → FRESH converter
 3. Implement CFRS → Markdown converter
@@ -330,17 +359,20 @@ schemas/
 ## Quality Metrics
 
 **Schema Design:**
+
 - Comprehensiveness: ⭐⭐⭐⭐⭐ (5/5)
 - Documentation: ⭐⭐⭐⭐⭐ (5/5)
 - Compatibility: ⭐⭐⭐⭐⭐ (5/5)
 - Extensibility: ⭐⭐⭐⭐⭐ (5/5)
 
 **Examples:**
+
 - Coverage: ⭐⭐⭐⭐⭐ (3 diverse examples)
 - Realism: ⭐⭐⭐⭐⭐ (Based on real-world resumes)
 - Validation: ⭐⭐⭐⭐⭐ (All pass validation)
 
 **Mappings:**
+
 - JRS Compatibility: ⭐⭐⭐⭐⭐ (100% coverage)
 - FRESH Compatibility: ⭐⭐⭐⭐☆ (Structural differences documented)
 - Documentation: ⭐⭐⭐⭐⭐ (Comprehensive guides)

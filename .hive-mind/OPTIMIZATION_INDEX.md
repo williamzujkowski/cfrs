@@ -10,11 +10,13 @@
 ## 📚 Document Hierarchy
 
 ### 1. Full Strategy Document (PRIMARY REFERENCE)
+
 **File:** `optimization-strategy.md` (59KB)
 **Purpose:** Complete technical specification with implementation details
 **Audience:** Developers, architects, technical leads
 
 **Contents:**
+
 - Bundle optimization strategy (code splitting, tree shaking)
 - Asset optimization (CSS, fonts, images)
 - Lazy loading strategy (routes, themes, importers)
@@ -30,11 +32,13 @@
 ---
 
 ### 2. Executive Summary (QUICK OVERVIEW)
+
 **File:** `optimization-summary.md` (11KB)
 **Purpose:** High-level overview for stakeholders and quick reference
 **Audience:** Product managers, stakeholders, non-technical reviewers
 
 **Contents:**
+
 - Critical performance targets
 - Bundle size budgets (visual breakdown)
 - 7 key optimization strategies
@@ -48,11 +52,13 @@
 ---
 
 ### 3. Implementation Checklist (TASK TRACKING)
+
 **File:** `optimization-checklist.md` (13KB)
 **Purpose:** Step-by-step implementation guide with checkboxes
 **Audience:** Developers actively implementing optimizations
 
 **Contents:**
+
 - Phase 1: Foundation (Vite config, bundle, CSS, assets)
 - Phase 2: Caching & Offline (service worker, storage, HTTP)
 - Phase 3: Monitoring & Testing (Web Vitals, Lighthouse CI, bundlesize)
@@ -66,11 +72,13 @@
 ---
 
 ### 4. Metrics Quick Reference Card (VISUAL GUIDE)
+
 **File:** `optimization-metrics-card.md` (15KB)
 **Purpose:** Visual reference for key metrics and targets
 **Audience:** All team members, keep visible during development
 
 **Contents:**
+
 - Critical targets (FCP, LCP, TTI, bundle size)
 - Bundle budget visualization
 - Load time breakdown (before/after)
@@ -88,13 +96,13 @@
 
 ## 📊 Document Comparison
 
-| Aspect | Strategy | Summary | Checklist | Metrics Card |
-|--------|----------|---------|-----------|--------------|
-| **Size** | 59KB | 11KB | 13KB | 15KB |
-| **Depth** | Complete | High-level | Actionable | Visual |
-| **Audience** | Technical | Management | Implementers | All |
-| **Format** | Detailed spec | Bullet points | Checkboxes | Visual aids |
-| **Use Case** | Implementation | Overview | Tracking | Quick ref |
+| Aspect       | Strategy       | Summary       | Checklist    | Metrics Card |
+| ------------ | -------------- | ------------- | ------------ | ------------ |
+| **Size**     | 59KB           | 11KB          | 13KB         | 15KB         |
+| **Depth**    | Complete       | High-level    | Actionable   | Visual       |
+| **Audience** | Technical      | Management    | Implementers | All          |
+| **Format**   | Detailed spec  | Bullet points | Checkboxes   | Visual aids  |
+| **Use Case** | Implementation | Overview      | Tracking     | Quick ref    |
 
 ---
 
@@ -144,11 +152,13 @@
 ## 🔗 Related Documentation
 
 **Project Documentation:**
+
 - `/home/william/git/cfrs/CLAUDE.md` - Project standards and requirements
 - `/home/william/git/cfrs/project_plan.md` - Overall project plan
 - `/home/william/git/cfrs/.hive-mind/ARCHITECTURE.md` - System architecture (TBD)
 
 **Future Documentation (TBD):**
+
 - `/home/william/git/cfrs/docs/PERFORMANCE.md` - Performance guidelines for contributors
 - `/home/william/git/cfrs/lighthouserc.js` - Lighthouse CI configuration
 - `/home/william/git/cfrs/vite.config.ts` - Vite build configuration
@@ -158,6 +168,7 @@
 ## ✅ Compliance Check
 
 **Alignment with CLAUDE.md:**
+
 - ✅ Load time <3s on 3G (target: 2.8s)
 - ✅ Lighthouse scores ≥90 (all categories)
 - ✅ GitHub Pages compatible (static SPA)
@@ -168,6 +179,7 @@
 - ✅ Zero external dependencies in critical path
 
 **Alignment with Project Plan:**
+
 - ✅ Phase 0/1 requirements addressed
 - ✅ Technical quality standards defined
 - ✅ Performance budgets established
@@ -179,12 +191,14 @@
 ## 📈 Key Metrics Summary
 
 ### Bundle Sizes (Gzipped)
+
 - **Vendor:** 45KB (target) / 80KB (max)
 - **Main:** 30KB (target) / 40KB (max)
 - **Critical CSS:** 12KB (target) / 15KB (max)
 - **Total Critical:** 87KB (target) / 135KB (max)
 
 ### Performance Targets
+
 - **FCP (3G):** <3s
 - **LCP (3G):** <4s
 - **TTI (3G):** <5s
@@ -192,6 +206,7 @@
 - **Lighthouse:** ≥90 (all categories)
 
 ### Implementation Timeline
+
 - **Week 1:** Foundation (Vite, bundles, assets)
 - **Week 2:** Caching (service worker, storage)
 - **Week 3:** Monitoring (Lighthouse CI, Web Vitals)
@@ -234,6 +249,7 @@
 **Stakeholder Questions:** Use `optimization-summary.md`
 
 **Additional Resources:**
+
 - Web Vitals: https://web.dev/vitals/
 - Lighthouse: https://web.dev/performance-scoring/
 - Vite Performance: https://vitejs.dev/guide/build.html
@@ -243,9 +259,9 @@
 
 ## 🔄 Version History
 
-| Version | Date | Changes | Author |
-|---------|------|---------|--------|
-| 1.0.0 | 2025-10-03 | Initial specification complete | OPTIMIZER Agent |
+| Version | Date       | Changes                        | Author          |
+| ------- | ---------- | ------------------------------ | --------------- |
+| 1.0.0   | 2025-10-03 | Initial specification complete | OPTIMIZER Agent |
 
 ---
 

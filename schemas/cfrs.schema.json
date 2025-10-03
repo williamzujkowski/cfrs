@@ -296,7 +296,16 @@
           "x_cfrs_category": {
             "type": "string",
             "description": "CFRS Extension: Skill category for grouping",
-            "enum": ["technical", "soft", "language", "tool", "framework", "methodology", "domain", "other"]
+            "enum": [
+              "technical",
+              "soft",
+              "language",
+              "tool",
+              "framework",
+              "methodology",
+              "domain",
+              "other"
+            ]
           }
         }
       }
@@ -517,7 +526,13 @@
           "fluency": {
             "type": "string",
             "description": "Proficiency level",
-            "enum": ["elementary", "limited-working", "professional-working", "full-professional", "native-or-bilingual"]
+            "enum": [
+              "elementary",
+              "limited-working",
+              "professional-working",
+              "full-professional",
+              "native-or-bilingual"
+            ]
           },
           "x_cfrs_cefr_level": {
             "type": "string",

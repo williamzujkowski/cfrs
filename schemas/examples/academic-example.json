@@ -49,7 +49,13 @@
       "location": "Boston, MA",
       "x_cfrs_employment_type": "full-time",
       "x_cfrs_remote": false,
-      "x_cfrs_keywords": ["Computational Biology", "Machine Learning", "Genomics", "Cancer Research", "Research Leadership"]
+      "x_cfrs_keywords": [
+        "Computational Biology",
+        "Machine Learning",
+        "Genomics",
+        "Cancer Research",
+        "Research Leadership"
+      ]
     },
     {
       "name": "Broad Institute of MIT and Harvard",
@@ -67,7 +73,13 @@
       "location": "Cambridge, MA",
       "x_cfrs_employment_type": "full-time",
       "x_cfrs_remote": false,
-      "x_cfrs_keywords": ["Single-cell Genomics", "Bioinformatics", "Python", "R", "Statistical Analysis"]
+      "x_cfrs_keywords": [
+        "Single-cell Genomics",
+        "Bioinformatics",
+        "Python",
+        "R",
+        "Statistical Analysis"
+      ]
     }
   ],
   "education": [
@@ -101,17 +113,20 @@
       "endDate": "2013-05",
       "score": "3.92/4.0",
       "location": "Berkeley, CA",
-      "x_cfrs_honors": [
-        "Highest Honors in Major",
-        "Phi Beta Kappa"
-      ]
+      "x_cfrs_honors": ["Highest Honors in Major", "Phi Beta Kappa"]
     }
   ],
   "skills": [
     {
       "name": "Computational Methods",
       "level": "expert",
-      "keywords": ["Machine Learning", "Statistical Modeling", "Bayesian Inference", "Deep Learning", "Algorithm Development"],
+      "keywords": [
+        "Machine Learning",
+        "Statistical Modeling",
+        "Bayesian Inference",
+        "Deep Learning",
+        "Algorithm Development"
+      ],
       "x_cfrs_years": 10,
       "x_cfrs_category": "technical"
     },
@@ -139,7 +154,13 @@
     {
       "name": "Research & Communication",
       "level": "expert",
-      "keywords": ["Grant Writing", "Manuscript Preparation", "Scientific Presentation", "Peer Review", "Mentorship"],
+      "keywords": [
+        "Grant Writing",
+        "Manuscript Preparation",
+        "Scientific Presentation",
+        "Peer Review",
+        "Mentorship"
+      ],
       "x_cfrs_years": 10,
       "x_cfrs_category": "soft"
     }
@@ -265,7 +286,12 @@
     },
     {
       "name": "Service",
-      "keywords": ["Peer Review", "Grant Review Panels", "Conference Organization", "Diversity in STEM"]
+      "keywords": [
+        "Peer Review",
+        "Grant Review Panels",
+        "Conference Organization",
+        "Diversity in STEM"
+      ]
     }
   ],
   "references": [

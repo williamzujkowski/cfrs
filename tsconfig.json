@@ -46,17 +46,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "apps/web/src/**/*",
-    "scripts/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ],
-  "references": [
-    { "path": "./tsconfig.node.json" }
-  ]
+  "include": ["apps/web/src/**/*", "scripts/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

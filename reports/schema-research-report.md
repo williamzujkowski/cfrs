@@ -9,6 +9,7 @@
 This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (Friendly Resume Schema) formats to ensure perfect compatibility for the CloudFlow Resume System. The research covers field inventories, compatibility matrices, ATS optimization recommendations, and best practices for schema design.
 
 **Key Findings:**
+
 - JSON Resume v1.0.0 is the current stable version (not v1.2.1 as initially referenced)
 - FRESH serves as a universal container format with 21 sections vs JSON Resume's 12 sections
 - Bidirectional conversion is possible with minimal data loss
@@ -20,6 +21,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ## 1. JSON Resume Schema v1.0.0 - Field Inventory
 
 ### 1.1 Overview
+
 - **Current Version:** v1.0.0 (stable)
 - **Schema Standard:** JSON Schema Draft 7
 - **License:** MIT
@@ -30,6 +32,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ### 1.2 Complete Field Structure
 
 #### 1.2.1 Basics Section (Personal Information)
+
 ```json
 {
   "basics": {
@@ -59,6 +62,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 1.2.2 Work Section
+
 ```json
 {
   "work": [
@@ -76,6 +80,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 1.2.3 Volunteer Section
+
 ```json
 {
   "volunteer": [
@@ -93,6 +98,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 1.2.4 Education Section
+
 ```json
 {
   "education": [
@@ -113,6 +119,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 #### 1.2.5 Additional Sections
 
 **Awards:**
+
 ```json
 {
   "awards": [
@@ -127,6 +134,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Certificates:**
+
 ```json
 {
   "certificates": [
@@ -141,6 +149,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Publications:**
+
 ```json
 {
   "publications": [
@@ -156,6 +165,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Skills:**
+
 ```json
 {
   "skills": [
@@ -169,6 +179,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Languages:**
+
 ```json
 {
   "languages": [
@@ -181,6 +192,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Interests:**
+
 ```json
 {
   "interests": [
@@ -193,6 +205,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **References:**
+
 ```json
 {
   "references": [
@@ -205,6 +218,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Projects:**
+
 ```json
 {
   "projects": [
@@ -221,6 +235,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Meta (Resume Metadata):**
+
 ```json
 {
   "meta": {
@@ -232,6 +247,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 ### 1.3 JSON Resume Characteristics
+
 - **Flexibility:** Most sections have `"additionalProperties": true`
 - **Date Format:** ISO 8601 (YYYY-MM-DD), partial dates supported (YYYY)
 - **Validation:** Email (RFC 5322), URLs (RFC 3986)
@@ -243,6 +259,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ## 2. FRESH Resume Schema - Field Inventory
 
 ### 2.1 Overview
+
 - **Current Version:** 1.0.0-beta
 - **Full Name:** Friendly Resume Schema / FRESCA (FRESH Resume and Employment Schema)
 - **Format Support:** JSON and YAML
@@ -253,6 +270,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ### 2.2 Complete Field Structure
 
 #### 2.2.1 Top-Level Structure
+
 ```json
 {
   "name": "string - person's name (top-level, not nested)",
@@ -271,6 +289,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 2.2.2 Contact & Location
+
 ```json
 {
   "contact": {
@@ -290,6 +309,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 2.2.3 Employment History
+
 ```json
 {
   "employment": {
@@ -310,6 +330,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 2.2.4 Projects
+
 ```json
 {
   "projects": [
@@ -331,6 +352,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 2.2.5 Education
+
 ```json
 {
   "education": {
@@ -353,6 +375,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 2.2.6 Skills
+
 ```json
 {
   "skills": {
@@ -369,6 +392,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 #### 2.2.7 Social Profiles
+
 ```json
 {
   "social": [
@@ -385,6 +409,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 #### 2.2.8 Extended Sections (FRESH-Specific)
 
 **Service (Volunteer/Military):**
+
 ```json
 {
   "service": {
@@ -404,6 +429,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Disposition (Work Preferences):**
+
 ```json
 {
   "disposition": {
@@ -420,6 +446,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Writing & Publications:**
+
 ```json
 {
   "writing": [
@@ -436,6 +463,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Reading:**
+
 ```json
 {
   "reading": [
@@ -450,6 +478,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Speaking Engagements:**
+
 ```json
 {
   "speaking": [
@@ -467,6 +496,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Governance (Boards/Committees):**
+
 ```json
 {
   "governance": [
@@ -484,6 +514,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Recognition (Awards):**
+
 ```json
 {
   "recognition": [
@@ -501,6 +532,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Work Samples:**
+
 ```json
 {
   "samples": [
@@ -515,6 +547,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **References:**
+
 ```json
 {
   "references": [
@@ -535,6 +568,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Testimonials:**
+
 ```json
 {
   "testimonials": [
@@ -549,6 +583,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Languages:**
+
 ```json
 {
   "languages": [
@@ -562,6 +597,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Interests & Extracurricular:**
+
 ```json
 {
   "interests": [
@@ -584,6 +620,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 **Affiliations:**
+
 ```json
 {
   "affiliation": {
@@ -603,6 +640,7 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 ```
 
 ### 2.3 FRESH Characteristics
+
 - **Comprehensive:** 21+ sections vs JSON Resume's 12
 - **Structured:** More granular organization (e.g., skills.sets vs flat skills array)
 - **Universal Container:** Designed to preserve data from multiple formats
@@ -615,135 +653,137 @@ This report provides a comprehensive analysis of JSON Resume v1.0.0 and FRESH (F
 
 ### 3.1 Field Name Mapping Table
 
-| CFRS/Common Concept | JSON Resume Field | FRESH Field | Notes |
-|---------------------|-------------------|-------------|-------|
-| **Personal Info** |
-| Full Name | `basics.name` | `name` (top-level) | FRESH: direct top-level; JRS: nested in basics |
-| Job Title/Label | `basics.label` | `info.label` | Direct mapping |
-| Profile Photo | `basics.image` | `info.image` | Direct mapping |
-| Professional Summary | `basics.summary` | `info.brief` | Field name differs: summary vs brief |
-| Email | `basics.email` | `contact.email` | JRS: in basics; FRESH: separate contact object |
-| Phone | `basics.phone` | `contact.phone` | JRS: in basics; FRESH: separate contact object |
-| Website | `basics.url` | `contact.website` | Field name differs: url vs website |
-| **Location** |
-| Address | `basics.location.address` | `location.address` | Direct mapping |
-| City | `basics.location.city` | `location.city` | Direct mapping |
-| Region/State | `basics.location.region` | `location.region` | Direct mapping |
-| Postal Code | `basics.location.postalCode` | `location.code` | Field name differs: postalCode vs code |
-| Country Code | `basics.location.countryCode` | `location.country` | Field name differs |
-| **Social Profiles** |
-| Social Profiles | `basics.profiles[]` | `social[]` | JRS: nested in basics; FRESH: top-level |
-| Network Name | `profiles[].network` | `social[].network` | Direct mapping |
-| Username | `profiles[].username` | `social[].user` | Field name differs: username vs user |
-| Profile URL | `profiles[].url` | `social[].url` | Direct mapping |
-| Social Label | N/A | `social[].label` | FRESH-specific |
-| **Employment** |
-| Employment Section | `work[]` | `employment.history[]` | JRS: flat array; FRESH: nested in history |
-| Company Name | `work[].name` | `employment.history[].employer` | Field name differs: name vs employer |
-| Job Position | `work[].position` | `employment.history[].position` | Direct mapping |
-| Company URL | `work[].url` | `employment.history[].url` | Direct mapping |
-| Start Date | `work[].startDate` | `employment.history[].start` | Field name differs: startDate vs start |
-| End Date | `work[].endDate` | `employment.history[].end` | Field name differs: endDate vs end |
-| Job Summary | `work[].summary` | `employment.history[].summary` | Direct mapping |
-| Highlights | `work[].highlights[]` | `employment.history[].highlights[]` | Direct mapping |
-| Technologies Used | N/A | `employment.history[].keywords[]` | FRESH-specific |
-| **Education** |
-| Education Section | `education[]` | `education.history[]` | JRS: flat array; FRESH: nested in history |
-| Institution | `education[].institution` | `education.history[].institution` | Direct mapping |
-| Study Area | `education[].area` | `education.history[].area` | Direct mapping |
-| Degree Type | `education[].studyType` | `education.history[].studyType` | Direct mapping |
-| Start Date | `education[].startDate` | `education.history[].start` | Field name differs |
-| End Date | `education[].endDate` | `education.history[].end` | Field name differs |
-| GPA/Grade | `education[].score` | `education.history[].grade` | Field name differs: score vs grade |
-| Courses | `education[].courses[]` | `education.history[].curriculum[]` | Field name differs: courses vs curriculum |
-| Institution URL | `education[].url` | `education.history[].url` | Direct mapping |
-| **Projects** |
-| Projects Section | `projects[]` | `projects[]` | Both top-level; structure differs |
-| Project Name | `projects[].name` | `projects[].title` | Field name differs: name vs title |
-| Description | `projects[].description` | `projects[].description` | Direct mapping |
-| Project URL | `projects[].url` | `projects[].url` | Direct mapping |
-| Start Date | `projects[].startDate` | `projects[].start` | Field name differs |
-| End Date | `projects[].endDate` | `projects[].end` | Field name differs |
-| Highlights | `projects[].highlights[]` | `projects[].highlights[]` | Direct mapping |
-| Project Role | N/A | `projects[].role` | FRESH-specific |
-| Project Category | N/A | `projects[].category` | FRESH-specific |
-| Repository URL | N/A | `projects[].repo` | FRESH-specific |
-| Media/Screenshots | N/A | `projects[].media[]` | FRESH-specific |
-| Keywords | N/A | `projects[].keywords[]` | FRESH-specific |
-| **Skills** |
-| Skills Section | `skills[]` | `skills.sets[]` & `skills.list[]` | JRS: flat array; FRESH: structured sets |
-| Skill Name | `skills[].name` | `skills.sets[].name` (category) | FRESH groups into categories |
-| Skill Level | `skills[].level` | `skills.sets[].level` | Direct mapping |
-| Keywords | `skills[].keywords[]` | `skills.sets[].skills[]` | Field name differs |
-| **Volunteer Work** |
-| Volunteer Section | `volunteer[]` | `service.history[]` | JRS: volunteer; FRESH: service |
-| Organization | `volunteer[].organization` | `service.history[].organization` | Direct mapping |
-| Position | `volunteer[].position` | `service.history[].position` | Direct mapping |
-| URL | `volunteer[].url` | `service.history[].url` | Direct mapping |
-| Start Date | `volunteer[].startDate` | `service.history[].start` | Field name differs |
-| End Date | `volunteer[].endDate` | `service.history[].end` | Field name differs |
-| Summary | `volunteer[].summary` | `service.history[].summary` | Direct mapping |
-| Highlights | `volunteer[].highlights[]` | `service.history[].highlights[]` | Direct mapping |
-| **Awards** |
-| Awards Section | `awards[]` | `recognition[]` | Section name differs |
-| Award Title | `awards[].title` | `recognition[].title` | Direct mapping |
-| Date | `awards[].date` | `recognition[].date` | Direct mapping |
-| Awarder/From | `awards[].awarder` | `recognition[].from` | Field name differs: awarder vs from |
-| Summary | `awards[].summary` | `recognition[].summary` | Direct mapping |
-| Award Type | N/A | `recognition[].flavor` | FRESH-specific |
-| Event | N/A | `recognition[].event` | FRESH-specific |
-| **Publications** |
-| Publications Section | `publications[]` | `writing[]` | Section name differs |
-| Publication Name | `publications[].name` | `writing[].title` | Field name differs: name vs title |
-| Publisher | `publications[].publisher` | `writing[].publisher` | Direct mapping |
-| Release Date | `publications[].releaseDate` | `writing[].date` | Field name differs |
-| URL | `publications[].url` | `writing[].url` | Direct mapping |
-| Summary | `publications[].summary` | `writing[].summary` | Direct mapping |
-| Publication Type | N/A | `writing[].flavor` | FRESH-specific |
-| **Languages** |
-| Languages Section | `languages[]` | `languages[]` | Direct mapping |
-| Language | `languages[].language` | `languages[].language` | Direct mapping |
-| Fluency | `languages[].fluency` | `languages[].level` | Field name differs: fluency vs level |
-| Years Experience | N/A | `languages[].years` | FRESH-specific |
-| **Interests** |
-| Interests Section | `interests[]` | `interests[]` | Direct mapping |
-| Interest Name | `interests[].name` | `interests[].name` | Direct mapping |
-| Keywords | `interests[].keywords[]` | `interests[].keywords[]` | Direct mapping |
-| Summary | N/A | `interests[].summary` | FRESH-specific |
-| **References** |
-| References Section | `references[]` | `references[]` | Both have; FRESH more detailed |
-| Reference Name | `references[].name` | `references[].name` | Direct mapping |
-| Reference Text | `references[].reference` | `references[].summary` | Field name differs |
-| Reference Role | N/A | `references[].role` | FRESH-specific |
-| Category | N/A | `references[].category` | FRESH-specific |
-| Private Flag | N/A | `references[].private` | FRESH-specific |
-| Contact Info | N/A | `references[].contact{}` | FRESH-specific |
-| **Certificates** |
-| Certificates Section | `certificates[]` | N/A (use education) | JRS-specific; FRESH merges into education |
-| Certificate Name | `certificates[].name` | N/A | JRS-specific |
-| Date | `certificates[].date` | N/A | JRS-specific |
-| Issuer | `certificates[].issuer` | N/A | JRS-specific |
-| **Metadata** |
-| Meta Section | `meta{}` | `meta{}` | Both have metadata |
-| Format/Version | `meta.version` | `meta.format` | Different purposes |
-| Last Modified | `meta.lastModified` | `meta.modified` | Field name differs |
-| Canonical URL | `meta.canonical` | N/A | JRS-specific |
+| CFRS/Common Concept     | JSON Resume Field             | FRESH Field                         | Notes                                          |
+| ----------------------- | ----------------------------- | ----------------------------------- | ---------------------------------------------- |
+| **Personal Info**       |
+| Full Name               | `basics.name`                 | `name` (top-level)                  | FRESH: direct top-level; JRS: nested in basics |
+| Job Title/Label         | `basics.label`                | `info.label`                        | Direct mapping                                 |
+| Profile Photo           | `basics.image`                | `info.image`                        | Direct mapping                                 |
+| Professional Summary    | `basics.summary`              | `info.brief`                        | Field name differs: summary vs brief           |
+| Email                   | `basics.email`                | `contact.email`                     | JRS: in basics; FRESH: separate contact object |
+| Phone                   | `basics.phone`                | `contact.phone`                     | JRS: in basics; FRESH: separate contact object |
+| Website                 | `basics.url`                  | `contact.website`                   | Field name differs: url vs website             |
+| **Location**            |
+| Address                 | `basics.location.address`     | `location.address`                  | Direct mapping                                 |
+| City                    | `basics.location.city`        | `location.city`                     | Direct mapping                                 |
+| Region/State            | `basics.location.region`      | `location.region`                   | Direct mapping                                 |
+| Postal Code             | `basics.location.postalCode`  | `location.code`                     | Field name differs: postalCode vs code         |
+| Country Code            | `basics.location.countryCode` | `location.country`                  | Field name differs                             |
+| **Social Profiles**     |
+| Social Profiles         | `basics.profiles[]`           | `social[]`                          | JRS: nested in basics; FRESH: top-level        |
+| Network Name            | `profiles[].network`          | `social[].network`                  | Direct mapping                                 |
+| Username                | `profiles[].username`         | `social[].user`                     | Field name differs: username vs user           |
+| Profile URL             | `profiles[].url`              | `social[].url`                      | Direct mapping                                 |
+| Social Label            | N/A                           | `social[].label`                    | FRESH-specific                                 |
+| **Employment**          |
+| Employment Section      | `work[]`                      | `employment.history[]`              | JRS: flat array; FRESH: nested in history      |
+| Company Name            | `work[].name`                 | `employment.history[].employer`     | Field name differs: name vs employer           |
+| Job Position            | `work[].position`             | `employment.history[].position`     | Direct mapping                                 |
+| Company URL             | `work[].url`                  | `employment.history[].url`          | Direct mapping                                 |
+| Start Date              | `work[].startDate`            | `employment.history[].start`        | Field name differs: startDate vs start         |
+| End Date                | `work[].endDate`              | `employment.history[].end`          | Field name differs: endDate vs end             |
+| Job Summary             | `work[].summary`              | `employment.history[].summary`      | Direct mapping                                 |
+| Highlights              | `work[].highlights[]`         | `employment.history[].highlights[]` | Direct mapping                                 |
+| Technologies Used       | N/A                           | `employment.history[].keywords[]`   | FRESH-specific                                 |
+| **Education**           |
+| Education Section       | `education[]`                 | `education.history[]`               | JRS: flat array; FRESH: nested in history      |
+| Institution             | `education[].institution`     | `education.history[].institution`   | Direct mapping                                 |
+| Study Area              | `education[].area`            | `education.history[].area`          | Direct mapping                                 |
+| Degree Type             | `education[].studyType`       | `education.history[].studyType`     | Direct mapping                                 |
+| Start Date              | `education[].startDate`       | `education.history[].start`         | Field name differs                             |
+| End Date                | `education[].endDate`         | `education.history[].end`           | Field name differs                             |
+| GPA/Grade               | `education[].score`           | `education.history[].grade`         | Field name differs: score vs grade             |
+| Courses                 | `education[].courses[]`       | `education.history[].curriculum[]`  | Field name differs: courses vs curriculum      |
+| Institution URL         | `education[].url`             | `education.history[].url`           | Direct mapping                                 |
+| **Projects**            |
+| Projects Section        | `projects[]`                  | `projects[]`                        | Both top-level; structure differs              |
+| Project Name            | `projects[].name`             | `projects[].title`                  | Field name differs: name vs title              |
+| Description             | `projects[].description`      | `projects[].description`            | Direct mapping                                 |
+| Project URL             | `projects[].url`              | `projects[].url`                    | Direct mapping                                 |
+| Start Date              | `projects[].startDate`        | `projects[].start`                  | Field name differs                             |
+| End Date                | `projects[].endDate`          | `projects[].end`                    | Field name differs                             |
+| Highlights              | `projects[].highlights[]`     | `projects[].highlights[]`           | Direct mapping                                 |
+| Project Role            | N/A                           | `projects[].role`                   | FRESH-specific                                 |
+| Project Category        | N/A                           | `projects[].category`               | FRESH-specific                                 |
+| Repository URL          | N/A                           | `projects[].repo`                   | FRESH-specific                                 |
+| Media/Screenshots       | N/A                           | `projects[].media[]`                | FRESH-specific                                 |
+| Keywords                | N/A                           | `projects[].keywords[]`             | FRESH-specific                                 |
+| **Skills**              |
+| Skills Section          | `skills[]`                    | `skills.sets[]` & `skills.list[]`   | JRS: flat array; FRESH: structured sets        |
+| Skill Name              | `skills[].name`               | `skills.sets[].name` (category)     | FRESH groups into categories                   |
+| Skill Level             | `skills[].level`              | `skills.sets[].level`               | Direct mapping                                 |
+| Keywords                | `skills[].keywords[]`         | `skills.sets[].skills[]`            | Field name differs                             |
+| **Volunteer Work**      |
+| Volunteer Section       | `volunteer[]`                 | `service.history[]`                 | JRS: volunteer; FRESH: service                 |
+| Organization            | `volunteer[].organization`    | `service.history[].organization`    | Direct mapping                                 |
+| Position                | `volunteer[].position`        | `service.history[].position`        | Direct mapping                                 |
+| URL                     | `volunteer[].url`             | `service.history[].url`             | Direct mapping                                 |
+| Start Date              | `volunteer[].startDate`       | `service.history[].start`           | Field name differs                             |
+| End Date                | `volunteer[].endDate`         | `service.history[].end`             | Field name differs                             |
+| Summary                 | `volunteer[].summary`         | `service.history[].summary`         | Direct mapping                                 |
+| Highlights              | `volunteer[].highlights[]`    | `service.history[].highlights[]`    | Direct mapping                                 |
+| **Awards**              |
+| Awards Section          | `awards[]`                    | `recognition[]`                     | Section name differs                           |
+| Award Title             | `awards[].title`              | `recognition[].title`               | Direct mapping                                 |
+| Date                    | `awards[].date`               | `recognition[].date`                | Direct mapping                                 |
+| Awarder/From            | `awards[].awarder`            | `recognition[].from`                | Field name differs: awarder vs from            |
+| Summary                 | `awards[].summary`            | `recognition[].summary`             | Direct mapping                                 |
+| Award Type              | N/A                           | `recognition[].flavor`              | FRESH-specific                                 |
+| Event                   | N/A                           | `recognition[].event`               | FRESH-specific                                 |
+| **Publications**        |
+| Publications Section    | `publications[]`              | `writing[]`                         | Section name differs                           |
+| Publication Name        | `publications[].name`         | `writing[].title`                   | Field name differs: name vs title              |
+| Publisher               | `publications[].publisher`    | `writing[].publisher`               | Direct mapping                                 |
+| Release Date            | `publications[].releaseDate`  | `writing[].date`                    | Field name differs                             |
+| URL                     | `publications[].url`          | `writing[].url`                     | Direct mapping                                 |
+| Summary                 | `publications[].summary`      | `writing[].summary`                 | Direct mapping                                 |
+| Publication Type        | N/A                           | `writing[].flavor`                  | FRESH-specific                                 |
+| **Languages**           |
+| Languages Section       | `languages[]`                 | `languages[]`                       | Direct mapping                                 |
+| Language                | `languages[].language`        | `languages[].language`              | Direct mapping                                 |
+| Fluency                 | `languages[].fluency`         | `languages[].level`                 | Field name differs: fluency vs level           |
+| Years Experience        | N/A                           | `languages[].years`                 | FRESH-specific                                 |
+| **Interests**           |
+| Interests Section       | `interests[]`                 | `interests[]`                       | Direct mapping                                 |
+| Interest Name           | `interests[].name`            | `interests[].name`                  | Direct mapping                                 |
+| Keywords                | `interests[].keywords[]`      | `interests[].keywords[]`            | Direct mapping                                 |
+| Summary                 | N/A                           | `interests[].summary`               | FRESH-specific                                 |
+| **References**          |
+| References Section      | `references[]`                | `references[]`                      | Both have; FRESH more detailed                 |
+| Reference Name          | `references[].name`           | `references[].name`                 | Direct mapping                                 |
+| Reference Text          | `references[].reference`      | `references[].summary`              | Field name differs                             |
+| Reference Role          | N/A                           | `references[].role`                 | FRESH-specific                                 |
+| Category                | N/A                           | `references[].category`             | FRESH-specific                                 |
+| Private Flag            | N/A                           | `references[].private`              | FRESH-specific                                 |
+| Contact Info            | N/A                           | `references[].contact{}`            | FRESH-specific                                 |
+| **Certificates**        |
+| Certificates Section    | `certificates[]`              | N/A (use education)                 | JRS-specific; FRESH merges into education      |
+| Certificate Name        | `certificates[].name`         | N/A                                 | JRS-specific                                   |
+| Date                    | `certificates[].date`         | N/A                                 | JRS-specific                                   |
+| Issuer                  | `certificates[].issuer`       | N/A                                 | JRS-specific                                   |
+| **Metadata**            |
+| Meta Section            | `meta{}`                      | `meta{}`                            | Both have metadata                             |
+| Format/Version          | `meta.version`                | `meta.format`                       | Different purposes                             |
+| Last Modified           | `meta.lastModified`           | `meta.modified`                     | Field name differs                             |
+| Canonical URL           | `meta.canonical`              | N/A                                 | JRS-specific                                   |
 | **FRESH-Only Sections** |
-| Work Preferences | N/A | `disposition{}` | FRESH-specific: travel, remote, relocation |
-| Reading List | N/A | `reading[]` | FRESH-specific |
-| Speaking | N/A | `speaking[]` | FRESH-specific |
-| Governance | N/A | `governance[]` | FRESH-specific |
-| Work Samples | N/A | `samples[]` | FRESH-specific |
-| Testimonials | N/A | `testimonials[]` | FRESH-specific |
-| Extracurricular | N/A | `extracurricular[]` | FRESH-specific |
-| Affiliations | N/A | `affiliation.history[]` | FRESH-specific |
+| Work Preferences        | N/A                           | `disposition{}`                     | FRESH-specific: travel, remote, relocation     |
+| Reading List            | N/A                           | `reading[]`                         | FRESH-specific                                 |
+| Speaking                | N/A                           | `speaking[]`                        | FRESH-specific                                 |
+| Governance              | N/A                           | `governance[]`                      | FRESH-specific                                 |
+| Work Samples            | N/A                           | `samples[]`                         | FRESH-specific                                 |
+| Testimonials            | N/A                           | `testimonials[]`                    | FRESH-specific                                 |
+| Extracurricular         | N/A                           | `extracurricular[]`                 | FRESH-specific                                 |
+| Affiliations            | N/A                           | `affiliation.history[]`             | FRESH-specific                                 |
 
 ### 3.2 Conversion Rules & Data Loss Analysis
 
 #### 3.2.1 JSON Resume → FRESH Conversion
+
 **Converter:** `toFRESH()` from fresh-jrs-converter
 
 **Field Mappings:**
+
 ```javascript
 // Basics → Info/Contact
 JRS.basics.label      → FRESH.info.label
@@ -766,14 +806,17 @@ JRS.education[].courses → FRESH.education.history[].curriculum
 ```
 
 **Data Loss:** MINIMAL
+
 - All JSON Resume fields have FRESH equivalents
 - FRESH is a superset, so no data is lost
 - Additional FRESH fields remain empty
 
 #### 3.2.2 FRESH → JSON Resume Conversion
+
 **Converter:** `toJRS()` from fresh-jrs-converter
 
 **Field Mappings:**
+
 ```javascript
 // Info/Contact → Basics
 FRESH.info.brief      → JRS.basics.summary
@@ -795,6 +838,7 @@ FRESH.education[].curriculum  → JRS.education[].courses
 ```
 
 **Data Loss:** MODERATE
+
 - FRESH-specific sections lost: `disposition`, `reading`, `speaking`, `governance`, `samples`, `testimonials`, `extracurricular`, `affiliation`
 - FRESH-specific fields lost: `employment.keywords`, `projects.role`, `projects.category`, `projects.repo`, `projects.media`
 - Workaround: Use `edge: true` option to preserve `projects` and `meta` for JSON Resume v1.0.0-candidate
@@ -802,26 +846,31 @@ FRESH.education[].curriculum  → JRS.education[].courses
 ### 3.3 Edge Cases & Incompatibilities
 
 #### Date Format Handling
+
 - **JSON Resume:** ISO 8601 (YYYY-MM-DD), supports partial dates (YYYY, YYYY-MM)
 - **FRESH:** ISO 8601, also supports "current" for ongoing positions
 - **CFRS Strategy:** Support all formats; normalize to ISO 8601; use null/empty for current positions
 
 #### Current Position Detection
+
 - **JSON Resume:** Empty `endDate` or omitted field indicates current position
 - **FRESH:** `end: "current"` explicitly marks current position
 - **CFRS Strategy:** Accept both; normalize to consistent internal representation
 
 #### Skills Structure
+
 - **JSON Resume:** Flat array with name/level/keywords
 - **FRESH:** Nested structure with sets (categories) and list (flat skills)
 - **CFRS Strategy:** Support both; provide bidirectional transformation
 
 #### Certificates Handling
+
 - **JSON Resume:** Dedicated `certificates[]` section
 - **FRESH:** No dedicated section; merge into `education` or `recognition`
 - **CFRS Strategy:** Preserve certificates as distinct; map to education.certifications or recognition based on context
 
 #### Name Structure
+
 - **JSON Resume:** Single `basics.name` field (full name as string)
 - **FRESH:** Single `name` field (top-level, full name as string)
 - **Both:** Don't enforce firstName/lastName split (cultural sensitivity)
@@ -834,12 +883,15 @@ FRESH.education[].curriculum  → JRS.education[].courses
 ### 4.1 ATS Parsing Standards
 
 #### 4.1.1 File Format Requirements
+
 **Optimal Formats:**
+
 - **Primary:** .docx (Word document) - most reliable parsing
 - **Secondary:** .pdf - widely supported by modern ATS
 - **Avoid:** .pdf with embedded images/graphics - parsing errors
 
 **CFRS Recommendation:**
+
 - Export primarily as .docx for ATS submission
 - Offer .pdf for human review and archival
 - HTML/web version for online profiles
@@ -860,6 +912,7 @@ FRESH.education[].curriculum  → JRS.education[].courses
 | Projects | "Projects" | "Portfolio", "Work Samples" |
 
 **CFRS Implementation:**
+
 - Map all schema sections to ATS-friendly headings
 - Provide heading customization with ATS-safe defaults
 - Warn users when using non-standard headings
@@ -867,6 +920,7 @@ FRESH.education[].curriculum  → JRS.education[].courses
 #### 4.1.3 Formatting Rules
 
 **Critical ATS Requirements:**
+
 ```yaml
 Contact Information:
   - Place OUTSIDE header/footer (25% parsing failure in headers)
@@ -902,6 +956,7 @@ Sections & Content:
 ```
 
 **CFRS Theming Requirements:**
+
 - ATS-safe theme as default
 - Single-column layout enforced for ATS themes
 - Contact info always in document body
@@ -911,12 +966,14 @@ Sections & Content:
 #### 4.1.4 Keyword Optimization
 
 **ATS Keyword Filtering (2025 State of Job Search):**
+
 - 99.7% of recruiters use keyword filters
 - Keywords must match job description
 - Include skills, technologies, certifications
 - Use exact terminology from job posting
 
 **CFRS Keyword Strategy:**
+
 ```yaml
 Keyword Placement:
   - Skills section: Exact technology names
@@ -937,6 +994,7 @@ Technical Keywords:
 ```
 
 **CFRS Features:**
+
 - Job description analyzer (extract keywords)
 - Keyword density checker
 - Skill matching score vs. job posting
@@ -945,6 +1003,7 @@ Technical Keywords:
 ### 4.2 ATS Field Extraction Standards
 
 #### Contact Information Extraction
+
 ```yaml
 Name Extraction:
   - First word(s) at top of document
@@ -968,6 +1027,7 @@ Location Extraction:
 ```
 
 #### Work Experience Extraction
+
 ```yaml
 Position Title:
   - First line of experience entry
@@ -992,6 +1052,7 @@ Responsibilities:
 ```
 
 #### Education Extraction
+
 ```yaml
 Degree:
   - Full degree name: "Bachelor of Science", not "BS"
@@ -1008,6 +1069,7 @@ Graduation Date:
 ```
 
 #### Skills Extraction
+
 ```yaml
 Skills Section:
   - Separate section labeled "Skills" or "Technical Skills"
@@ -1023,6 +1085,7 @@ Proficiency Levels:
 ### 4.3 CFRS ATS Compliance Checklist
 
 **Pre-Export Validation:**
+
 - [ ] Contact info in document body (not header/footer)
 - [ ] Standard section headings used
 - [ ] Reverse chronological order
@@ -1030,7 +1093,7 @@ Proficiency Levels:
 - [ ] No tables, columns, or text boxes
 - [ ] ATS-safe fonts (Arial, Calibri, Georgia)
 - [ ] 11-12pt body text, 14-16pt headers
-- [ ] Simple bullet points (•, -, *)
+- [ ] Simple bullet points (•, -, \*)
 - [ ] No images or graphics
 - [ ] Keywords from job description included
 - [ ] File format: .docx or .pdf (non-image)
@@ -1039,6 +1102,7 @@ Proficiency Levels:
 - [ ] Quantified achievements (numbers, percentages)
 
 **CFRS Implementation:**
+
 - ATS compliance score (0-100%)
 - Real-time validation during editing
 - Pre-export ATS check with warnings
@@ -1052,20 +1116,24 @@ Proficiency Levels:
 ### 5.1 Extension Strategy for Custom Fields
 
 #### Namespaced Extensions
+
 **Problem:** Need custom fields without breaking compatibility
 
 **Solution:** Use namespace prefixes for extensions
 
 **JSON Resume Approach:**
+
 - Schema allows `"additionalProperties": true` in most sections
 - No official extension convention documented
 - Community uses vendor prefixes informally
 
 **FRESH Approach:**
+
 - Explicit support for additional properties
 - More flexible schema structure
 
 **CFRS Extension Standard:**
+
 ```json
 {
   "x_cfrs_custom": "value",
@@ -1078,6 +1146,7 @@ Proficiency Levels:
 ```
 
 **Namespace Rules:**
+
 1. All custom fields prefixed with `x_cfrs_`
 2. Vendor-specific: `x_vendor_fieldname`
 3. Experimental: `x_experimental_feature`
@@ -1085,6 +1154,7 @@ Proficiency Levels:
 5. Document all custom fields in CFRS schema
 
 **Benefits:**
+
 - Backward compatible with JSON Resume & FRESH
 - Clear identification of custom fields
 - No naming conflicts
@@ -1093,6 +1163,7 @@ Proficiency Levels:
 ### 5.2 Privacy & Redaction Fields
 
 **CFRS Privacy Model:**
+
 ```json
 {
   "basics": {
@@ -1108,6 +1179,7 @@ Proficiency Levels:
 ```
 
 **Privacy Levels:**
+
 - `public` - Always visible
 - `private` - Never exported (local only)
 - `redacted` - Replaced with placeholder (e.g., "[email protected]")
@@ -1115,6 +1187,7 @@ Proficiency Levels:
 - `initials_only` - Name shows "J.D." instead of "John Doe"
 
 **Implementation:**
+
 - Privacy settings per field
 - One-click redaction presets (networking, public web, recruiter)
 - Export-time stripping of private fields
@@ -1130,6 +1203,7 @@ Proficiency Levels:
    - PATCH: Bug fixes, clarifications
 
 2. **Version Declaration:**
+
 ```json
 {
   "meta": {
@@ -1177,6 +1251,7 @@ Proficiency Levels:
    - Privacy field stripping verification
 
 **CFRS Validation Levels:**
+
 ```javascript
 {
   "strict": true,     // Fail on any violation
@@ -1211,6 +1286,7 @@ Proficiency Levels:
    - International phone number support (+country code)
 
 4. **Language Variations:**
+
 ```json
 {
   "basics": {
@@ -1243,6 +1319,7 @@ Proficiency Levels:
    - Reference contact info matches format standards
 
 3. **Completeness Scoring:**
+
 ```javascript
 {
   "completeness": {
@@ -1275,6 +1352,7 @@ Proficiency Levels:
 ### 6.1 Core Schema Design
 
 **Base CFRS Schema Structure:**
+
 ```json
 {
   "$schema": "https://json-schema.org/draft-07/schema#",
@@ -1379,6 +1457,7 @@ Proficiency Levels:
 ```
 
 **Key Design Decisions:**
+
 1. **JSON Resume as Base:** Use JRS structure as foundation (wider adoption)
 2. **FRESH Features via Extensions:** Add FRESH-specific fields with `x_cfrs_` prefix
 3. **Lossless Conversion:** Preserve all data from both formats
@@ -1388,6 +1467,7 @@ Proficiency Levels:
 ### 6.2 Converter Architecture
 
 **Bidirectional Conversion Flow:**
+
 ```
 External Format (JRS/FRESH/LinkedIn/MD)
   ↓ [Import]
@@ -1414,36 +1494,38 @@ Target Format (JRS/FRESH/PDF/DOCX/HTML)
    - `exportToHtml()` - CFRS → HTML
 
 3. **Mapping Layer:**
+
 ```javascript
 const fieldMappings = {
   jrs_to_cfrs: {
     'basics.summary': 'basics.summary',
     'basics.picture': 'basics.image',
     'work[].name': 'work[].name',
-    'education[].gpa': 'education[].score'
+    'education[].gpa': 'education[].score',
   },
 
   fresh_to_cfrs: {
     'info.brief': 'basics.summary',
     'info.image': 'basics.image',
     'employment.history[].employer': 'work[].name',
-    'education.history[].grade': 'education[].score'
+    'education.history[].grade': 'education[].score',
   },
 
   cfrs_to_jrs: {
     'basics.image': 'basics.picture',
-    'x_cfrs_keywords': null  // Strip extensions
+    x_cfrs_keywords: null, // Strip extensions
   },
 
   cfrs_to_fresh: {
     'basics.summary': 'info.brief',
     'basics.image': 'info.image',
-    'work[].name': 'employment.history[].employer'
-  }
+    'work[].name': 'employment.history[].employer',
+  },
 };
 ```
 
 4. **Validation Pipeline:**
+
 ```javascript
 function validateAndConvert(data, sourceFormat, targetFormat) {
   // Step 1: Validate source format
@@ -1478,6 +1560,7 @@ function validateAndConvert(data, sourceFormat, targetFormat) {
 ### 6.3 Data Transformation Rules
 
 **Field Mapping Priority:**
+
 1. **Direct Mapping:** Field exists in both formats with same meaning
 2. **Renamed Field:** Field exists but with different name
 3. **Structural Mapping:** Field exists but in different structure (e.g., flat vs nested)
@@ -1487,6 +1570,7 @@ function validateAndConvert(data, sourceFormat, targetFormat) {
 **Transformation Examples:**
 
 1. **Date Normalization:**
+
 ```javascript
 function normalizeDate(date, sourceFormat) {
   if (!date) return null;
@@ -1495,8 +1579,8 @@ function normalizeDate(date, sourceFormat) {
   if (date === 'current') return null;
 
   // Partial dates → ISO 8601
-  if (/^\d{4}$/.test(date)) return `${date}-01-01`;  // Year only
-  if (/^\d{4}-\d{2}$/.test(date)) return `${date}-01`;  // Year-Month
+  if (/^\d{4}$/.test(date)) return `${date}-01-01`; // Year only
+  if (/^\d{4}-\d{2}$/.test(date)) return `${date}-01`; // Year-Month
 
   // Full ISO 8601
   return date;
@@ -1504,14 +1588,15 @@ function normalizeDate(date, sourceFormat) {
 ```
 
 2. **Skills Structure Transformation:**
+
 ```javascript
 // JRS flat array → CFRS (maintain structure)
 function importJRSSkills(jrsSkills) {
-  return jrsSkills.map(skill => ({
+  return jrsSkills.map((skill) => ({
     name: skill.name,
     level: skill.level,
     keywords: skill.keywords || [],
-    x_cfrs_category: 'General'  // Extension for future FRESH export
+    x_cfrs_category: 'General', // Extension for future FRESH export
   }));
 }
 
@@ -1519,13 +1604,13 @@ function importJRSSkills(jrsSkills) {
 function importFRESHSkills(freshSkills) {
   const flatSkills = [];
 
-  freshSkills.sets.forEach(set => {
-    set.skills.forEach(skill => {
+  freshSkills.sets.forEach((set) => {
+    set.skills.forEach((skill) => {
       flatSkills.push({
         name: skill,
         level: set.level,
         keywords: [],
-        x_cfrs_category: set.name
+        x_cfrs_category: set.name,
       });
     });
   });
@@ -1535,6 +1620,7 @@ function importFRESHSkills(freshSkills) {
 ```
 
 3. **Contact Info Restructuring:**
+
 ```javascript
 // FRESH separate contact object → JRS basics
 function exportToJRSBasics(cfrsBasics, cfrsContact) {
@@ -1547,7 +1633,7 @@ function exportToJRSBasics(cfrsBasics, cfrsContact) {
     url: cfrsContact?.website || cfrsBasics.url,
     summary: cfrsBasics.summary,
     location: cfrsBasics.location,
-    profiles: cfrsBasics.profiles
+    profiles: cfrsBasics.profiles,
   };
 }
 ```
@@ -1555,6 +1641,7 @@ function exportToJRSBasics(cfrsBasics, cfrsContact) {
 ### 6.4 Privacy & Redaction Implementation
 
 **Redaction Presets:**
+
 ```javascript
 const redactionPresets = {
   public_web: {
@@ -1562,12 +1649,12 @@ const redactionPresets = {
     'basics.email': '[email protected]',
     'basics.location.address': null,
     'basics.location.postalCode': null,
-    'references[].contact': null
+    'references[].contact': null,
   },
 
   networking: {
     'basics.location.address': null,
-    'basics.location.postalCode': null
+    'basics.location.postalCode': null,
   },
 
   recruiter: {
@@ -1579,15 +1666,15 @@ const redactionPresets = {
     'basics.email': '[REDACTED]',
     'basics.location': { city: 'City', region: 'State' },
     'basics.name': 'J.D.',
-    'references': []
-  }
+    references: [],
+  },
 };
 
 function applyRedaction(resume, preset) {
   const redactionRules = redactionPresets[preset];
-  const redacted = JSON.parse(JSON.stringify(resume));  // Deep clone
+  const redacted = JSON.parse(JSON.stringify(resume)); // Deep clone
 
-  Object.keys(redactionRules).forEach(path => {
+  Object.keys(redactionRules).forEach((path) => {
     setNestedValue(redacted, path, redactionRules[path]);
   });
 
@@ -1598,25 +1685,26 @@ function applyRedaction(resume, preset) {
 ### 6.5 ATS Export Optimization
 
 **ATS-Safe Theme Requirements:**
+
 ```javascript
 const atsThemeConfig = {
   layout: {
-    columns: 1,  // Single column only
-    margins: { top: 1, right: 1, bottom: 1, left: 1 },  // inches
-    headerFooter: false  // No header/footer for critical data
+    columns: 1, // Single column only
+    margins: { top: 1, right: 1, bottom: 1, left: 1 }, // inches
+    headerFooter: false, // No header/footer for critical data
   },
 
   typography: {
     fontFamily: ['Calibri', 'Arial', 'Georgia'],
-    bodySize: 11,  // 11-12pt
-    headingSize: 14,  // 14-16pt
-    lineHeight: 1.15
+    bodySize: 11, // 11-12pt
+    headingSize: 14, // 14-16pt
+    lineHeight: 1.15,
   },
 
   sections: {
     contactInfo: {
-      position: 'body',  // NOT in header
-      format: 'Name\nPhone | Email | Location\nLinkedIn'
+      position: 'body', // NOT in header
+      format: 'Name\nPhone | Email | Location\nLinkedIn',
     },
 
     sectionHeadings: {
@@ -1626,15 +1714,15 @@ const atsThemeConfig = {
       projects: 'PROJECTS',
       volunteer: 'VOLUNTEER EXPERIENCE',
       awards: 'AWARDS',
-      certifications: 'CERTIFICATIONS'
+      certifications: 'CERTIFICATIONS',
     },
 
-    dateFormat: 'Month YYYY',  // e.g., "January 2023"
+    dateFormat: 'Month YYYY', // e.g., "January 2023"
 
     bullets: {
-      style: 'simple',  // • or - or *
-      action_verbs: true  // Start with verbs
-    }
+      style: 'simple', // • or - or *
+      action_verbs: true, // Start with verbs
+    },
   },
 
   formatting: {
@@ -1642,12 +1730,13 @@ const atsThemeConfig = {
     textBoxes: false,
     images: false,
     graphics: false,
-    hyperlinks: 'text'  // Show URL as text, not hidden hyperlink
-  }
+    hyperlinks: 'text', // Show URL as text, not hidden hyperlink
+  },
 };
 ```
 
 **ATS Validation Rules:**
+
 ```javascript
 function validateATSCompliance(resume, theme) {
   const issues = [];
@@ -1690,7 +1779,7 @@ function validateATSCompliance(resume, theme) {
     score: calculateATSScore(issues, warnings),
     issues,
     warnings,
-    compliant: issues.length === 0
+    compliant: issues.length === 0,
   };
 }
 ```
@@ -1702,11 +1791,13 @@ function validateATSCompliance(resume, theme) {
 ### 7.1 Schema Compatibility Metrics
 
 **Conversion Accuracy:**
+
 - **Target:** 100% field preservation for JRS ↔ CFRS ↔ JRS
 - **Target:** 95% field preservation for FRESH → CFRS → FRESH
 - **Target:** 90% field preservation for FRESH → CFRS → JRS
 
 **Validation Coverage:**
+
 - **Target:** 100% of required fields validated
 - **Target:** 100% of standard formats supported (email, URL, phone, date)
 - **Target:** 0 data loss for standard fields
@@ -1714,11 +1805,13 @@ function validateATSCompliance(resume, theme) {
 ### 7.2 ATS Compatibility Metrics
 
 **Parsing Success Rate:**
+
 - **Target:** 95% successful parsing by top 5 ATS systems (Workday, Taleo, Greenhouse, iCIMS, Lever)
 - **Target:** 90% accurate field extraction
 - **Target:** 100% contact info extraction from body (not header/footer)
 
 **ATS Score Calculation:**
+
 ```javascript
 function calculateATSScore(resume, theme) {
   let score = 100;
@@ -1747,21 +1840,25 @@ function calculateATSScore(resume, theme) {
 ### 7.3 Testing Strategy
 
 **Golden Fixture Tests:**
+
 1. **Source:** Sample resumes in JRS, FRESH, LinkedIn JSON formats
 2. **Process:** Import → Validate → Edit → Export → Re-import
 3. **Assertion:** Verify data integrity at each step
 
 **Snapshot Tests:**
+
 1. **Schema Snapshots:** Detect unintended schema changes
 2. **Mapping Snapshots:** Verify field mappings remain consistent
 3. **Output Snapshots:** Check rendered output consistency
 
 **ATS Validation Tests:**
+
 1. **Headless Browser:** Parse exported docx/pdf programmatically
 2. **Field Extraction:** Verify all fields extracted correctly
 3. **Format Compliance:** Check against ATS formatting rules
 
 **Integration Tests:**
+
 1. **Round-Trip Conversion:** JRS → CFRS → JRS (verify equality)
 2. **Cross-Format:** FRESH → CFRS → JRS (verify expected mappings)
 3. **Extension Preservation:** CFRS with extensions → export → import (verify preservation)
@@ -1847,31 +1944,35 @@ function calculateATSScore(resume, theme) {
 ### 9.1 Reference URLs
 
 **JSON Resume:**
+
 - Official Schema: https://jsonresume.org/schema
 - GitHub Repository: https://github.com/jsonresume/resume-schema
 - NPM Package: https://www.npmjs.com/package/@jsonresume/schema
 - Schema File: https://github.com/jsonresume/resume-schema/blob/master/schema.json
 
 **FRESH:**
+
 - Official Repository: https://github.com/fresh-standard/fresh-resume-schema
 - Schema File: https://raw.githubusercontent.com/fresh-standard/fresh-resume-schema/master/schema/fresh-resume-schema_1.0.0-beta.json
 - Example Resume: https://gist.github.com/hacksalot/cff53019c09949ee82f4
 - NPM Package: https://www.npmjs.com/package/fresh-resume-schema
 
 **Converters:**
+
 - FRESH-JRS Converter: https://github.com/fresh-standard/fresh-jrs-converter
 - HackMyResume: https://github.com/hacksalot/HackMyResume
 
 **ATS Resources:**
+
 - TopResume ATS Guide: https://topresume.com/career-advice/what-is-an-ats-resume
 - Jobscan ATS Formatting: https://www.jobscan.co/blog/ats-formatting-mistakes/
 - MyPerfectResume ATS Checker: https://www.myperfectresume.com/resume/ats-resume-checker
 
 ### 9.2 Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | 2025-10-03 | Initial research report |
+| Version | Date       | Changes                 |
+| ------- | ---------- | ----------------------- |
+| 1.0.0   | 2025-10-03 | Initial research report |
 
 ### 9.3 Contributors
 
@@ -1883,4 +1984,4 @@ function calculateATSScore(resume, theme) {
 
 **End of Report**
 
-*This report is authoritative for CFRS schema standards and should be referenced for all schema-related decisions.*
+_This report is authoritative for CFRS schema standards and should be referenced for all schema-related decisions._
