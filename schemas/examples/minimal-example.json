@@ -1,0 +1,117 @@
+{
+  "$schema": "https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json",
+  "basics": {
+    "name": "Jane Doe",
+    "label": "Software Engineer",
+    "email": "jane.doe@example.com",
+    "phone": "+1-555-123-4567",
+    "url": "https://janedoe.dev",
+    "summary": "Passionate software engineer with 5 years of experience building scalable web applications. Specializing in modern JavaScript frameworks and cloud architecture.",
+    "location": {
+      "city": "San Francisco",
+      "region": "CA",
+      "countryCode": "US"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "janedoe",
+        "url": "https://linkedin.com/in/janedoe"
+      },
+      {
+        "network": "GitHub",
+        "username": "jdoe",
+        "url": "https://github.com/jdoe"
+      }
+    ],
+    "x_cfrs_locale": "en-US"
+  },
+  "work": [
+    {
+      "name": "TechCorp Inc.",
+      "position": "Senior Software Engineer",
+      "url": "https://techcorp.com",
+      "startDate": "2021-03",
+      "summary": "Lead development of customer-facing web applications serving 2M+ users.",
+      "highlights": [
+        "Reduced page load time by 60% through code splitting and lazy loading",
+        "Mentored 5 junior developers and conducted weekly code reviews",
+        "Architected microservices migration reducing infrastructure costs by 30%"
+      ],
+      "location": "San Francisco, CA",
+      "x_cfrs_employment_type": "full-time",
+      "x_cfrs_remote": false,
+      "x_cfrs_keywords": ["React", "TypeScript", "AWS", "Node.js", "GraphQL"]
+    },
+    {
+      "name": "StartupXYZ",
+      "position": "Full Stack Developer",
+      "url": "https://startupxyz.com",
+      "startDate": "2019-06",
+      "endDate": "2021-02",
+      "summary": "Built and maintained multiple web applications from concept to production.",
+      "highlights": [
+        "Developed real-time collaboration features using WebSockets",
+        "Implemented CI/CD pipeline reducing deployment time by 80%",
+        "Contributed to 10+ open source libraries used by the team"
+      ],
+      "location": "Remote",
+      "x_cfrs_employment_type": "full-time",
+      "x_cfrs_remote": true,
+      "x_cfrs_keywords": ["Vue.js", "Python", "PostgreSQL", "Docker", "Kubernetes"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of California, Berkeley",
+      "url": "https://berkeley.edu",
+      "area": "Computer Science",
+      "studyType": "Bachelor of Science",
+      "startDate": "2015-09",
+      "endDate": "2019-05",
+      "score": "3.8/4.0",
+      "courses": [
+        "Data Structures and Algorithms",
+        "Database Systems",
+        "Computer Networks",
+        "Software Engineering"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Frontend Development",
+      "level": "expert",
+      "keywords": ["React", "Vue.js", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"],
+      "x_cfrs_years": 5,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Backend Development",
+      "level": "advanced",
+      "keywords": ["Node.js", "Python", "GraphQL", "REST APIs", "PostgreSQL", "MongoDB"],
+      "x_cfrs_years": 4,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Cloud & DevOps",
+      "level": "advanced",
+      "keywords": ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform"],
+      "x_cfrs_years": 3,
+      "x_cfrs_category": "technical"
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "native-or-bilingual"
+    }
+  ],
+  "meta": {
+    "version": "1.0",
+    "lastModified": "2025-10-03T00:00:00Z",
+    "x_cfrs_theme": "modern",
+    "x_cfrs_ats_optimized": true,
+    "x_cfrs_redaction_profile": "none"
+  }
+}

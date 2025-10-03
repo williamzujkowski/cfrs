@@ -1,0 +1,426 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CFRS to FRESH Mapping",
+  "version": "1.0.0",
+  "description": "Bidirectional mapping specification between CloudFlow Resume Schema (CFRS) v1.0.0 and FRESH Resume Schema. FRESH is an alternative resume schema with different structure and terminology.",
+  "compatibility": {
+    "cfrs_version": "1.0.0",
+    "fresh_version": "0.9.0",
+    "backward_compatible": true,
+    "forward_compatible": true,
+    "lossless_round_trip": false,
+    "notes": "FRESH and CFRS have different philosophies. Some semantic mapping required."
+  },
+  "field_mappings": {
+    "name_and_contact": {
+      "cfrs_paths": ["$.basics.name", "$.basics.email", "$.basics.phone", "$.basics.url"],
+      "fresh_path": "$.name",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.name": "$.basics.name",
+          "$.contact.email": "$.basics.email",
+          "$.contact.phone": "$.basics.phone",
+          "$.contact.website": "$.basics.url"
+        },
+        "fresh_to_cfrs": {
+          "$.basics.name": "$.name",
+          "$.basics.email": "$.contact.email",
+          "$.basics.phone": "$.contact.phone",
+          "$.basics.url": "$.contact.website"
+        }
+      }
+    },
+    "info_and_label": {
+      "cfrs_paths": ["$.basics.label", "$.basics.summary"],
+      "fresh_path": "$.info",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.info.label": "$.basics.label",
+          "$.info.brief": "$.basics.summary",
+          "$.info.image": "$.basics.image"
+        },
+        "fresh_to_cfrs": {
+          "$.basics.label": "$.info.label",
+          "$.basics.summary": "$.info.brief",
+          "$.basics.image": "$.info.image"
+        }
+      }
+    },
+    "location": {
+      "cfrs_path": "$.basics.location",
+      "fresh_path": "$.location",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.location.address": "$.basics.location.address",
+          "$.location.city": "$.basics.location.city",
+          "$.location.region": "$.basics.location.region",
+          "$.location.code": "$.basics.location.postalCode",
+          "$.location.country": "$.basics.location.countryCode"
+        },
+        "fresh_to_cfrs": {
+          "$.basics.location.address": "$.location.address",
+          "$.basics.location.city": "$.location.city",
+          "$.basics.location.region": "$.location.region",
+          "$.basics.location.postalCode": "$.location.code",
+          "$.basics.location.countryCode": "$.location.country"
+        }
+      }
+    },
+    "social_profiles": {
+      "cfrs_path": "$.basics.profiles[*]",
+      "fresh_path": "$.social[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.social[*].label": "$.basics.profiles[*].network",
+          "$.social[*].network": "$.basics.profiles[*].network (lowercase)",
+          "$.social[*].user": "$.basics.profiles[*].username",
+          "$.social[*].url": "$.basics.profiles[*].url"
+        },
+        "fresh_to_cfrs": {
+          "$.basics.profiles[*].network": "$.social[*].label",
+          "$.basics.profiles[*].username": "$.social[*].user",
+          "$.basics.profiles[*].url": "$.social[*].url"
+        }
+      }
+    },
+    "employment": {
+      "cfrs_path": "$.work[*]",
+      "fresh_path": "$.employment.history[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.employment.history[*].employer": "$.work[*].name",
+          "$.employment.history[*].position": "$.work[*].position",
+          "$.employment.history[*].url": "$.work[*].url",
+          "$.employment.history[*].start": "$.work[*].startDate",
+          "$.employment.history[*].end": "$.work[*].endDate",
+          "$.employment.history[*].summary": "$.work[*].summary",
+          "$.employment.history[*].highlights": "$.work[*].highlights",
+          "$.employment.history[*].location": "$.work[*].location"
+        },
+        "fresh_to_cfrs": {
+          "$.work[*].name": "$.employment.history[*].employer",
+          "$.work[*].position": "$.employment.history[*].position",
+          "$.work[*].url": "$.employment.history[*].url",
+          "$.work[*].startDate": "$.employment.history[*].start",
+          "$.work[*].endDate": "$.employment.history[*].end",
+          "$.work[*].summary": "$.employment.history[*].summary",
+          "$.work[*].highlights": "$.employment.history[*].highlights",
+          "$.work[*].location": "$.employment.history[*].location"
+        }
+      },
+      "notes": "FRESH uses 'employer' instead of 'name', and nests employment under 'employment.history'"
+    },
+    "education": {
+      "cfrs_path": "$.education[*]",
+      "fresh_path": "$.education.history[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.education.history[*].institution": "$.education[*].institution",
+          "$.education.history[*].url": "$.education[*].url",
+          "$.education.history[*].area": "$.education[*].area",
+          "$.education.history[*].studyType": "$.education[*].studyType",
+          "$.education.history[*].start": "$.education[*].startDate",
+          "$.education.history[*].end": "$.education[*].endDate",
+          "$.education.history[*].grade": "$.education[*].score",
+          "$.education.history[*].curriculum": "$.education[*].courses"
+        },
+        "fresh_to_cfrs": {
+          "$.education[*].institution": "$.education.history[*].institution",
+          "$.education[*].url": "$.education.history[*].url",
+          "$.education[*].area": "$.education.history[*].area",
+          "$.education[*].studyType": "$.education.history[*].studyType",
+          "$.education[*].startDate": "$.education.history[*].start",
+          "$.education[*].endDate": "$.education.history[*].end",
+          "$.education[*].score": "$.education.history[*].grade",
+          "$.education[*].courses": "$.education.history[*].curriculum"
+        }
+      },
+      "notes": "FRESH uses 'grade' instead of 'score', 'curriculum' instead of 'courses'"
+    },
+    "skills": {
+      "cfrs_path": "$.skills[*]",
+      "fresh_path": "$.skills.sets[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.skills.sets[*].name": "$.skills[*].name",
+          "$.skills.sets[*].level": "$.skills[*].level",
+          "$.skills.sets[*].skills": "$.skills[*].keywords"
+        },
+        "fresh_to_cfrs": {
+          "$.skills[*].name": "$.skills.sets[*].name",
+          "$.skills[*].level": "$.skills.sets[*].level",
+          "$.skills[*].keywords": "$.skills.sets[*].skills"
+        }
+      },
+      "notes": "FRESH groups skills under 'skills.sets', uses 'skills' array instead of 'keywords'"
+    },
+    "projects": {
+      "cfrs_path": "$.projects[*]",
+      "fresh_path": "$.projects[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.projects[*].title": "$.projects[*].name",
+          "$.projects[*].category": "$.projects[*].type",
+          "$.projects[*].role": "$.projects[*].roles[0] (first role)",
+          "$.projects[*].url": "$.projects[*].url",
+          "$.projects[*].start": "$.projects[*].startDate",
+          "$.projects[*].end": "$.projects[*].endDate",
+          "$.projects[*].description": "$.projects[*].description",
+          "$.projects[*].summary": "$.projects[*].highlights (joined)",
+          "$.projects[*].keywords": "$.projects[*].keywords"
+        },
+        "fresh_to_cfrs": {
+          "$.projects[*].name": "$.projects[*].title",
+          "$.projects[*].type": "$.projects[*].category",
+          "$.projects[*].roles": "[$.projects[*].role] (as array)",
+          "$.projects[*].url": "$.projects[*].url",
+          "$.projects[*].startDate": "$.projects[*].start",
+          "$.projects[*].endDate": "$.projects[*].end",
+          "$.projects[*].description": "$.projects[*].description",
+          "$.projects[*].highlights": "$.projects[*].summary (split or as array)",
+          "$.projects[*].keywords": "$.projects[*].keywords"
+        }
+      },
+      "notes": "FRESH uses 'title' instead of 'name', single 'role' instead of 'roles' array"
+    },
+    "service_volunteer": {
+      "cfrs_path": "$.volunteer[*]",
+      "fresh_path": "$.service.history[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.service.history[*].organization": "$.volunteer[*].organization",
+          "$.service.history[*].position": "$.volunteer[*].position",
+          "$.service.history[*].url": "$.volunteer[*].url",
+          "$.service.history[*].start": "$.volunteer[*].startDate",
+          "$.service.history[*].end": "$.volunteer[*].endDate",
+          "$.service.history[*].summary": "$.volunteer[*].summary",
+          "$.service.history[*].highlights": "$.volunteer[*].highlights"
+        },
+        "fresh_to_cfrs": {
+          "$.volunteer[*].organization": "$.service.history[*].organization",
+          "$.volunteer[*].position": "$.service.history[*].position",
+          "$.volunteer[*].url": "$.service.history[*].url",
+          "$.volunteer[*].startDate": "$.service.history[*].start",
+          "$.volunteer[*].endDate": "$.service.history[*].end",
+          "$.volunteer[*].summary": "$.service.history[*].summary",
+          "$.volunteer[*].highlights": "$.service.history[*].highlights"
+        }
+      },
+      "notes": "FRESH calls this 'service' instead of 'volunteer'"
+    },
+    "recognition_awards": {
+      "cfrs_path": "$.awards[*]",
+      "fresh_path": "$.recognition[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.recognition[*].title": "$.awards[*].title",
+          "$.recognition[*].date": "$.awards[*].date",
+          "$.recognition[*].from": "$.awards[*].awarder",
+          "$.recognition[*].summary": "$.awards[*].summary"
+        },
+        "fresh_to_cfrs": {
+          "$.awards[*].title": "$.recognition[*].title",
+          "$.awards[*].date": "$.recognition[*].date",
+          "$.awards[*].awarder": "$.recognition[*].from",
+          "$.awards[*].summary": "$.recognition[*].summary"
+        }
+      },
+      "notes": "FRESH calls this 'recognition', uses 'from' instead of 'awarder'"
+    },
+    "writing_publications": {
+      "cfrs_path": "$.publications[*]",
+      "fresh_path": "$.writing[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.writing[*].title": "$.publications[*].name",
+          "$.writing[*].publisher": "$.publications[*].publisher",
+          "$.writing[*].date": "$.publications[*].releaseDate",
+          "$.writing[*].url": "$.publications[*].url",
+          "$.writing[*].summary": "$.publications[*].summary"
+        },
+        "fresh_to_cfrs": {
+          "$.publications[*].name": "$.writing[*].title",
+          "$.publications[*].publisher": "$.writing[*].publisher",
+          "$.publications[*].releaseDate": "$.writing[*].date",
+          "$.publications[*].url": "$.writing[*].url",
+          "$.publications[*].summary": "$.writing[*].summary"
+        }
+      },
+      "notes": "FRESH calls this 'writing', uses 'title' instead of 'name'"
+    },
+    "languages": {
+      "cfrs_path": "$.languages[*]",
+      "fresh_path": "$.languages[*]",
+      "mapping_type": "direct",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.languages[*].language": "$.languages[*].language",
+          "$.languages[*].level": "$.languages[*].fluency (mapped to FRESH levels)"
+        },
+        "fresh_to_cfrs": {
+          "$.languages[*].language": "$.languages[*].language",
+          "$.languages[*].fluency": "$.languages[*].level (mapped to CFRS levels)"
+        }
+      },
+      "level_mapping": {
+        "cfrs_to_fresh": {
+          "elementary": "Beginner",
+          "limited-working": "Intermediate",
+          "professional-working": "Advanced",
+          "full-professional": "Fluent",
+          "native-or-bilingual": "Native"
+        },
+        "fresh_to_cfrs": {
+          "Beginner": "elementary",
+          "Intermediate": "limited-working",
+          "Advanced": "professional-working",
+          "Fluent": "full-professional",
+          "Native": "native-or-bilingual"
+        }
+      }
+    },
+    "interests": {
+      "cfrs_path": "$.interests[*]",
+      "fresh_path": "$.interests[*]",
+      "mapping_type": "direct",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.interests[*].name": "$.interests[*].name",
+          "$.interests[*].keywords": "$.interests[*].keywords"
+        },
+        "fresh_to_cfrs": {
+          "$.interests[*].name": "$.interests[*].name",
+          "$.interests[*].keywords": "$.interests[*].keywords"
+        }
+      }
+    },
+    "references": {
+      "cfrs_path": "$.references[*]",
+      "fresh_path": "$.references[*]",
+      "mapping_type": "structural",
+      "transform": {
+        "cfrs_to_fresh": {
+          "$.references[*].name": "$.references[*].name",
+          "$.references[*].category": "'professional' (default)",
+          "$.references[*].summary": "$.references[*].reference"
+        },
+        "fresh_to_cfrs": {
+          "$.references[*].name": "$.references[*].name",
+          "$.references[*].reference": "$.references[*].summary"
+        }
+      },
+      "notes": "FRESH includes 'category' field not present in CFRS"
+    },
+    "testimonials": {
+      "cfrs_path": null,
+      "fresh_path": "$.testimonials[*]",
+      "mapping_type": "unsupported",
+      "notes": "FRESH has testimonials section not present in CFRS. Could map to references or custom section."
+    },
+    "extracurricular": {
+      "cfrs_path": null,
+      "fresh_path": "$.extracurricular[*]",
+      "mapping_type": "custom",
+      "notes": "FRESH extracurricular could map to CFRS volunteer or custom sections"
+    },
+    "governance": {
+      "cfrs_path": null,
+      "fresh_path": "$.governance[*]",
+      "mapping_type": "custom",
+      "notes": "FRESH governance could map to CFRS volunteer or custom sections"
+    }
+  },
+  "conversion_rules": {
+    "cfrs_to_fresh": {
+      "description": "Convert CFRS resume to FRESH format",
+      "steps": [
+        "1. Transform basics into FRESH name, contact, info, and location structure",
+        "2. Convert work array to employment.history with field name mappings",
+        "3. Convert education array to education.history with field name mappings",
+        "4. Convert skills to skills.sets structure",
+        "5. Map awards to recognition with 'from' field",
+        "6. Map publications to writing with 'title' field",
+        "7. Map volunteer to service.history",
+        "8. Map language fluency levels using level_mapping table",
+        "9. Handle CFRS-specific extensions in custom manner or omit",
+        "10. Validate output against FRESH schema"
+      ],
+      "date_format_conversion": {
+        "description": "FRESH uses different date format",
+        "cfrs": "YYYY-MM-DD or YYYY-MM",
+        "fresh": "YYYY-MM-DD (preferred) or YYYY-MM",
+        "conversion": "Parse CFRS ISO date, format to FRESH convention"
+      }
+    },
+    "fresh_to_cfrs": {
+      "description": "Convert FRESH resume to CFRS format",
+      "steps": [
+        "1. Add $schema field pointing to CFRS schema",
+        "2. Transform FRESH name, contact, info into CFRS basics structure",
+        "3. Convert employment.history to work array",
+        "4. Convert education.history to education array",
+        "5. Convert skills.sets to skills array",
+        "6. Map recognition to awards",
+        "7. Map writing to publications",
+        "8. Map service to volunteer",
+        "9. Map language levels using reverse mapping",
+        "10. Handle FRESH-specific fields (testimonials, governance) as custom sections or omit",
+        "11. Validate output against CFRS schema"
+      ]
+    }
+  },
+  "cfrs_extensions_handling": {
+    "export_to_fresh": {
+      "x_cfrs_pronouns": "omit",
+      "x_cfrs_locale": "omit",
+      "x_cfrs_employment_type": "omit",
+      "x_cfrs_remote": "omit",
+      "x_cfrs_keywords": "omit or merge into project keywords",
+      "x_cfrs_years": "omit",
+      "x_cfrs_category": "omit",
+      "x_cfrs_featured": "omit",
+      "x_cfrs_honors": "could map to recognition items",
+      "x_cfrs_cefr_level": "omit",
+      "x_cfrs_custom_sections": "attempt to map to FRESH extracurricular or omit"
+    }
+  },
+  "validation": {
+    "cfrs_schema_url": "https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json",
+    "fresh_schema_url": "https://github.com/fresh-standard/fresh-resume-schema",
+    "test_cases": [
+      "schemas/examples/minimal-example.json",
+      "schemas/examples/comprehensive-example.json"
+    ]
+  },
+  "implementation_notes": {
+    "challenges": [
+      "FRESH has nested structure (employment.history) vs CFRS flat arrays",
+      "Different field names require comprehensive mapping",
+      "FRESH has sections (testimonials, governance) not in CFRS",
+      "Date format differences need careful handling",
+      "Language proficiency level terminology differs"
+    ],
+    "best_practices": [
+      "Provide detailed conversion logs showing transformations",
+      "Warn about fields that cannot be converted",
+      "Support dry-run mode to preview conversion",
+      "Validate both input and output schemas"
+    ],
+    "libraries": {
+      "validation": "ajv for JSON Schema validation",
+      "transformation": "lodash for deep object manipulation",
+      "date_handling": "date-fns or dayjs for date parsing/formatting"
+    }
+  }
+}

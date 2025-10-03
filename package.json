@@ -1,0 +1,85 @@
+{
+  "name": "cloudflow-resume",
+  "version": "1.0.0",
+  "description": "Privacy-first resume builder with JSON Resume compatibility",
+  "type": "module",
+  "author": "CloudFlow Resume Project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/cloudflow-resume.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write \"**/*.{ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,css,md}\"",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "validate:schema": "node scripts/validate-schema.js",
+    "validate:mappings": "node scripts/validate-mappings.js",
+    "validate": "npm run typecheck && npm run lint && npm run validate:schema && npm run validate:mappings",
+    "prepare": "husky install",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "clsx": "^2.0.0",
+    "dompurify": "^3.0.8",
+    "gray-matter": "^4.0.3",
+    "mammoth": "^1.6.0",
+    "marked": "^11.1.1",
+    "nunjucks": "^3.2.4",
+    "preact": "^10.19.3",
+    "preact-render-to-string": "^6.3.1",
+    "wouter": "^3.7.1",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.7.0",
+    "@testing-library/preact": "^3.2.4",
+    "@types/dompurify": "^3.0.5",
+    "@types/node": "^20.10.6",
+    "@types/nunjucks": "^3.2.6",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "@vitest/coverage-v8": "^1.1.1",
+    "@vitest/ui": "^1.1.1",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "gh-pages": "^6.1.1",
+    "husky": "^8.0.3",
+    "jsdom": "^23.2.0",
+    "lint-staged": "^15.2.0",
+    "postcss": "^8.4.33",
+    "prettier": "^3.1.1",
+    "tailwindcss": "^3.4.1",
+    "terser": "^5.44.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vitest": "^1.1.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ],
+    "schemas/*.json": [
+      "npm run validate:schema"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

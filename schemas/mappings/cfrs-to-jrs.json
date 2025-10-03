@@ -1,0 +1,451 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CFRS to JSON Resume Mapping",
+  "version": "1.0.0",
+  "description": "Bidirectional mapping specification between CloudFlow Resume Schema (CFRS) v1.0.0 and JSON Resume v1.2.1. CFRS is a superset of JSON Resume with namespaced extensions (x_cfrs_*) for enhanced features.",
+  "compatibility": {
+    "cfrs_version": "1.0.0",
+    "json_resume_version": "1.2.1",
+    "backward_compatible": true,
+    "forward_compatible": true,
+    "lossless_round_trip": false,
+    "notes": "Converting from CFRS to JSON Resume will lose CFRS-specific extensions. Converting from JSON Resume to CFRS is lossless."
+  },
+  "field_mappings": {
+    "basics": {
+      "cfrs_path": "$.basics",
+      "jrs_path": "$.basics",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "notes": "All JSON Resume basics fields are supported in CFRS with identical schema",
+      "fields": {
+        "name": {
+          "cfrs": "$.basics.name",
+          "jrs": "$.basics.name",
+          "bidirectional": true,
+          "required_in_cfrs": true,
+          "required_in_jrs": true
+        },
+        "label": {
+          "cfrs": "$.basics.label",
+          "jrs": "$.basics.label",
+          "bidirectional": true
+        },
+        "image": {
+          "cfrs": "$.basics.image",
+          "jrs": "$.basics.image",
+          "bidirectional": true
+        },
+        "email": {
+          "cfrs": "$.basics.email",
+          "jrs": "$.basics.email",
+          "bidirectional": true
+        },
+        "phone": {
+          "cfrs": "$.basics.phone",
+          "jrs": "$.basics.phone",
+          "bidirectional": true
+        },
+        "url": {
+          "cfrs": "$.basics.url",
+          "jrs": "$.basics.url",
+          "bidirectional": true
+        },
+        "summary": {
+          "cfrs": "$.basics.summary",
+          "jrs": "$.basics.summary",
+          "bidirectional": true
+        },
+        "location": {
+          "cfrs": "$.basics.location",
+          "jrs": "$.basics.location",
+          "bidirectional": true,
+          "nested_fields": {
+            "address": "direct",
+            "postalCode": "direct",
+            "city": "direct",
+            "countryCode": "direct",
+            "region": "direct"
+          }
+        },
+        "profiles": {
+          "cfrs": "$.basics.profiles",
+          "jrs": "$.basics.profiles",
+          "bidirectional": true,
+          "nested_fields": {
+            "network": "direct",
+            "username": "direct",
+            "url": "direct"
+          }
+        }
+      },
+      "cfrs_extensions": {
+        "x_cfrs_pronouns": {
+          "cfrs": "$.basics.x_cfrs_pronouns",
+          "jrs": null,
+          "export_behavior": "omit",
+          "import_behavior": "ignore"
+        },
+        "x_cfrs_locale": {
+          "cfrs": "$.basics.x_cfrs_locale",
+          "jrs": null,
+          "export_behavior": "omit",
+          "import_behavior": "ignore"
+        }
+      }
+    },
+    "work": {
+      "cfrs_path": "$.work[*]",
+      "jrs_path": "$.work[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "name": "direct",
+        "position": "direct",
+        "url": "direct",
+        "startDate": "direct",
+        "endDate": "direct",
+        "summary": "direct",
+        "highlights": "direct"
+      },
+      "cfrs_additions": {
+        "location": {
+          "cfrs": "$.work[*].location",
+          "jrs": null,
+          "export_behavior": "omit",
+          "import_behavior": "preserve",
+          "notes": "JSON Resume spec doesn't include location, but some renderers support it"
+        }
+      },
+      "cfrs_extensions": {
+        "x_cfrs_employment_type": {
+          "cfrs": "$.work[*].x_cfrs_employment_type",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_remote": {
+          "cfrs": "$.work[*].x_cfrs_remote",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_keywords": {
+          "cfrs": "$.work[*].x_cfrs_keywords",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "education": {
+      "cfrs_path": "$.education[*]",
+      "jrs_path": "$.education[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "institution": "direct",
+        "url": "direct",
+        "area": "direct",
+        "studyType": "direct",
+        "startDate": "direct",
+        "endDate": "direct",
+        "score": "direct",
+        "courses": "direct"
+      },
+      "cfrs_additions": {
+        "location": {
+          "cfrs": "$.education[*].location",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      },
+      "cfrs_extensions": {
+        "x_cfrs_honors": {
+          "cfrs": "$.education[*].x_cfrs_honors",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "skills": {
+      "cfrs_path": "$.skills[*]",
+      "jrs_path": "$.skills[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "name": "direct",
+        "level": "direct",
+        "keywords": "direct"
+      },
+      "cfrs_extensions": {
+        "x_cfrs_years": {
+          "cfrs": "$.skills[*].x_cfrs_years",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_category": {
+          "cfrs": "$.skills[*].x_cfrs_category",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "projects": {
+      "cfrs_path": "$.projects[*]",
+      "jrs_path": "$.projects[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "notes": "JSON Resume v1.0.0+ includes projects section",
+      "fields": {
+        "name": "direct",
+        "description": "direct",
+        "highlights": "direct",
+        "keywords": "direct",
+        "startDate": "direct",
+        "endDate": "direct",
+        "url": "direct",
+        "roles": "direct",
+        "entity": "direct",
+        "type": "direct"
+      },
+      "cfrs_extensions": {
+        "x_cfrs_featured": {
+          "cfrs": "$.projects[*].x_cfrs_featured",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "volunteer": {
+      "cfrs_path": "$.volunteer[*]",
+      "jrs_path": "$.volunteer[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "organization": "direct",
+        "position": "direct",
+        "url": "direct",
+        "startDate": "direct",
+        "endDate": "direct",
+        "summary": "direct",
+        "highlights": "direct"
+      }
+    },
+    "awards": {
+      "cfrs_path": "$.awards[*]",
+      "jrs_path": "$.awards[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "title": "direct",
+        "date": "direct",
+        "awarder": "direct",
+        "summary": "direct"
+      }
+    },
+    "publications": {
+      "cfrs_path": "$.publications[*]",
+      "jrs_path": "$.publications[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "name": "direct",
+        "publisher": "direct",
+        "releaseDate": "direct",
+        "url": "direct",
+        "summary": "direct"
+      },
+      "cfrs_extensions": {
+        "x_cfrs_authors": {
+          "cfrs": "$.publications[*].x_cfrs_authors",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_citation_count": {
+          "cfrs": "$.publications[*].x_cfrs_citation_count",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "languages": {
+      "cfrs_path": "$.languages[*]",
+      "jrs_path": "$.languages[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "language": "direct",
+        "fluency": "direct"
+      },
+      "cfrs_extensions": {
+        "x_cfrs_cefr_level": {
+          "cfrs": "$.languages[*].x_cfrs_cefr_level",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "interests": {
+      "cfrs_path": "$.interests[*]",
+      "jrs_path": "$.interests[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "name": "direct",
+        "keywords": "direct"
+      }
+    },
+    "references": {
+      "cfrs_path": "$.references[*]",
+      "jrs_path": "$.references[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "fields": {
+        "name": "direct",
+        "reference": "direct"
+      },
+      "cfrs_extensions": {
+        "x_cfrs_relationship": {
+          "cfrs": "$.references[*].x_cfrs_relationship",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_email": {
+          "cfrs": "$.references[*].x_cfrs_email",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_phone": {
+          "cfrs": "$.references[*].x_cfrs_phone",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "certificates": {
+      "cfrs_path": "$.certificates[*]",
+      "jrs_path": "$.certificates[*]",
+      "mapping_type": "direct",
+      "compatibility": "100%",
+      "notes": "Added in JSON Resume v1.1.0",
+      "fields": {
+        "name": "direct",
+        "date": "direct",
+        "issuer": "direct",
+        "url": "direct"
+      },
+      "cfrs_extensions": {
+        "x_cfrs_expiry_date": {
+          "cfrs": "$.certificates[*].x_cfrs_expiry_date",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_credential_id": {
+          "cfrs": "$.certificates[*].x_cfrs_credential_id",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "meta": {
+      "cfrs_path": "$.meta",
+      "jrs_path": "$.meta",
+      "mapping_type": "partial",
+      "compatibility": "75%",
+      "fields": {
+        "canonical": "direct",
+        "version": "direct",
+        "lastModified": "direct"
+      },
+      "cfrs_extensions": {
+        "x_cfrs_theme": {
+          "cfrs": "$.meta.x_cfrs_theme",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_ats_optimized": {
+          "cfrs": "$.meta.x_cfrs_ats_optimized",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_redaction_profile": {
+          "cfrs": "$.meta.x_cfrs_redaction_profile",
+          "jrs": null,
+          "export_behavior": "omit"
+        },
+        "x_cfrs_locale_variants": {
+          "cfrs": "$.meta.x_cfrs_locale_variants",
+          "jrs": null,
+          "export_behavior": "omit"
+        }
+      }
+    },
+    "x_cfrs_custom_sections": {
+      "cfrs_path": "$.x_cfrs_custom_sections[*]",
+      "jrs_path": null,
+      "mapping_type": "extension_only",
+      "compatibility": "0%",
+      "export_behavior": "omit",
+      "notes": "Custom sections are a CFRS-only feature and cannot be represented in JSON Resume"
+    }
+  },
+  "conversion_rules": {
+    "cfrs_to_jrs": {
+      "description": "Convert CFRS resume to JSON Resume format",
+      "steps": [
+        "1. Copy all core fields directly (basics, work, education, skills, etc.)",
+        "2. Strip all fields with x_cfrs_* prefix",
+        "3. Remove x_cfrs_custom_sections entirely",
+        "4. Optionally preserve CFRS extensions in a top-level x_cfrs object for round-trip capability",
+        "5. Validate output against JSON Resume schema"
+      ],
+      "preserve_extensions": {
+        "option": "x_cfrs",
+        "description": "Store all CFRS extensions in $.x_cfrs for potential round-trip conversion",
+        "example": {
+          "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json",
+          "basics": {},
+          "x_cfrs": {
+            "extensions": {},
+            "custom_sections": []
+          }
+        }
+      }
+    },
+    "jrs_to_cfrs": {
+      "description": "Convert JSON Resume to CFRS format",
+      "steps": [
+        "1. Copy all fields directly (100% compatible)",
+        "2. Add $schema field pointing to CFRS schema",
+        "3. Optionally restore x_cfrs extensions if present in $.x_cfrs",
+        "4. Initialize empty meta.x_cfrs_* fields with defaults",
+        "5. Validate output against CFRS schema"
+      ],
+      "lossless": true
+    }
+  },
+  "validation": {
+    "cfrs_schema_url": "https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json",
+    "jrs_schema_url": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+    "test_cases": [
+      "schemas/examples/minimal-example.json",
+      "schemas/examples/comprehensive-example.json",
+      "schemas/examples/academic-example.json"
+    ]
+  },
+  "implementation_notes": {
+    "libraries": {
+      "validation": "ajv (JSON Schema validator)",
+      "transformation": "lodash or custom transform functions"
+    },
+    "error_handling": {
+      "invalid_dates": "Preserve as-is with warning",
+      "invalid_urls": "Preserve as-is with warning",
+      "missing_required_fields": "Throw validation error"
+    },
+    "best_practices": [
+      "Always validate input before conversion",
+      "Log warnings for data that cannot be converted",
+      "Provide conversion report showing what was preserved/lost",
+      "Support --preserve-extensions flag for round-trip scenarios"
+    ]
+  }
+}

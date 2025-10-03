@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "lastUpdated": "2025-10-03T00:00:00.000Z",
+  "enforcement": {
+    "active": true,
+    "level": "strict",
+    "preCommitHooks": true,
+    "ciValidation": true
+  },
+  "rules": {
+    "schema": {
+      "required": true,
+      "location": "schemas/cfrs.schema.json",
+      "validation": "ajv",
+      "versionControl": true,
+      "description": "CFRS schema must exist and be valid JSON Schema Draft 2020-12"
+    },
+    "mappings": {
+      "required": true,
+      "locations": [
+        "schemas/mappings/cfrs-to-jrs.json",
+        "schemas/mappings/cfrs-to-fresh.json"
+      ],
+      "bidirectional": false,
+      "description": "Schema mappings must be complete and tested"
+    },
+    "themes": {
+      "noRemoteJs": true,
+      "noInlineJs": true,
+      "cspCompliant": true,
+      "maxSizeKb": 100,
+      "atsSafe": true,
+      "description": "Themes must be pure CSS + Nunjucks with no JavaScript"
+    },
+    "privacy": {
+      "noServerStorage": true,
+      "clientSideOnly": true,
+      "noExternalRequests": true,
+      "description": "All processing must happen locally in the browser"
+    },
+    "accessibility": {
+      "wcagLevel": "AA",
+      "keyboardNav": true,
+      "screenReader": true,
+      "colorContrast": 4.5,
+      "description": "Must meet WCAG AA standards"
+    },
+    "performance": {
+      "maxBundleSizeKb": 600,
+      "maxLoadTimeMs": 3000,
+      "targetConnection": "3G",
+      "description": "Performance budgets for 3G connection"
+    },
+    "documentation": {
+      "adrRequired": true,
+      "manifestUpdated": true,
+      "changelogUpdated": false,
+      "description": "Architecture Decision Records required for schema changes"
+    },
+    "commits": {
+      "conventional": false,
+      "signedCommits": false,
+      "description": "Commit message standards"
+    }
+  },
+  "violations": {
+    "schemaBreak": "fail-ci",
+    "mappingBreak": "fail-ci",
+    "remoteJsInTheme": "fail-ci",
+    "privacyViolation": "fail-ci",
+    "a11yViolation": "warn",
+    "performanceBudget": "warn",
+    "missingAdr": "fail-ci",
+    "missingManifestUpdate": "warn"
+  },
+  "exemptions": {
+    "developmentMode": {
+      "performance": true,
+      "bundleSize": true
+    },
+    "testFiles": {
+      "all": true
+    }
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "$schema": "https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json",
+  "basics": {
+    "name": "Dr. Maria Rodriguez",
+    "label": "Assistant Professor of Computational Biology",
+    "email": "m.rodriguez@university.edu",
+    "phone": "+1-555-246-8101",
+    "url": "https://mariarodriguez.science",
+    "summary": "Computational biologist specializing in genomic data analysis and machine learning applications in precision medicine. Dedicated to advancing scientific knowledge through interdisciplinary research and mentoring the next generation of researchers.",
+    "location": {
+      "city": "Boston",
+      "region": "MA",
+      "countryCode": "US"
+    },
+    "profiles": [
+      {
+        "network": "ORCID",
+        "username": "0000-0002-1234-5678",
+        "url": "https://orcid.org/0000-0002-1234-5678"
+      },
+      {
+        "network": "Google Scholar",
+        "username": "maria-rodriguez",
+        "url": "https://scholar.google.com/citations?user=example"
+      },
+      {
+        "network": "GitHub",
+        "username": "mrodriguez-lab",
+        "url": "https://github.com/mrodriguez-lab"
+      }
+    ],
+    "x_cfrs_pronouns": "she/her",
+    "x_cfrs_locale": "en-US"
+  },
+  "work": [
+    {
+      "name": "Harvard Medical School",
+      "position": "Assistant Professor of Computational Biology",
+      "url": "https://hms.harvard.edu",
+      "startDate": "2021-07",
+      "summary": "Lead independent research laboratory focused on developing computational methods for cancer genomics.",
+      "highlights": [
+        "Secured $2.5M in grant funding (NIH R01, NSF CAREER)",
+        "Published 15 peer-reviewed papers (h-index: 18)",
+        "Supervise team of 8 graduate students and 3 postdocs",
+        "Teach graduate courses in Computational Biology and Machine Learning",
+        "Serve on institutional review board and graduate admissions committee"
+      ],
+      "location": "Boston, MA",
+      "x_cfrs_employment_type": "full-time",
+      "x_cfrs_remote": false,
+      "x_cfrs_keywords": ["Computational Biology", "Machine Learning", "Genomics", "Cancer Research", "Research Leadership"]
+    },
+    {
+      "name": "Broad Institute of MIT and Harvard",
+      "position": "Postdoctoral Research Fellow",
+      "url": "https://broadinstitute.org",
+      "startDate": "2018-09",
+      "endDate": "2021-06",
+      "summary": "Conducted research on single-cell genomics and developed novel computational tools.",
+      "highlights": [
+        "Developed CellMapper, software tool with 5,000+ citations",
+        "Collaborated on multi-institutional Cancer Genome Atlas project",
+        "Mentored 4 graduate rotation students",
+        "Published 8 first-author papers in high-impact journals"
+      ],
+      "location": "Cambridge, MA",
+      "x_cfrs_employment_type": "full-time",
+      "x_cfrs_remote": false,
+      "x_cfrs_keywords": ["Single-cell Genomics", "Bioinformatics", "Python", "R", "Statistical Analysis"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Stanford University",
+      "url": "https://stanford.edu",
+      "area": "Computational Biology",
+      "studyType": "Doctor of Philosophy (Ph.D.)",
+      "startDate": "2013-09",
+      "endDate": "2018-06",
+      "score": "4.0/4.0",
+      "courses": [
+        "Statistical Genomics",
+        "Machine Learning for Biology",
+        "Molecular Biology",
+        "Advanced Algorithms"
+      ],
+      "location": "Stanford, CA",
+      "x_cfrs_honors": [
+        "Stanford Graduate Fellowship",
+        "Best Thesis Award in Biomedical Informatics",
+        "ISCB Student Council Travel Fellowship"
+      ]
+    },
+    {
+      "institution": "University of California, Berkeley",
+      "url": "https://berkeley.edu",
+      "area": "Molecular and Cell Biology",
+      "studyType": "Bachelor of Arts",
+      "startDate": "2009-09",
+      "endDate": "2013-05",
+      "score": "3.92/4.0",
+      "location": "Berkeley, CA",
+      "x_cfrs_honors": [
+        "Highest Honors in Major",
+        "Phi Beta Kappa"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Computational Methods",
+      "level": "expert",
+      "keywords": ["Machine Learning", "Statistical Modeling", "Bayesian Inference", "Deep Learning", "Algorithm Development"],
+      "x_cfrs_years": 10,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Programming & Data Science",
+      "level": "expert",
+      "keywords": ["Python", "R", "Julia", "Bash", "SQL", "Git"],
+      "x_cfrs_years": 12,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Bioinformatics Tools",
+      "level": "expert",
+      "keywords": ["Bioconductor", "Scanpy", "Seurat", "GATK", "BWA", "STAR"],
+      "x_cfrs_years": 9,
+      "x_cfrs_category": "tool"
+    },
+    {
+      "name": "Genomics & Biology",
+      "level": "expert",
+      "keywords": ["RNA-seq", "Single-cell Sequencing", "CRISPR", "Cancer Biology", "Immunology"],
+      "x_cfrs_years": 11,
+      "x_cfrs_category": "domain"
+    },
+    {
+      "name": "Research & Communication",
+      "level": "expert",
+      "keywords": ["Grant Writing", "Manuscript Preparation", "Scientific Presentation", "Peer Review", "Mentorship"],
+      "x_cfrs_years": 10,
+      "x_cfrs_category": "soft"
+    }
+  ],
+  "projects": [
+    {
+      "name": "CellMapper",
+      "description": "Open-source toolkit for single-cell RNA-seq analysis with automated cell type annotation and trajectory inference.",
+      "highlights": [
+        "5,000+ citations in scientific literature",
+        "Used in 100+ published studies",
+        "Active community of 500+ researchers",
+        "Featured in Nature Methods"
+      ],
+      "keywords": ["Python", "Single-cell Genomics", "Machine Learning", "Bioinformatics"],
+      "startDate": "2016-03",
+      "url": "https://github.com/cellmapper/cellmapper",
+      "roles": ["Creator", "Lead Developer"],
+      "entity": "Open Source / Academic",
+      "type": "Research Software",
+      "x_cfrs_featured": true
+    },
+    {
+      "name": "Cancer Immune Atlas",
+      "description": "Multi-institutional effort to comprehensively map immune cell populations in tumor microenvironments.",
+      "highlights": [
+        "Analyzed 500+ patient samples across 15 cancer types",
+        "Identified novel immune subtypes associated with therapy response",
+        "Published in Cell (2022)"
+      ],
+      "keywords": ["Single-cell Sequencing", "Immunology", "Cancer Biology", "Data Integration"],
+      "startDate": "2019-01",
+      "endDate": "2022-12",
+      "entity": "Multi-institutional Consortium",
+      "type": "Collaborative Research",
+      "x_cfrs_featured": true
+    }
+  ],
+  "publications": [
+    {
+      "name": "CellMapper: Automated annotation of cell types in single-cell RNA-seq data",
+      "publisher": "Nature Methods",
+      "releaseDate": "2020-08",
+      "url": "https://doi.org/10.1038/s41592-020-example",
+      "summary": "Developed machine learning framework for automated cell type identification achieving 95% accuracy across diverse datasets.",
+      "x_cfrs_authors": ["Maria Rodriguez", "John Chen", "Sarah Williams"],
+      "x_cfrs_citation_count": 5234
+    },
+    {
+      "name": "Immune landscape of pancreatic cancer reveals therapeutic opportunities",
+      "publisher": "Cell",
+      "releaseDate": "2022-03",
+      "url": "https://doi.org/10.1016/j.cell.2022.example",
+      "summary": "Comprehensive single-cell analysis identifying immune subtypes predictive of immunotherapy response.",
+      "x_cfrs_authors": ["Cancer Immune Atlas Consortium (M. Rodriguez et al.)"],
+      "x_cfrs_citation_count": 423
+    },
+    {
+      "name": "Deep learning for genomic variant interpretation",
+      "publisher": "Nature Genetics",
+      "releaseDate": "2023-06",
+      "url": "https://doi.org/10.1038/s41588-023-example",
+      "summary": "Neural network model for predicting pathogenicity of genetic variants with clinical-grade accuracy.",
+      "x_cfrs_authors": ["Maria Rodriguez", "Emily Thompson"],
+      "x_cfrs_citation_count": 178
+    }
+  ],
+  "awards": [
+    {
+      "title": "NSF CAREER Award",
+      "date": "2024-02",
+      "awarder": "National Science Foundation",
+      "summary": "Five-year grant ($500K) supporting research and education in computational cancer genomics"
+    },
+    {
+      "title": "Sloan Research Fellowship",
+      "date": "2023-02",
+      "awarder": "Alfred P. Sloan Foundation",
+      "summary": "Awarded to early-career scientists of outstanding promise"
+    },
+    {
+      "title": "ISCB Overton Prize",
+      "date": "2021-07",
+      "awarder": "International Society for Computational Biology",
+      "summary": "Recognizing outstanding early-career scientist in computational biology"
+    },
+    {
+      "title": "Outstanding Dissertation Award",
+      "date": "2018-06",
+      "awarder": "Stanford University School of Medicine",
+      "summary": "Best Ph.D. dissertation in Biomedical Informatics"
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "ISCB Student Council",
+      "position": "Symposium Co-Chair",
+      "url": "https://iscbsc.org",
+      "startDate": "2022-01",
+      "endDate": "2023-12",
+      "summary": "Organized international student symposium with 200+ attendees.",
+      "highlights": [
+        "Coordinated program with 30 speakers from 15 countries",
+        "Secured $50K in sponsorship funding",
+        "Established mentorship program matching 100 students with senior scientists"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "native-or-bilingual"
+    },
+    {
+      "language": "Spanish",
+      "fluency": "native-or-bilingual"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Research Areas",
+      "keywords": ["Cancer Genomics", "Immunotherapy", "Precision Medicine", "AI in Healthcare"]
+    },
+    {
+      "name": "Service",
+      "keywords": ["Peer Review", "Grant Review Panels", "Conference Organization", "Diversity in STEM"]
+    }
+  ],
+  "references": [
+    {
+      "name": "Prof. Robert Johnson",
+      "reference": "Available upon request",
+      "x_cfrs_relationship": "Ph.D. Advisor, Stanford University",
+      "x_cfrs_email": "r.johnson@stanford.edu"
+    },
+    {
+      "name": "Dr. Linda Patel",
+      "reference": "Available upon request",
+      "x_cfrs_relationship": "Postdoctoral Mentor, Broad Institute",
+      "x_cfrs_email": "lpatel@broadinstitute.org"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Teaching Certificate in Higher Education",
+      "date": "2020-05",
+      "issuer": "Harvard Medical School",
+      "x_cfrs_credential_id": "HMS-TC-2020-045"
+    }
+  ],
+  "meta": {
+    "canonical": "https://mariarodriguez.science/cv",
+    "version": "3.2",
+    "lastModified": "2025-10-03T00:00:00Z",
+    "x_cfrs_theme": "academic",
+    "x_cfrs_ats_optimized": false,
+    "x_cfrs_redaction_profile": "partial"
+  },
+  "x_cfrs_custom_sections": [
+    {
+      "title": "Grants & Funding",
+      "content": "**Active Grants**\n- NIH R01 CA234567 (PI): \"Machine Learning for Cancer Genomics\" (2022-2027, $1.8M)\n- NSF CAREER Award (PI): \"Computational Methods for Single-cell Analysis\" (2024-2029, $500K)\n\n**Completed Grants**\n- NIH K99/R00 CA123456 (PI): \"Pathway to Independence Award\" (2019-2023, $800K)",
+      "order": 50
+    },
+    {
+      "title": "Teaching Experience",
+      "content": "**Harvard Medical School**\n- BMI 702: Computational Biology (Fall 2021-2024, Course Director)\n- BMI 708: Machine Learning for Healthcare (Spring 2022-2024, Co-Instructor)\n- Mentored 8 Ph.D. students, 3 postdocs, 12 rotation students",
+      "order": 60
+    },
+    {
+      "title": "Professional Service",
+      "content": "**Editorial Boards**\n- Associate Editor, *Bioinformatics* (2023-present)\n- Review Editor, *Frontiers in Genetics* (2022-present)\n\n**Grant Review**\n- NIH BISTIC Study Section (Ad-hoc reviewer, 2023-present)\n- NSF DBI Panel (2024)\n\n**Conference Organization**\n- ISMB 2025: Program Committee Member\n- RECOMB 2024: Session Chair",
+      "order": 70
+    }
+  ]
+}

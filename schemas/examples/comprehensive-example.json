@@ -1,0 +1,341 @@
+{
+  "$schema": "https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json",
+  "basics": {
+    "name": "Dr. Alex Chen",
+    "label": "Principal Engineer & Technical Leader",
+    "image": "https://example.com/photos/alex-chen.jpg",
+    "email": "alex.chen@example.com",
+    "phone": "+1-555-987-6543",
+    "url": "https://alexchen.tech",
+    "summary": "Accomplished technical leader with 12+ years driving innovation in distributed systems, cloud architecture, and engineering excellence. Proven track record of building high-performing teams and delivering scalable solutions that serve millions of users. Passionate about mentorship, open source contribution, and advancing industry best practices.",
+    "location": {
+      "address": "123 Innovation Drive",
+      "postalCode": "98101",
+      "city": "Seattle",
+      "countryCode": "US",
+      "region": "WA"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "alexchen",
+        "url": "https://linkedin.com/in/alexchen"
+      },
+      {
+        "network": "GitHub",
+        "username": "achen",
+        "url": "https://github.com/achen"
+      },
+      {
+        "network": "Twitter",
+        "username": "alexchen_dev",
+        "url": "https://twitter.com/alexchen_dev"
+      }
+    ],
+    "x_cfrs_pronouns": "they/them",
+    "x_cfrs_locale": "en-US"
+  },
+  "work": [
+    {
+      "name": "CloudScale Technologies",
+      "position": "Principal Engineer",
+      "url": "https://cloudscale.tech",
+      "startDate": "2020-01",
+      "summary": "Lead architect for distributed data platform processing 500TB+ daily across global infrastructure.",
+      "highlights": [
+        "Designed multi-region event streaming architecture achieving 99.99% uptime",
+        "Led team of 15 engineers across 3 continents, delivered 8 major releases",
+        "Reduced infrastructure costs by $2.5M annually through optimization initiatives",
+        "Established engineering standards adopted across 200+ person engineering org",
+        "Mentored 12 engineers, 4 promoted to senior roles within 18 months"
+      ],
+      "location": "Seattle, WA",
+      "x_cfrs_employment_type": "full-time",
+      "x_cfrs_remote": false,
+      "x_cfrs_keywords": ["Distributed Systems", "Kafka", "Kubernetes", "Go", "Python", "AWS", "Terraform", "Team Leadership"]
+    },
+    {
+      "name": "DataFlow Inc.",
+      "position": "Senior Staff Engineer",
+      "url": "https://dataflow.io",
+      "startDate": "2017-03",
+      "endDate": "2019-12",
+      "summary": "Technical lead for real-time analytics platform serving 10M+ daily active users.",
+      "highlights": [
+        "Built real-time data pipeline processing 1M events/second with <100ms latency",
+        "Architected microservices migration from monolith, improved deployment frequency 10x",
+        "Championed observability practices, reduced MTTR by 65%",
+        "Filed 2 patents in distributed computing and data compression"
+      ],
+      "location": "San Francisco, CA",
+      "x_cfrs_employment_type": "full-time",
+      "x_cfrs_remote": false,
+      "x_cfrs_keywords": ["Real-time Analytics", "Apache Flink", "Scala", "Redis", "Cassandra", "Observability"]
+    },
+    {
+      "name": "Innovate Labs",
+      "position": "Software Engineer",
+      "url": "https://innovatelabs.com",
+      "startDate": "2013-06",
+      "endDate": "2017-02",
+      "summary": "Full stack engineer building customer-facing SaaS applications.",
+      "highlights": [
+        "Developed API gateway handling 50K requests/second",
+        "Implemented automated testing framework increasing code coverage from 20% to 85%",
+        "Led migration from PHP to Node.js, improving performance by 3x"
+      ],
+      "location": "Austin, TX",
+      "x_cfrs_employment_type": "full-time",
+      "x_cfrs_remote": false,
+      "x_cfrs_keywords": ["Node.js", "React", "PostgreSQL", "Docker", "API Design"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Massachusetts Institute of Technology",
+      "url": "https://mit.edu",
+      "area": "Computer Science",
+      "studyType": "Doctor of Philosophy (Ph.D.)",
+      "startDate": "2009-09",
+      "endDate": "2013-05",
+      "score": "4.0/4.0",
+      "courses": [
+        "Distributed Systems",
+        "Advanced Algorithms",
+        "Machine Learning",
+        "Computer Systems Engineering"
+      ],
+      "location": "Cambridge, MA",
+      "x_cfrs_honors": [
+        "Presidential Fellowship",
+        "Best Dissertation Award in Computer Science"
+      ]
+    },
+    {
+      "institution": "Stanford University",
+      "url": "https://stanford.edu",
+      "area": "Computer Science",
+      "studyType": "Bachelor of Science",
+      "startDate": "2005-09",
+      "endDate": "2009-06",
+      "score": "3.95/4.0",
+      "courses": [
+        "Operating Systems",
+        "Database Systems",
+        "Computer Networks",
+        "Artificial Intelligence"
+      ],
+      "location": "Stanford, CA",
+      "x_cfrs_honors": [
+        "Summa Cum Laude",
+        "Phi Beta Kappa"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "System Architecture",
+      "level": "expert",
+      "keywords": ["Distributed Systems", "Microservices", "Event-Driven Architecture", "Service Mesh", "API Design"],
+      "x_cfrs_years": 12,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Programming Languages",
+      "level": "expert",
+      "keywords": ["Go", "Python", "Scala", "Java", "TypeScript", "Rust"],
+      "x_cfrs_years": 12,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Cloud Platforms",
+      "level": "expert",
+      "keywords": ["AWS", "GCP", "Azure", "Kubernetes", "Docker", "Terraform", "CloudFormation"],
+      "x_cfrs_years": 10,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Data Technologies",
+      "level": "expert",
+      "keywords": ["Kafka", "Apache Flink", "Spark", "PostgreSQL", "Redis", "Cassandra", "Elasticsearch"],
+      "x_cfrs_years": 9,
+      "x_cfrs_category": "technical"
+    },
+    {
+      "name": "Leadership & Communication",
+      "level": "expert",
+      "keywords": ["Technical Leadership", "Mentorship", "Public Speaking", "Technical Writing", "Stakeholder Management"],
+      "x_cfrs_years": 8,
+      "x_cfrs_category": "soft"
+    }
+  ],
+  "projects": [
+    {
+      "name": "OpenStream",
+      "description": "Open source distributed streaming platform built on Kafka with enhanced observability and developer experience.",
+      "highlights": [
+        "10K+ GitHub stars, 500+ production deployments",
+        "Featured in CNCF landscape",
+        "Reduced operational complexity by 70% compared to native Kafka"
+      ],
+      "keywords": ["Go", "Kafka", "Kubernetes", "gRPC", "Prometheus"],
+      "startDate": "2018-01",
+      "url": "https://github.com/openstream/openstream",
+      "roles": ["Creator", "Lead Maintainer"],
+      "entity": "Open Source",
+      "type": "Infrastructure Software",
+      "x_cfrs_featured": true
+    },
+    {
+      "name": "CloudMetrics",
+      "description": "High-performance metrics aggregation service processing 100M+ metrics per second.",
+      "highlights": [
+        "Achieved 99.995% uptime over 3 years",
+        "Processed 1 trillion metrics daily at peak",
+        "Won company innovation award 2019"
+      ],
+      "keywords": ["Rust", "ClickHouse", "Prometheus", "Grafana"],
+      "startDate": "2017-06",
+      "endDate": "2020-12",
+      "entity": "DataFlow Inc.",
+      "type": "Enterprise Software",
+      "x_cfrs_featured": true
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Code for Good",
+      "position": "Technical Advisor",
+      "url": "https://codeforgood.org",
+      "startDate": "2019-01",
+      "summary": "Provide technical guidance to nonprofits building digital solutions for social impact.",
+      "highlights": [
+        "Mentored 20+ nonprofit technical teams",
+        "Designed scalable architecture for education platform serving 50K students",
+        "Conducted quarterly workshops on cloud architecture best practices"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Top 100 Innovators in Tech",
+      "date": "2023-11",
+      "awarder": "Tech Innovation Magazine",
+      "summary": "Recognized for contributions to open source distributed systems and industry leadership"
+    },
+    {
+      "title": "Engineering Excellence Award",
+      "date": "2022-06",
+      "awarder": "CloudScale Technologies",
+      "summary": "Awarded for exceptional technical leadership and impact on engineering culture"
+    },
+    {
+      "title": "Best Paper Award",
+      "date": "2019-10",
+      "awarder": "ACM Symposium on Cloud Computing",
+      "summary": "Research on optimizing distributed consensus protocols"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Scalable Consensus in Distributed Systems: A Practical Approach",
+      "publisher": "ACM Transactions on Computer Systems",
+      "releaseDate": "2021-03",
+      "url": "https://doi.org/10.1145/example",
+      "summary": "Novel approach to achieving consensus in large-scale distributed systems with reduced latency and improved throughput.",
+      "x_cfrs_authors": ["Alex Chen", "Maria Garcia", "John Smith"],
+      "x_cfrs_citation_count": 156
+    },
+    {
+      "name": "Building Resilient Microservices: Lessons from Production",
+      "publisher": "IEEE Software",
+      "releaseDate": "2020-07",
+      "url": "https://doi.org/10.1109/example",
+      "summary": "Practical patterns and anti-patterns for building production-grade microservices at scale.",
+      "x_cfrs_authors": ["Alex Chen"],
+      "x_cfrs_citation_count": 89
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "native-or-bilingual"
+    },
+    {
+      "language": "Mandarin Chinese",
+      "fluency": "professional-working",
+      "x_cfrs_cefr_level": "B2"
+    },
+    {
+      "language": "Spanish",
+      "fluency": "limited-working",
+      "x_cfrs_cefr_level": "A2"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Open Source",
+      "keywords": ["Contribution", "Maintainership", "Community Building"]
+    },
+    {
+      "name": "Technical Writing",
+      "keywords": ["Blogging", "Documentation", "Conference Talks"]
+    },
+    {
+      "name": "Outdoor Activities",
+      "keywords": ["Hiking", "Rock Climbing", "Photography"]
+    }
+  ],
+  "references": [
+    {
+      "name": "Dr. Sarah Johnson",
+      "reference": "Available upon request",
+      "x_cfrs_relationship": "VP of Engineering at CloudScale Technologies",
+      "x_cfrs_email": "sarah.johnson@cloudscale.tech"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "AWS Certified Solutions Architect - Professional",
+      "date": "2022-03",
+      "issuer": "Amazon Web Services",
+      "url": "https://aws.amazon.com/certification",
+      "x_cfrs_expiry_date": "2025-03",
+      "x_cfrs_credential_id": "AWS-PSA-12345"
+    },
+    {
+      "name": "Certified Kubernetes Administrator (CKA)",
+      "date": "2021-08",
+      "issuer": "Cloud Native Computing Foundation",
+      "url": "https://www.cncf.io/certification/cka",
+      "x_cfrs_expiry_date": "2024-08",
+      "x_cfrs_credential_id": "CKA-67890"
+    }
+  ],
+  "meta": {
+    "canonical": "https://alexchen.tech/resume",
+    "version": "2.1",
+    "lastModified": "2025-10-03T00:00:00Z",
+    "x_cfrs_theme": "professional",
+    "x_cfrs_ats_optimized": true,
+    "x_cfrs_redaction_profile": "none",
+    "x_cfrs_locale_variants": [
+      {
+        "locale": "zh-CN",
+        "url": "https://alexchen.tech/resume-zh"
+      }
+    ]
+  },
+  "x_cfrs_custom_sections": [
+    {
+      "title": "Patents",
+      "content": "- **US Patent 10,234,567**: Method for Distributed Data Compression (2020)\n- **US Patent 10,345,678**: System for Real-time Event Processing (2019)",
+      "order": 100
+    },
+    {
+      "title": "Speaking Engagements",
+      "content": "- **KubeCon 2023**: \"Scaling Kubernetes to 10,000 Nodes\" (Keynote)\n- **QCon 2022**: \"Building Resilient Distributed Systems\"\n- **AWS re:Invent 2021**: \"Serverless at Scale\"",
+      "order": 110
+    }
+  ]
+}

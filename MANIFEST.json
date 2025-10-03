@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "projectName": "CloudFlow Resume",
+  "repository": "https://github.com/yourusername/cloudflow-resume",
+  "lastUpdated": "2025-10-03T00:00:00.000Z",
+  "inventory": {
+    "schemas": {
+      "cfrs": {
+        "path": "schemas/cfrs.schema.json",
+        "version": "1.0.0",
+        "status": "pending",
+        "description": "CloudFlow Resume Schema - Core schema definition"
+      },
+      "mappings": {
+        "cfrsToJrs": {
+          "path": "schemas/mappings/cfrs-to-jrs.json",
+          "status": "pending",
+          "description": "CFRS to JSON Resume v1.2.1 mapping"
+        },
+        "cfrsToFresh": {
+          "path": "schemas/mappings/cfrs-to-fresh.json",
+          "status": "pending",
+          "description": "CFRS to FRESH mapping"
+        }
+      }
+    },
+    "themes": {
+      "default": {
+        "path": "themes/default",
+        "status": "pending",
+        "description": "Default ATS-safe theme"
+      }
+    },
+    "documentation": {
+      "claude": {
+        "path": "CLAUDE.md",
+        "status": "complete",
+        "type": "authoritative"
+      },
+      "architecture": {
+        "path": "docs/ARCHITECTURE.md",
+        "status": "pending",
+        "type": "supporting"
+      },
+      "enforcement": {
+        "path": "docs/ENFORCEMENT.md",
+        "status": "pending",
+        "type": "supporting"
+      },
+      "schema": {
+        "path": "docs/SCHEMA.md",
+        "status": "pending",
+        "type": "supporting"
+      },
+      "themes": {
+        "path": "docs/THEMES.md",
+        "status": "pending",
+        "type": "supporting"
+      }
+    },
+    "infrastructure": {
+      "packageJson": {
+        "path": "package.json",
+        "status": "complete"
+      },
+      "viteConfig": {
+        "path": "vite.config.ts",
+        "status": "complete"
+      },
+      "tsConfig": {
+        "path": "tsconfig.json",
+        "status": "complete"
+      },
+      "tailwindConfig": {
+        "path": "tailwind.config.js",
+        "status": "complete"
+      },
+      "eslintConfig": {
+        "path": ".eslintrc.cjs",
+        "status": "complete"
+      }
+    }
+  },
+  "agents": {
+    "coder": {
+      "mission": "Setup foundational project infrastructure and tooling",
+      "status": "active",
+      "deliverables": [
+        "Directory structure",
+        "Vite + TypeScript + Preact setup",
+        "Build configuration",
+        "CSS framework setup",
+        "Git hooks",
+        "CI/CD pipeline"
+      ]
+    },
+    "schema": {
+      "mission": "Create CFRS schema and mappings",
+      "status": "pending",
+      "deliverables": [
+        "cfrs.schema.json",
+        "cfrs-to-jrs.json mapping",
+        "cfrs-to-fresh.json mapping",
+        "Schema documentation"
+      ]
+    },
+    "theme": {
+      "mission": "Build default ATS-safe themes",
+      "status": "pending",
+      "deliverables": [
+        "Default theme",
+        "Theme SDK",
+        "Theme registry"
+      ]
+    },
+    "ui": {
+      "mission": "Build frontend components and pages",
+      "status": "pending",
+      "deliverables": [
+        "Editor UI",
+        "Import/export UI",
+        "Theme selector",
+        "Accessibility features"
+      ]
+    }
+  },
+  "compliance": {
+    "schemaVersion": "1.0.0",
+    "mappingsComplete": false,
+    "themesValidated": false,
+    "a11yTested": false,
+    "performanceTested": false,
+    "ciPassing": false
+  }
+}

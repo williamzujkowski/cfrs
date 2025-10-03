@@ -1,0 +1,711 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cloudflowresume.dev/schemas/cfrs-v1.0.0.json",
+  "title": "CloudFlow Resume Schema (CFRS)",
+  "version": "1.0.0",
+  "description": "A comprehensive, privacy-focused resume schema with ATS optimization, internationalization support, and backward compatibility with JSON Resume v1.2.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "basics"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The schema version identifier",
+      "pattern": "^https://cloudflowresume\\.dev/schemas/cfrs-v\\d+\\.\\d+\\.\\d+\\.json$"
+    },
+    "basics": {
+      "type": "object",
+      "description": "Core personal and contact information",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "label": {
+          "type": "string",
+          "description": "Professional title or headline",
+          "maxLength": 200
+        },
+        "image": {
+          "type": "string",
+          "description": "URL or data URI of profile image",
+          "format": "uri"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number in any format",
+          "maxLength": 50
+        },
+        "url": {
+          "type": "string",
+          "description": "Personal website or portfolio URL",
+          "format": "uri"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Professional summary or objective statement",
+          "maxLength": 5000
+        },
+        "location": {
+          "type": "object",
+          "description": "Physical location information",
+          "additionalProperties": false,
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "Street address",
+              "maxLength": 200
+            },
+            "postalCode": {
+              "type": "string",
+              "description": "Postal or ZIP code",
+              "maxLength": 20
+            },
+            "city": {
+              "type": "string",
+              "description": "City name",
+              "maxLength": 100
+            },
+            "countryCode": {
+              "type": "string",
+              "description": "ISO 3166-1 alpha-2 country code",
+              "pattern": "^[A-Z]{2}$"
+            },
+            "region": {
+              "type": "string",
+              "description": "State, province, or region",
+              "maxLength": 100
+            }
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "description": "Social media and professional network profiles",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["network", "url"],
+            "properties": {
+              "network": {
+                "type": "string",
+                "description": "Social network name (e.g., LinkedIn, GitHub, Twitter)",
+                "maxLength": 100
+              },
+              "username": {
+                "type": "string",
+                "description": "Username on the network",
+                "maxLength": 100
+              },
+              "url": {
+                "type": "string",
+                "description": "Profile URL",
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "x_cfrs_pronouns": {
+          "type": "string",
+          "description": "CFRS Extension: Preferred pronouns",
+          "maxLength": 50
+        },
+        "x_cfrs_locale": {
+          "type": "string",
+          "description": "CFRS Extension: Primary locale code (e.g., en-US, fr-FR)",
+          "pattern": "^[a-z]{2}-[A-Z]{2}$"
+        }
+      }
+    },
+    "work": {
+      "type": "array",
+      "description": "Employment history",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Company or organization name",
+            "maxLength": 200
+          },
+          "position": {
+            "type": "string",
+            "description": "Job title or role",
+            "maxLength": 200
+          },
+          "url": {
+            "type": "string",
+            "description": "Company website",
+            "format": "uri"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date in ISO 8601 format (YYYY-MM-DD or YYYY-MM)",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date in ISO 8601 format (YYYY-MM-DD or YYYY-MM), omit if current",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Overview of role and responsibilities",
+            "maxLength": 5000
+          },
+          "highlights": {
+            "type": "array",
+            "description": "Key achievements and responsibilities",
+            "items": {
+              "type": "string",
+              "maxLength": 1000
+            }
+          },
+          "location": {
+            "type": "string",
+            "description": "Work location (city, state/country or 'Remote')",
+            "maxLength": 200
+          },
+          "x_cfrs_employment_type": {
+            "type": "string",
+            "description": "CFRS Extension: Employment type",
+            "enum": ["full-time", "part-time", "contract", "freelance", "internship", "volunteer"]
+          },
+          "x_cfrs_remote": {
+            "type": "boolean",
+            "description": "CFRS Extension: Whether position was remote"
+          },
+          "x_cfrs_keywords": {
+            "type": "array",
+            "description": "CFRS Extension: ATS-targeted keywords for this role",
+            "items": {
+              "type": "string",
+              "maxLength": 100
+            }
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "description": "Educational background",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "institution": {
+            "type": "string",
+            "description": "Name of educational institution",
+            "maxLength": 200
+          },
+          "url": {
+            "type": "string",
+            "description": "Institution website",
+            "format": "uri"
+          },
+          "area": {
+            "type": "string",
+            "description": "Field of study or major",
+            "maxLength": 200
+          },
+          "studyType": {
+            "type": "string",
+            "description": "Type of degree or certification",
+            "maxLength": 100
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date in ISO 8601 format",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date or expected graduation date",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "score": {
+            "type": "string",
+            "description": "GPA or grade (e.g., '3.8/4.0', 'First Class Honours')",
+            "maxLength": 50
+          },
+          "courses": {
+            "type": "array",
+            "description": "Notable courses or subjects",
+            "items": {
+              "type": "string",
+              "maxLength": 200
+            }
+          },
+          "location": {
+            "type": "string",
+            "description": "Institution location",
+            "maxLength": 200
+          },
+          "x_cfrs_honors": {
+            "type": "array",
+            "description": "CFRS Extension: Academic honors or distinctions",
+            "items": {
+              "type": "string",
+              "maxLength": 200
+            }
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "Professional skills organized by category",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Skill category or individual skill name",
+            "maxLength": 200
+          },
+          "level": {
+            "type": "string",
+            "description": "Proficiency level",
+            "enum": ["beginner", "intermediate", "advanced", "expert", "master"]
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Related technologies, tools, or sub-skills",
+            "items": {
+              "type": "string",
+              "maxLength": 100
+            }
+          },
+          "x_cfrs_years": {
+            "type": "number",
+            "description": "CFRS Extension: Years of experience with this skill",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "x_cfrs_category": {
+            "type": "string",
+            "description": "CFRS Extension: Skill category for grouping",
+            "enum": ["technical", "soft", "language", "tool", "framework", "methodology", "domain", "other"]
+          }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "description": "Notable projects, portfolio items, or open source contributions",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Project name",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "description": "Project overview",
+            "maxLength": 2000
+          },
+          "highlights": {
+            "type": "array",
+            "description": "Key achievements or features",
+            "items": {
+              "type": "string",
+              "maxLength": 1000
+            }
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Technologies and skills used",
+            "items": {
+              "type": "string",
+              "maxLength": 100
+            }
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Project start date",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Project end date, omit if ongoing",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "url": {
+            "type": "string",
+            "description": "Project URL (demo, repository, or documentation)",
+            "format": "uri"
+          },
+          "roles": {
+            "type": "array",
+            "description": "Roles held in the project",
+            "items": {
+              "type": "string",
+              "maxLength": 100
+            }
+          },
+          "entity": {
+            "type": "string",
+            "description": "Organization or context (e.g., company, open source, personal)",
+            "maxLength": 200
+          },
+          "type": {
+            "type": "string",
+            "description": "Project type",
+            "maxLength": 100
+          },
+          "x_cfrs_featured": {
+            "type": "boolean",
+            "description": "CFRS Extension: Whether to highlight this project prominently"
+          }
+        }
+      }
+    },
+    "volunteer": {
+      "type": "array",
+      "description": "Volunteer work and community involvement",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "organization": {
+            "type": "string",
+            "description": "Organization name",
+            "maxLength": 200
+          },
+          "position": {
+            "type": "string",
+            "description": "Volunteer role or title",
+            "maxLength": 200
+          },
+          "url": {
+            "type": "string",
+            "description": "Organization website",
+            "format": "uri"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date, omit if ongoing",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Overview of volunteer work",
+            "maxLength": 2000
+          },
+          "highlights": {
+            "type": "array",
+            "description": "Key contributions and achievements",
+            "items": {
+              "type": "string",
+              "maxLength": 1000
+            }
+          }
+        }
+      }
+    },
+    "awards": {
+      "type": "array",
+      "description": "Awards, honors, and recognitions",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Award name",
+            "maxLength": 200
+          },
+          "date": {
+            "type": "string",
+            "description": "Date awarded",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "awarder": {
+            "type": "string",
+            "description": "Awarding organization",
+            "maxLength": 200
+          },
+          "summary": {
+            "type": "string",
+            "description": "Context and significance",
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "publications": {
+      "type": "array",
+      "description": "Published works, articles, and papers",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Publication title",
+            "maxLength": 300
+          },
+          "publisher": {
+            "type": "string",
+            "description": "Publisher or venue",
+            "maxLength": 200
+          },
+          "releaseDate": {
+            "type": "string",
+            "description": "Publication date",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "url": {
+            "type": "string",
+            "description": "Publication URL or DOI",
+            "format": "uri"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Abstract or summary",
+            "maxLength": 2000
+          },
+          "x_cfrs_authors": {
+            "type": "array",
+            "description": "CFRS Extension: List of co-authors",
+            "items": {
+              "type": "string",
+              "maxLength": 200
+            }
+          },
+          "x_cfrs_citation_count": {
+            "type": "number",
+            "description": "CFRS Extension: Number of citations",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "description": "Language proficiencies",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["language"],
+        "properties": {
+          "language": {
+            "type": "string",
+            "description": "Language name",
+            "maxLength": 100
+          },
+          "fluency": {
+            "type": "string",
+            "description": "Proficiency level",
+            "enum": ["elementary", "limited-working", "professional-working", "full-professional", "native-or-bilingual"]
+          },
+          "x_cfrs_cefr_level": {
+            "type": "string",
+            "description": "CFRS Extension: CEFR level (A1-C2)",
+            "pattern": "^[ABC][12]$"
+          }
+        }
+      }
+    },
+    "interests": {
+      "type": "array",
+      "description": "Professional and personal interests",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Interest area or hobby",
+            "maxLength": 200
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Related topics or activities",
+            "items": {
+              "type": "string",
+              "maxLength": 100
+            }
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "description": "Professional references",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Reference name",
+            "maxLength": 200
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference statement or contact information",
+            "maxLength": 2000
+          },
+          "x_cfrs_relationship": {
+            "type": "string",
+            "description": "CFRS Extension: Relationship to candidate (e.g., 'Former Manager at Acme Corp')",
+            "maxLength": 200
+          },
+          "x_cfrs_email": {
+            "type": "string",
+            "description": "CFRS Extension: Reference email address",
+            "format": "email"
+          },
+          "x_cfrs_phone": {
+            "type": "string",
+            "description": "CFRS Extension: Reference phone number",
+            "maxLength": 50
+          }
+        }
+      }
+    },
+    "certificates": {
+      "type": "array",
+      "description": "Professional certifications and licenses",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Certification name",
+            "maxLength": 200
+          },
+          "date": {
+            "type": "string",
+            "description": "Date obtained",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "issuer": {
+            "type": "string",
+            "description": "Issuing organization",
+            "maxLength": 200
+          },
+          "url": {
+            "type": "string",
+            "description": "Verification URL or credential link",
+            "format": "uri"
+          },
+          "x_cfrs_expiry_date": {
+            "type": "string",
+            "description": "CFRS Extension: Expiration date if applicable",
+            "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+          },
+          "x_cfrs_credential_id": {
+            "type": "string",
+            "description": "CFRS Extension: Credential or license number",
+            "maxLength": 100
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata about the resume document",
+      "additionalProperties": false,
+      "properties": {
+        "canonical": {
+          "type": "string",
+          "description": "Canonical URL for this resume",
+          "format": "uri"
+        },
+        "version": {
+          "type": "string",
+          "description": "Resume version or revision identifier",
+          "maxLength": 50
+        },
+        "lastModified": {
+          "type": "string",
+          "description": "Last modification timestamp",
+          "format": "date-time"
+        },
+        "x_cfrs_theme": {
+          "type": "string",
+          "description": "CFRS Extension: Preferred theme identifier",
+          "maxLength": 100
+        },
+        "x_cfrs_ats_optimized": {
+          "type": "boolean",
+          "description": "CFRS Extension: Whether resume is optimized for ATS parsing"
+        },
+        "x_cfrs_redaction_profile": {
+          "type": "string",
+          "description": "CFRS Extension: Active redaction profile name",
+          "enum": ["none", "partial", "full", "custom"]
+        },
+        "x_cfrs_locale_variants": {
+          "type": "array",
+          "description": "CFRS Extension: Available locale variants of this resume",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["locale"],
+            "properties": {
+              "locale": {
+                "type": "string",
+                "description": "Locale code (e.g., en-US, fr-FR)",
+                "pattern": "^[a-z]{2}-[A-Z]{2}$"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL to locale-specific version",
+                "format": "uri"
+              }
+            }
+          }
+        }
+      }
+    },
+    "x_cfrs_custom_sections": {
+      "type": "array",
+      "description": "CFRS Extension: Custom resume sections for non-standard content",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "content"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Section title",
+            "maxLength": 200
+          },
+          "content": {
+            "type": "string",
+            "description": "Section content (supports Markdown)",
+            "maxLength": 5000
+          },
+          "order": {
+            "type": "number",
+            "description": "Display order relative to other sections"
+          }
+        }
+      }
+    }
+  }
+}

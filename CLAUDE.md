@@ -26,7 +26,7 @@ This file (CLAUDE.md) is the **single source of truth** for:
 ### Schema & Data Compliance ✅
 - CFRS JSON Schema v1.0.0 adopted
 - Namespaced extensions (`x_cfrs_*`) only
-- Backward compatible with JSON Resume v1.2.1
+- Backward compatible with JSON Resume v1.0.0
 - Exportable to JSON Resume & FRESH
 
 ### Security & Privacy ✅

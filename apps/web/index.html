@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Security Headers (CSP) -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data: blob:;
+               font-src 'self' data:;
+               connect-src 'self';
+               worker-src 'self' blob:;
+               frame-src 'none';
+               object-src 'none';
+               base-uri 'self';"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="no-referrer" />
+
+    <!-- SEO & PWA Metadata -->
+    <meta
+      name="description"
+      content="CloudFlow Resume - Privacy-first resume builder with JSON Resume compatibility. Build, export, and customize your resume locally in your browser."
+    />
+    <meta name="keywords" content="resume builder, JSON Resume, privacy, ATS-friendly, CloudFlow" />
+    <meta name="author" content="CloudFlow Resume Project" />
+    <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CloudFlow Resume" />
+    <meta property="og:description" content="Privacy-first resume builder with JSON Resume compatibility" />
+    <meta property="og:site_name" content="CloudFlow Resume" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>CloudFlow Resume - Privacy-First Resume Builder</title>
+  </head>
+  <body>
+    <!-- Accessibility skip link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary-600 focus:text-white focus:px-4 focus:py-2 focus:rounded">
+      Skip to main content
+    </a>
+
+    <!-- App root -->
+    <div id="app"></div>
+
+    <!-- Noscript fallback -->
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: system-ui, sans-serif;">
+        <h1>JavaScript Required</h1>
+        <p>CloudFlow Resume requires JavaScript to function. All processing happens locally in your browser - no data is sent to servers.</p>
+        <p>Please enable JavaScript to continue.</p>
+      </div>
+    </noscript>
+
+    <!-- Main script -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
