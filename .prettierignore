@@ -5,3 +5,5 @@ dist
 *.min.css
 pnpm-lock.yaml
 package-lock.json
+.hive-mind
+.claude-flow
