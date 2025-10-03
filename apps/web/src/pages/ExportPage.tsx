@@ -1,7 +1,8 @@
+import { h } from 'preact';
 import { useResumeStore } from '../store';
 import { useLocation } from 'wouter';
 
-export function ExportPage() {
+export function ExportPage(): h.JSX.Element {
   const resume = useResumeStore((state) => state.resume);
   const [, setLocation] = useLocation();
 
@@ -21,7 +22,7 @@ export function ExportPage() {
     );
   }
 
-  const downloadJSON = () => {
+  const downloadJSON = (): void => {
     const blob = new Blob([JSON.stringify(resume, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -31,7 +32,7 @@ export function ExportPage() {
     URL.revokeObjectURL(url);
   };
 
-  const downloadHTML = () => {
+  const downloadHTML = (): void => {
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,19 +53,27 @@ export function ExportPage() {
   <h1>${resume.basics.name}</h1>
   ${resume.basics.label ? `<p class="subtitle">${resume.basics.label}</p>` : ''}
   ${resume.basics.summary ? `<section><h2>Summary</h2><p>${resume.basics.summary}</p></section>` : ''}
-  ${resume.work && resume.work.length > 0 ? `
+  ${
+    resume.work && resume.work.length > 0
+      ? `
     <section>
       <h2>Work Experience</h2>
-      ${resume.work.map(job => `
+      ${resume.work
+        .map(
+          (job) => `
         <div class="job">
           <h3>${job.position}</h3>
           <p><strong>${job.name}</strong> | ${job.startDate} - ${job.endDate || 'Present'}</p>
           ${job.summary ? `<p>${job.summary}</p>` : ''}
-          ${job.highlights ? `<ul>${job.highlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
+          ${job.highlights ? `<ul>${job.highlights.map((h) => `<li>${h}</li>`).join('')}</ul>` : ''}
         </div>
-      `).join('')}
+      `
+        )
+        .join('')}
     </section>
-  ` : ''}
+  `
+      : ''
+  }
 </body>
 </html>`;
 
@@ -80,19 +89,13 @@ export function ExportPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Export Resume
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400">
-          Download your resume in various formats.
-        </p>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Export Resume</h2>
+        <p className="text-gray-600 dark:text-gray-400">Download your resume in various formats.</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-            CFRS JSON
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">CFRS JSON</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             CloudFlow Resume Schema format with all extensions
           </p>
@@ -105,9 +108,7 @@ export function ExportPage() {
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-            HTML
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">HTML</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             Standalone HTML file with inline CSS
           </p>

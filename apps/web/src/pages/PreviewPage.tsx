@@ -1,7 +1,8 @@
+import { h } from 'preact';
 import { useResumeStore, useUIStore } from '../store';
 import { useLocation } from 'wouter';
 
-export function PreviewPage() {
+export function PreviewPage(): h.JSX.Element {
   const resume = useResumeStore((state) => state.resume);
   const validationErrors = useUIStore((state) => state.validationErrors);
   const [, setLocation] = useLocation();
@@ -25,9 +26,7 @@ export function PreviewPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Resume Preview
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Resume Preview</h2>
       </div>
 
       {validationErrors.length > 0 && (
@@ -41,9 +40,7 @@ export function PreviewPage() {
                 {err.instancePath || '/'}: {err.message}
               </li>
             ))}
-            {validationErrors.length > 5 && (
-              <li>...and {validationErrors.length - 5} more</li>
-            )}
+            {validationErrors.length > 5 && <li>...and {validationErrors.length - 5} more</li>}
           </ul>
         </div>
       )}
@@ -65,7 +62,9 @@ export function PreviewPage() {
             {resume.work.map((job, idx) => (
               <div key={idx} className="mb-4">
                 <h3 className="text-lg font-semibold">{job.position}</h3>
-                <p className="text-gray-600">{job.name} | {job.startDate} - {job.endDate || 'Present'}</p>
+                <p className="text-gray-600">
+                  {job.name} | {job.startDate} - {job.endDate || 'Present'}
+                </p>
                 {job.summary && <p>{job.summary}</p>}
                 {job.highlights && job.highlights.length > 0 && (
                   <ul>
@@ -84,8 +83,12 @@ export function PreviewPage() {
             <h2>Education</h2>
             {resume.education.map((edu, idx) => (
               <div key={idx} className="mb-4">
-                <h3 className="text-lg font-semibold">{edu.studyType} in {edu.area}</h3>
-                <p className="text-gray-600">{edu.institution} | {edu.startDate} - {edu.endDate || 'Present'}</p>
+                <h3 className="text-lg font-semibold">
+                  {edu.studyType} in {edu.area}
+                </h3>
+                <p className="text-gray-600">
+                  {edu.institution} | {edu.startDate} - {edu.endDate || 'Present'}
+                </p>
               </div>
             ))}
           </div>
@@ -96,7 +99,10 @@ export function PreviewPage() {
             <h2>Skills</h2>
             <div className="flex flex-wrap gap-2">
               {resume.skills.map((skill, idx) => (
-                <span key={idx} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">
+                <span
+                  key={idx}
+                  className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm"
+                >
                   {skill.name}
                 </span>
               ))}

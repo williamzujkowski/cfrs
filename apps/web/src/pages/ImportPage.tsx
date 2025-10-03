@@ -1,15 +1,16 @@
+import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { useResumeStore, useUIStore } from '../store';
 import { importJSON } from '../importers/json';
 import { importMarkdown } from '../importers/markdown';
 import { validateResume } from '../utils/validator';
 
-export function ImportPage() {
+export function ImportPage(): h.JSX.Element {
   const [importing, setImporting] = useState(false);
   const setResume = useResumeStore((state) => state.setResume);
   const setValidationErrors = useUIStore((state) => state.setValidationErrors);
 
-  const handleFileUpload = async (event: Event) => {
+  const handleFileUpload = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
     if (!file) return;
@@ -20,9 +21,9 @@ export function ImportPage() {
       let resume;
 
       if (file.name.endsWith('.json')) {
-        resume = await importJSON(content);
+        resume = importJSON(content);
       } else if (file.name.endsWith('.md') || file.name.endsWith('.markdown')) {
-        resume = await importMarkdown(content);
+        resume = importMarkdown(content);
       } else {
         throw new Error('Unsupported file format. Please use .json or .md files.');
       }
@@ -44,7 +45,7 @@ export function ImportPage() {
     }
   };
 
-  const handlePaste = async (event: Event) => {
+  const handlePaste = (event: Event): void => {
     event.preventDefault();
     const target = event.target as HTMLTextAreaElement;
     const content = target.value;
@@ -56,10 +57,10 @@ export function ImportPage() {
 
       // Try JSON first
       try {
-        resume = await importJSON(content);
+        resume = importJSON(content);
       } catch {
         // Fall back to Markdown
-        resume = await importMarkdown(content);
+        resume = importMarkdown(content);
       }
 
       const { valid, errors } = validateResume(resume);
@@ -91,13 +92,11 @@ export function ImportPage() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          Upload File
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Upload File</h3>
         <input
           type="file"
           accept=".json,.md,.markdown"
-          onChange={handleFileUpload}
+          onChange={(e) => void handleFileUpload(e)}
           disabled={importing}
           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-600 file:text-white hover:file:bg-primary-700 disabled:opacity-50"
         />

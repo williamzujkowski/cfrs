@@ -27,30 +27,30 @@ export const useResumeStore = create<ResumeState>()(
   persist(
     (set) => ({
       resume: null,
-      setResume: (resume) => set({ resume }),
-      updateResume: (updates) =>
+      setResume: (resume): void => set({ resume }),
+      updateResume: (updates): void =>
         set((state) => ({
           resume: state.resume ? { ...state.resume, ...updates } : null,
         })),
-      clearResume: () => set({ resume: null }),
+      clearResume: (): void => set({ resume: null }),
     }),
     {
       name: 'cfrs-resume-storage',
-      partialize: (state) => ({ resume: state.resume }),
+      partialize: (state): { resume: CFRSResume | null } => ({ resume: state.resume }),
     }
   )
 );
 
 export const useUIStore = create<UIState>()((set) => ({
   theme: 'classic',
-  setTheme: (theme) => set({ theme }),
+  setTheme: (theme): void => set({ theme }),
   validationErrors: [],
-  setValidationErrors: (errors) => set({ validationErrors: errors }),
+  setValidationErrors: (errors): void => set({ validationErrors: errors }),
   isLoading: false,
-  setLoading: (loading) => set({ isLoading: loading }),
+  setLoading: (loading): void => set({ isLoading: loading }),
 }));
 
 export const useImportStore = create<ImportState>()((set) => ({
   importFormat: null,
-  setImportFormat: (format) => set({ importFormat: format }),
+  setImportFormat: (format): void => set({ importFormat: format }),
 }));

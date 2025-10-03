@@ -12,14 +12,14 @@ if (!root) {
 render(<App />, root);
 
 // Log version and privacy notice
-console.log(
-  '%cCloudFlow Resume',
-  'font-size: 1.5em; font-weight: bold; color: #3b82f6;'
-);
+// eslint-disable-next-line no-console
+console.log('%cCloudFlow Resume', 'font-size: 1.5em; font-weight: bold; color: #3b82f6;');
+// eslint-disable-next-line no-console
 console.log(
   '%cAll processing happens locally in your browser. No data is sent to servers.',
   'color: #10b981; font-weight: bold;'
 );
+// eslint-disable-next-line no-console
 console.log(`Version: ${__APP_VERSION__}`);
 
 // Service worker registration for offline support (future enhancement)
@@ -28,6 +28,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
     navigator.serviceWorker
       .register('/sw.js')
       .then((registration) => {
+        // eslint-disable-next-line no-console
         console.log('SW registered:', registration);
       })
       .catch((error) => {
